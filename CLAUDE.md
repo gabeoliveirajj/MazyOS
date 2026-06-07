@@ -113,3 +113,51 @@ Quando o usuário pedir skill nova:
 4. Se a skill precisar de arquivos de apoio (templates, exemplos),
    criar dentro da pasta da skill
 5. Seguir o fluxo da skill-creator nativa do Claude Code
+
+---
+
+## Operação: BJJ Nerd Academy
+
+Este workspace é a operação da **BJJ Nerd Academy** — academia de Jiu-Jitsu lifestyle focada em transformar vidas através da arte marcial.
+
+### Estrutura de pastas
+
+- `_memoria/` — quem é a academia, como falamos, foco atual
+- `identidade/` — marca (cores, fonts, logo) aplicada em tudo
+- `marketing/` — campanhas, conteúdo, posts, carrosseis
+- `comercial/` — captação, pipeline, propostas, materiais de venda
+- `operacoes/` — aulas, horários, procedimentos, documentos internos
+- `saidas/` — materiais, análises, dados exportados
+- `dados/` — arquivos a analisar (vídeos, métricas, etc.)
+- `projetos/` — iniciativas que envolvem mais de um setor
+
+### Setores e responsáveis
+
+- **Marketing:** Gabriel — captação de alunos, conteúdo, redes sociais, campanhas
+- **Comercial:** Gabriel — pipeline de matrículas, relacionamento comercial
+- **Aulas & Comunidade:** Daniel — aulas, relacionamento com alunos
+- **Administrativo & Financeiro:** Alexandre — gestão interna, financeiro
+
+### Principais entregas
+
+- Aulas com/sem kimono (segundas a quintas, horários variados)
+- Conteúdo de marketing (carrosseis, vídeos de posições semanais, posts)
+- Comunicação com alunos (WhatsApp, Instagram)
+- Gestão de matrículas e experimentais
+
+### Tom de voz & marca
+
+Ler `_memoria/preferencias.md` e `identidade/design-guide.md` **antes de qualquer conteúdo visual ou comunicação**.
+
+### Prioridades atuais
+
+1. Aumentar captação de alunos (volume de pessoas chegar até experimental)
+2. Automatizar edição de vídeos (prioridade máxima de Gabriel)
+3. Potencialmente: automação de postagens nas redes e comunicação
+
+### Regras específicas
+
+- Posts e carrosseis devem seguir a paleta de cores e tipografia em `identidade/design-guide.md`
+- Toda comunicação deve ser acolhedora, motivadora, sem pressão de venda
+- Vídeos de posições: usar template semanal (a definir via `/mapear-rotinas` quando automatizar)
+- GitHub como controle de versão — usar `/salvar` pra fazer commit + push
