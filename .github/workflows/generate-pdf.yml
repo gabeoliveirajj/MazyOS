@@ -22,16 +22,19 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la ./memories || true
-          ls -la ./memories/session || true
+          find . -maxdepth 3 -type d | sort
+          ls -la memories || true
+          ls -la memories/session || true
 
       - name: Instalar dependências (memories/session)
-        working-directory: ./memories/session
-        run: npm install
+        run: |
+          cd memories/session
+          npm install
 
       - name: Gerar PDF
-        working-directory: ./memories/session
-        run: npm run generate-pdf
+        run: |
+          cd memories/session
+          npm run generate-pdf
 
       - name: Upload do PDF como artifact
         uses: actions/upload-artifact@v4
