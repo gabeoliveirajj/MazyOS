@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-core');
 
 (async () => {
   try {
@@ -8,15 +8,18 @@ const puppeteer = require('puppeteer');
     const pdfPath = path.resolve(__dirname, 'apresentacao-nutri-chedid.pdf');
     const html = fs.readFileSync(htmlPath, 'utf8');
 
-    const chromeCandidates = [
-      '/usr/bin/google-chrome-stable',
-      '/usr/bin/google-chrome',
-      '/usr/bin/chromium-browser',
-      '/usr/bin/chromium'
-    ];
-    let executablePath = null;
-    for (const p of chromeCandidates) {
-      if (fs.existsSync(p)) { executablePath = p; break; }
+    // Prefer explicit env path (set in CI) then fallback to common locations
+    let executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || null;
+    if (!executablePath) {
+      const chromeCandidates = [
+        '/usr/bin/google-chrome-stable',
+        '/usr/bin/google-chrome',
+        '/usr/bin/chromium-browser',
+        '/usr/bin/chromium'
+      ];
+      for (const p of chromeCandidates) {
+        if (fs.existsSync(p)) { executablePath = p; break; }
+      }
     }
 
     const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] };

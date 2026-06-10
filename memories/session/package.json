@@ -9,6 +9,6 @@
   "author": "Gabriel Oliveira",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^21.0.0"
+    "puppeteer-core": "^21.0.0"
   }
 }
