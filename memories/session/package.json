@@ -1,0 +1,14 @@
+{
+  "name": "nutri-chedid-presentation",
+  "version": "1.0.0",
+  "description": "Gera PDF da apresentação Nutri Chedid",
+  "main": "generate_pdf.js",
+  "scripts": {
+    "generate-pdf": "node generate_pdf.js"
+  },
+  "author": "Gabriel Oliveira",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.0.0"
+  }
+}
