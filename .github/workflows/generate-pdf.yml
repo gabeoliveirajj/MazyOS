@@ -18,12 +18,19 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Depurar caminho do repositório
+        run: |
+          pwd
+          ls -la
+          ls -la ./memories || true
+          ls -la ./memories/session || true
+
       - name: Instalar dependências (memories/session)
-        working-directory: memories/session
+        working-directory: ./memories/session
         run: npm install
 
       - name: Gerar PDF
-        working-directory: memories/session
+        working-directory: ./memories/session
         run: npm run generate-pdf
 
       - name: Upload do PDF como artifact
