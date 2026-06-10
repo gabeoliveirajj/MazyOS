@@ -30,6 +30,25 @@ usar o contexto naturalmente.
 
 ---
 
+## Contexto do Nutri Chedid
+
+Este workspace acompanha a operação de Nutri Chedid: a consultoria nutricional, a comunidade Team Chedid e a presença digital da marca. O foco é manter o serviço clínico redondo enquanto estrutura a captação comercial e os indicadores de vendas.
+
+**Setores principais:**
+- Marketing: Alice (marketing) e você (marketing e comercial)
+- Comercial: você, com suporte para estruturar captação e vendas; futuro gerente comercial
+- Operações: Henrique Chedid (CEO, rosto da marca, atendimento clínico e criação de conteúdo)
+- Tráfego: gestora de tráfego para campanhas digitais
+
+Use `_memoria/empresa.md`, `_memoria/preferencias.md` e `_memoria/estrategia.md` para orientar sugestões e decidir prioridades.
+
+Este workspace cobre três frentes principais do Nutri Chedid:
+- Clínica presencial
+- Consultoria online escalável
+- Projeto Mais Saúde para empresas
+
+---
+
 ## Fluxo de trabalho
 
 Antes de executar qualquer tarefa, verificar se existe skill relevante
