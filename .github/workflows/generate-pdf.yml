@@ -27,6 +27,8 @@ jobs:
           ls -la memories/session || true
 
       - name: Instalar dependências (memories/session)
+        env:
+          PUPPETEER_SKIP_DOWNLOAD: 'true'
         run: |
           cd memories/session
           npm install

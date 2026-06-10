@@ -8,7 +8,21 @@ const puppeteer = require('puppeteer');
     const pdfPath = path.resolve(__dirname, 'apresentacao-nutri-chedid.pdf');
     const html = fs.readFileSync(htmlPath, 'utf8');
 
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+    const chromeCandidates = [
+      '/usr/bin/google-chrome-stable',
+      '/usr/bin/google-chrome',
+      '/usr/bin/chromium-browser',
+      '/usr/bin/chromium'
+    ];
+    let executablePath = null;
+    for (const p of chromeCandidates) {
+      if (fs.existsSync(p)) { executablePath = p; break; }
+    }
+
+    const launchOptions = { args: ['--no-sandbox', '--disable-setuid-sandbox'] };
+    if (executablePath) launchOptions.executablePath = executablePath;
+
+    const browser = await puppeteer.launch(launchOptions);
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: 'networkidle0' });
     await page.pdf({ path: pdfPath, format: 'A4', printBackground: true });
