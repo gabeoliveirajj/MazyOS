@@ -79,6 +79,13 @@ draft: true
 5. **H2 onde a empresa se encaixa:** conexão natural com o produto, sem ser propaganda
 6. **CTA final:** link WhatsApp / formulário / contato configurado
 
+**Obrigatório em TODO artigo (E-E-A-T — nutrição é saúde/YMYL):**
+- **Fontes citadas:** ao longo do texto e/ou num bloco "Referências" ao final — estudos, sociedades de nutrição, diretrizes oficiais. Nunca afirmar dado de saúde sem fonte.
+- **Assinatura do autor:** ao final, um espaço com a assinatura do Henrique e o **CRN visível**.
+- **Bio do autor:** bloco curto com as credenciais do Henrique (formação, especializações, experiência).
+
+> Esses três itens são padrão fixo (ver `_memoria/preferencias.md`). Google e IAs só rankeiam/citam conteúdo de saúde com autor credenciado e fontes verificáveis. Se o CRN ou a bio ainda não estiverem em `_memoria/empresa.md`, inserir os blocos mesmo assim com `[CRN a preencher]` / `[bio a preencher]` e avisar o usuário.
+
 **Regras de escrita** (seguir `_memoria/preferencias.md` estritamente):
 - Sem jargão de marketing/inglês quando o público não usa
 - Frases curtas, parágrafos de 2-4 linhas

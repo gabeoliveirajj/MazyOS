@@ -1,55 +1,35 @@
-# Identidade visual — BJJ Nerd Academy
+# Identidade visual — Nutri Chedid
 
 > Como a marca aparece em tudo que o MazyOS gera.
-> As skills de conteúdo, carrossel e post leem esse arquivo antes de criar qualquer visual.
+> ⚠️ A marca está em **REBRANDING** (nome e identidade em revisão). O guia abaixo é a direção **PROVISÓRIA** que vínhamos usando nos materiais — não é oficial/final.
 
 ---
 
-## Cores
+## Direção atual (provisória)
 
-- **Fundo principal:** #242221 (preto profundo)
-- **Fundo alternativo:** #4e4e4e (cinza médio)
-- **Cor de destaque / CTA:** #db0200 (vermelho vibrante — o "NERD")
-- **Acentos quentes:** #c49d73 (laranja/bronze), #a48a68 (marrom claro)
-- **Texto principal:** #666666 (cinza escuro)
+- **Vibe:** premium, sofisticada, saúde de alta performance. Escura + dourada.
+- **Símbolo:** 🔱 (tridente) — símbolo que o Henrique usa muito; serve como marca/ícone provisório enquanto não há logo fechado.
 
 ---
 
-## Tipografia
+## Cores (provisórias, usadas nos materiais)
 
-- **Títulos e destaques:** Bebas Neue (condensada, caixa-alta)
-- **Botões / labels:** Bebas Neue
-- **Corpo e textos longos:** Inter (peso 400–600)
-
----
-
-## Estilo geral
-
-Vibe quente, acolhedora e motivadora. Bronze + preto + vermelho vibrante. Moderno mas acessível. Logo da coruja em posição de destaque. Espaço respirável.
+- **Fundo escuro:** #0f0a07 / #130d09
+- **Dourado / bronze (destaque):** #c8a86a, #b9975b, #e3c48f
+- **Texto claro:** #f5efe5 · **secundário:** #c2b39f
+- **Versão clara (blog/LP):** fundo #faf6ef, texto #2a2218
 
 ---
 
-## Elementos-chave
+## Tipografia (provisória)
 
-- **Logo:** Coruja em kimono de Jiu-Jitsu, braços cruzados, tesoura vermelha (golpe do JJ)
-- **Bordas:** Linhas limpas, nada muito arredondado
-- **Sombras:** Suaves, aumentam profundidade sem excessos
-- **Botões:** CTA em vermelho (#db0200), texto em branco ou preto conforme contraste
+- **Títulos:** serifada (Georgia) — ar editorial/premium
+- **Corpo:** Inter
 
 ---
 
-## O que NUNCA fazer
+## Pendente do rebranding
 
-- Não use tons muito claros/pastéis — a marca é aquecida e contrastante
-- Não remova a tesoura vermelha do logo
-- Não misture com outros tons de vermelho (apenas #db0200)
-- Não use emojis em materiais oficiais (ok em comunicação casual/WhatsApp)
-- Não use serif demais — Bebas é geo/sans-serif
-
----
-
-## Logo
-
-- **Arquivo:** identidade/logo.png
-- **Onde usar:** Slide final de carrosseis (CTA), header de propostas, materiais institucionais
-- **Tamanho sugerido:** 120-200px de largura em HTMLs
+- Nome definitivo da **marca** e do **"Projeto Mais Saúde"** (hoje placeholder)
+- Logo oficial, paleta e tipografia definitivas
+- Quando o branding novo sair, atualizar este guia e os materiais

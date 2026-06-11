@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projeto Mais Saúde · Nutri Chedid para empresas</title>
+<meta name="description" content="Programa de nutrição corporativa do Nutri Chedid: menos absenteísmo, mais energia e equipes mais produtivas. Saúde como benefício que dá retorno." />
+<style>
+  :root {
+    --bg: #0f0a07;
+    --ink: #1a1410;
+    --paper: #faf6ef;
+    --paper-2: #f1e9dc;
+    --line: #e4d9c6;
+    --accent: #b9975b;
+    --accent-deep: #9c7c43;
+    --accent-soft: #e3c48f;
+    --text: #2a2218;
+    --muted: #6f6453;
+    --text-light: #f5efe5;
+    --muted-light: #c2b39f;
+    --good: #4f9d6b;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text); background: var(--paper); line-height: 1.6; -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -0.02em; line-height: 1.1; margin: 0; }
+  a { color: inherit; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; border-radius: 14px;
+    background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep)); color: #20180c; font-weight: 700;
+    text-decoration: none; border: none; cursor: pointer; font-size: 16px; transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 12px 30px rgba(185,151,91,0.30);
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(185,151,91,0.40); }
+  .btn.ghost { background: transparent; color: var(--text-light); border: 1px solid rgba(255,255,255,0.25); box-shadow: none; }
+  .btn.ghost:hover { background: rgba(255,255,255,0.08); }
+  .eyebrow { font-size: 13px; letter-spacing: 0.20em; text-transform: uppercase; font-weight: 700; color: var(--accent-deep); }
+
+  /* NAV */
+  .nav {
+    position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px);
+    background: rgba(15,10,7,0.82); border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: inline-flex; align-items: center; gap: 12px; color: var(--text-light); text-decoration: none; }
+  .brand .mark { width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; background: rgba(185,151,91,0.16); border: 1px solid rgba(255,255,255,0.1); font-size: 22px; }
+  .brand b { font-size: 15px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-soft); }
+  .brand span { font-size: 12px; color: var(--muted-light); display: block; letter-spacing: 0.04em; }
+  .nav .links { display: flex; align-items: center; gap: 28px; }
+  .nav .links a { color: var(--muted-light); text-decoration: none; font-size: 14px; font-weight: 500; }
+  .nav .links a:hover { color: var(--accent-soft); }
+  .nav .btn { padding: 11px 20px; font-size: 14px; }
+  @media (max-width: 860px) { .nav .links a:not(.btn) { display: none; } }
+
+  /* HERO */
+  .hero { background:
+      radial-gradient(800px 420px at 80% -10%, rgba(185,151,91,0.22), transparent 60%),
+      linear-gradient(180deg, #130d09, #0c0805); color: var(--text-light); padding: 90px 0 100px; }
+  .hero .grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+  .hero h1 { font-size: clamp(40px, 5vw, 64px); color: #fff; }
+  .hero h1 em { color: var(--accent-soft); font-style: italic; }
+  .hero p.lead { font-size: clamp(18px, 1.4vw, 21px); color: var(--muted-light); margin: 22px 0 30px; max-width: 560px; }
+  .hero .cta-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .hero .micro { font-size: 13px; color: var(--muted-light); margin-top: 18px; }
+  .hero-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 30px;
+    backdrop-filter: blur(8px); box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+  }
+  .hero-card .ht { font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-soft); font-weight: 700; }
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 18px; }
+  .stat .n { font-family: Georgia, serif; font-size: 34px; color: var(--accent-soft); }
+  .stat .l { font-size: 13px; color: var(--muted-light); line-height: 1.4; }
+
+  /* TRUST BAR */
+  .trust { background: var(--ink); color: var(--muted-light); padding: 22px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .trust .wrap { display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap; font-size: 14px; letter-spacing: 0.04em; }
+  .trust b { color: var(--accent-soft); }
+
+  /* SECTION base */
+  section.block { padding: 84px 0; }
+  .section-head { max-width: 720px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(30px, 3.4vw, 46px); margin: 14px 0 0; }
+  .section-head p { font-size: 18px; color: var(--muted); margin: 16px 0 0; }
+  .center { text-align: center; margin-left: auto; margin-right: auto; }
+
+  /* PROBLEM */
+  .problem { background: var(--paper-2); }
+  .cards { display: grid; gap: 22px; }
+  .cards.c3 { grid-template-columns: repeat(3, 1fr); }
+  .cards.c2 { grid-template-columns: repeat(2, 1fr); }
+  .card {
+    background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px;
+    box-shadow: 0 10px 30px rgba(60,45,20,0.05);
+  }
+  .card .ic { font-size: 30px; }
+  .card h3 { font-size: 22px; margin: 14px 0 8px; color: var(--ink); }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+
+  /* STEPS */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; counter-reset: step; }
+  .step { position: relative; padding-top: 18px; }
+  .step .num { font-family: Georgia, serif; font-size: 16px; font-weight: 700; color: #20180c; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep)); margin-bottom: 16px; }
+  .step h3 { font-size: 20px; margin-bottom: 8px; }
+  .step p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* INCLUDED list */
+  .included { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 40px; }
+  .inc-item { display: flex; gap: 14px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .inc-item .chk { flex: none; width: 28px; height: 28px; border-radius: 8px; background: rgba(185,151,91,0.16); color: var(--accent-deep); display: grid; place-items: center; font-weight: 800; }
+  .inc-item h4 { margin: 0 0 3px; font-size: 17px; font-family: Inter, sans-serif; font-weight: 700; color: var(--ink); }
+  .inc-item p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  /* BENEFITS split */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .panel { border-radius: 24px; padding: 38px; }
+  .panel.company { background: linear-gradient(160deg, #1a130c, #0f0a07); color: var(--text-light); }
+  .panel.people { background: #fff; border: 1px solid var(--line); }
+  .panel h3 { font-size: 26px; margin-bottom: 22px; }
+  .panel.company h3 { color: var(--accent-soft); }
+  .panel ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .panel li { display: flex; gap: 12px; align-items: flex-start; font-size: 16px; }
+  .panel li::before { content: '✓'; color: var(--accent); font-weight: 800; }
+  .panel.company li { color: var(--muted-light); }
+  .panel.company li::before { color: var(--accent-soft); }
+  .panel.people li { color: var(--text); }
+
+  /* AUTHORITY */
+  .authority { background: var(--ink); color: var(--text-light); }
+  .authority .grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 48px; align-items: center; }
+  .author-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12); border-radius: 24px; padding: 34px; }
+  .author-card .av { width: 88px; height: 88px; border-radius: 50%; background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep)); display: grid; place-items: center; font-size: 40px; margin-bottom: 18px; }
+  .author-card h3 { color: #fff; font-size: 24px; }
+  .author-card .crn { color: var(--accent-soft); font-size: 14px; font-weight: 600; margin-top: 4px; letter-spacing: 0.04em; }
+  .author-card p { color: var(--muted-light); font-size: 15px; margin-top: 14px; }
+  .authority h2 { color: #fff; font-size: clamp(28px, 3.2vw, 42px); }
+  .authority p.big { color: var(--muted-light); font-size: 19px; margin-top: 18px; }
+
+  /* QUOTE */
+  .quote { background: var(--paper-2); }
+  .quote blockquote { margin: 0; max-width: 860px; }
+  .quote q { font-family: Georgia, serif; font-size: clamp(24px, 3vw, 34px); line-height: 1.35; color: var(--ink); font-style: italic; }
+  .quote .by { margin-top: 22px; color: var(--muted); font-size: 15px; }
+  .quote .tag { display: inline-block; margin-bottom: 10px; font-size: 12px; color: var(--accent-deep); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 700; }
+
+  /* FAQ */
+  details.faq { border-bottom: 1px solid var(--line); padding: 22px 0; }
+  details.faq summary { cursor: pointer; list-style: none; font-size: 19px; font-weight: 700; color: var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  details.faq summary::-webkit-details-marker { display: none; }
+  details.faq summary::after { content: '+'; color: var(--accent-deep); font-size: 26px; transition: transform 0.2s ease; }
+  details.faq[open] summary::after { transform: rotate(45deg); }
+  details.faq p { margin: 14px 0 0; color: var(--muted); font-size: 16px; max-width: 820px; }
+
+  /* CTA final */
+  .cta-final { background:
+      radial-gradient(700px 360px at 20% 120%, rgba(185,151,91,0.22), transparent 60%),
+      linear-gradient(180deg, #130d09, #0c0805); color: var(--text-light); text-align: center; }
+  .cta-final h2 { font-size: clamp(32px, 4vw, 52px); color: #fff; max-width: 800px; margin: 0 auto; }
+  .cta-final p { color: var(--muted-light); font-size: 19px; margin: 20px auto 32px; max-width: 620px; }
+
+  /* FOOTER */
+  footer { background: #0a0705; color: var(--muted-light); padding: 40px 0; font-size: 14px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+  footer .note { font-size: 12px; opacity: 0.7; }
+
+  /* example banner */
+  .example-banner { background: #2a2218; color: var(--accent-soft); text-align: center; font-size: 13px; padding: 8px; letter-spacing: 0.06em; }
+
+  /* imagens / banco de imagens */
+  .hero-img { width: 100%; border-radius: 16px; aspect-ratio: 16/10; object-fit: cover; display: block; margin-bottom: 22px; border: 1px solid rgba(255,255,255,0.12); }
+  .media { background: var(--paper); }
+  .media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .media-grid figure { margin: 0; position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 4/3; border: 1px solid var(--line); box-shadow: 0 12px 32px rgba(60,45,20,0.08); }
+  .media-grid img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .media-grid figure:hover img { transform: scale(1.05); }
+  .media-grid figcaption { position: absolute; inset: auto 0 0 0; padding: 16px; color: #fff; font-size: 15px; font-weight: 700; background: linear-gradient(to top, rgba(15,10,7,0.9), transparent); }
+  .panel-img { width: 100%; border-radius: 14px; aspect-ratio: 16/9; object-fit: cover; display: block; margin-bottom: 22px; }
+
+  @media (max-width: 860px) {
+    .hero .grid, .authority .grid { grid-template-columns: 1fr; }
+    .cards.c3, .steps, .included, .split, .stat-row, .media-grid { grid-template-columns: 1fr; }
+    section.block { padding: 60px 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="example-banner">★ MATERIAL DE EXEMPLO · Landing page demonstrativa do Projeto Mais Saúde</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#topo">
+      <span class="mark">🔱</span>
+      <span><b>Nutri Chedid</b><span>Projeto Mais Saúde</span></span>
+    </a>
+    <div class="links">
+      <a href="#problema">O problema</a>
+      <a href="#solucao">A solução</a>
+      <a href="#como">Como funciona</a>
+      <a href="#faq">Dúvidas</a>
+      <a class="btn" href="#contato">Falar com a gente</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="topo">
+  <div class="wrap grid">
+    <div>
+      <span class="eyebrow" style="color:var(--accent-soft)">Projeto Mais Saúde</span>
+      <h1>A saúde do seu time, cuidada <em>como a gente cuida de cada paciente</em>.</h1>
+      <p class="lead">O Projeto Mais Saúde nasceu de um método que já transformou a saúde de milhares de pessoas em mais de 20 países. Agora levamos esse mesmo cuidado, pessoa por pessoa, para dentro da sua empresa.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contato">Vamos conversar</a>
+        <a class="btn ghost" href="#historia">Conhecer a história</a>
+      </div>
+      <p class="micro">Uma conversa sem compromisso. A gente entende a sua empresa antes de propor qualquer coisa.</p>
+    </div>
+    <div class="hero-card">
+      <img class="hero-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1100&q=80&auto=format&fit=crop" alt="Equipe trabalhando junta no escritório" loading="lazy" />
+      <div class="ht">O que já construímos</div>
+      <div class="stat-row">
+        <div class="stat"><div class="n">3.000+</div><div class="l">pessoas acompanhadas pelo método</div></div>
+        <div class="stat"><div class="n">20+</div><div class="l">países alcançados</div></div>
+        <div class="stat"><div class="n">~200</div><div class="l">pessoas ativas hoje na consultoria</div></div>
+        <div class="stat"><div class="n">1 case</div><div class="l">empresa que bateu recorde de faturamento*</div></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted-light);margin:16px 0 0">*Case real, em Floripa, com depoimento gravado.</p>
+    </div>
+  </div>
+</header>
+
+<div class="trust">
+  <div class="wrap">
+    <span>Atendimento conduzido por <b>nutricionista registrado</b></span>
+    <span>Presencial + online</span>
+    <span>Programas <b>sob medida</b> para a sua equipe</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="block problem" id="problema">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">A virada</span>
+      <h2>Quando o time se cuida, a empresa inteira sente.</h2>
+      <p>Mais energia, sono melhor, menos ansiedade. Gente que se cuida trabalha melhor, e isso vira cultura. Foi exatamente o que vimos acontecer.</p>
+    </div>
+    <div class="cards c3">
+      <div class="card"><div class="ic">🔋</div><h3>Mais energia</h3><p>Alimentação equilibrada mantém o foco e a disposição ao longo do dia inteiro.</p></div>
+      <div class="card"><div class="ic">😌</div><h3>Sono e equilíbrio</h3><p>Quem se cuida dorme melhor e lida melhor com a pressão do dia a dia.</p></div>
+      <div class="card"><div class="ic">🤝</div><h3>Cultura forte</h3><p>Saúde compartilhada vira identidade do time, não um benefício que ninguém usa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="block" id="solucao">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">A solução</span>
+      <h2>Projeto Mais Saúde: o cuidado nutricional como benefício que dá retorno.</h2>
+      <p>Levamos a estrutura clínica do Nutri Chedid para a sua empresa, com acompanhamento de verdade, não palestra solta. Cada colaborador recebe orientação profissional, e a empresa acompanha o impacto.</p>
+    </div>
+    <div class="cards c3">
+      <div class="card"><div class="ic">🩺</div><h3>Acompanhamento real</h3><p>Consultas e planos individuais, não conteúdo genérico. Cada pessoa com seu objetivo.</p></div>
+      <div class="card"><div class="ic">📚</div><h3>Educação prática</h3><p>Workshops e materiais que cabem na rotina: o que comer no escritório, no home office, na correria.</p></div>
+      <div class="card"><div class="ic">📊</div><h3>Indicadores para a empresa</h3><p>Relatórios de adesão e evolução (sempre respeitando a privacidade individual).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- MEDIA BAND -->
+<section class="block media">
+  <div class="wrap">
+    <div class="media-grid">
+      <figure><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=900&q=80&auto=format&fit=crop" alt="Pessoas trabalhando no escritório" loading="lazy" /><figcaption>Mais energia no trabalho</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format&fit=crop" alt="Pessoas se exercitando na academia" loading="lazy" /><figcaption>Hábitos que viram rotina</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=80&auto=format&fit=crop" alt="Prato saudável com vegetais" loading="lazy" /><figcaption>Alimentação de verdade</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="block problem" id="como">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Como funciona</span>
+      <h2>Simples de começar, fácil de manter.</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><h3>Diagnóstico</h3><p>Conversamos para entender a realidade e os objetivos da sua equipe. Sem custo.</p></div>
+      <div class="step"><div class="num">2</div><h3>Desenho do programa</h3><p>Montamos o formato ideal: consultas, workshops e frequência sob medida.</p></div>
+      <div class="step"><div class="num">3</div><h3>Implementação</h3><p>Rodamos o acompanhamento presencial e/ou online, integrado à rotina.</p></div>
+      <div class="step"><div class="num">4</div><h3>Acompanhamento</h3><p>Medimos adesão e resultados, e ajustamos o programa ao longo do tempo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- INCLUDED -->
+<section class="block" id="incluso">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">O que está incluído</span>
+      <h2>Tudo o que a sua equipe precisa para comer melhor e manter.</h2>
+    </div>
+    <div class="included">
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Consultas individuais</h4><p>Avaliação e plano alimentar personalizado por colaborador.</p></div></div>
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Workshops temáticos</h4><p>Encontros práticos sobre energia, sono, foco e alimentação na rotina.</p></div></div>
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Materiais de apoio</h4><p>Guias, receitas e checklists para o dia a dia.</p></div></div>
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Canal de dúvidas</h4><p>Acesso a orientação profissional entre as consultas.</p></div></div>
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Relatórios de adesão</h4><p>Acompanhamento agregado para o RH, sem expor dados individuais.</p></div></div>
+      <div class="inc-item"><span class="chk">✓</span><div><h4>Formato flexível</h4><p>Presencial, online ou híbrido, conforme a estrutura da empresa.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS SPLIT -->
+<section class="block problem">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Ganha todo mundo</span>
+      <h2>Bom para o colaborador, estratégico para a empresa.</h2>
+    </div>
+    <div class="split">
+      <div class="panel company">
+        <img class="panel-img" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Equipe colaborando no trabalho" loading="lazy" />
+        <h3>Para a empresa</h3>
+        <ul>
+          <li>Redução de absenteísmo e afastamentos</li>
+          <li>Mais energia e produtividade no time</li>
+          <li>Benefício que atrai e retém talentos</li>
+          <li>Saúde como parte concreta da cultura</li>
+          <li>Indicadores para acompanhar o impacto</li>
+        </ul>
+      </div>
+      <div class="panel people">
+        <img class="panel-img" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=900&q=80&auto=format&fit=crop" alt="Pessoa se exercitando" loading="lazy" />
+        <h3>Para o colaborador</h3>
+        <ul>
+          <li>Acompanhamento nutricional profissional</li>
+          <li>Mais disposição no trabalho e fora dele</li>
+          <li>Plano que cabe na rotina real</li>
+          <li>Saúde cuidada sem custo individual</li>
+          <li>Resultados que ele leva para a vida</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AUTHORITY -->
+<section class="block authority" id="historia">
+  <div class="wrap grid">
+    <div class="author-card">
+      <div class="av">🔱</div>
+      <h3>Henrique Chedid</h3>
+      <div class="crn">Nutricionista · CRN-X XXXXX</div>
+      <p>[Bio a preencher: formação, especializações e anos de experiência. À frente do atendimento clínico do Nutri Chedid e do Projeto Mais Saúde.]</p>
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--accent-soft)">A história</span>
+      <h2>Não nasceu numa mesa de reunião.</h2>
+      <p class="big">O Projeto Mais Saúde nasceu do método que o Henrique passou anos documentando e que já cuidou de milhares de pessoas em mais de 20 países. Quando vimos times inteiros mudando de energia, sono e disposição, entendemos: isso podia transformar a cultura de uma empresa. É a mesma estrutura clínica, pessoa por pessoa, agora dentro do seu negócio.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="block quote">
+  <div class="wrap">
+    <blockquote>
+      <span class="tag">Depoimento (exemplo ilustrativo)</span>
+      <q>A empresa bateu recorde de faturamento por 3 meses seguidos após a implantação.</q>
+      <div class="by">Nome do responsável, Cargo · Empresa exemplo</div>
+    </blockquote>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="block" id="faq">
+  <div class="wrap" style="max-width:880px">
+    <div class="section-head">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2>O que as empresas costumam perguntar.</h2>
+    </div>
+    <details class="faq" open><summary>Funciona para empresas de qualquer tamanho?</summary><p>Sim. O programa é montado sob medida, desde times pequenos até grandes equipes, com formato presencial, online ou híbrido conforme a estrutura.</p></details>
+    <details class="faq"><summary>Os dados de saúde dos colaboradores ficam expostos?</summary><p>Não. O atendimento individual é confidencial. A empresa recebe apenas relatórios agregados de adesão e evolução, sem identificar pessoas.</p></details>
+    <details class="faq"><summary>Quanto tempo até ver resultado?</summary><p>Engajamento e energia costumam melhorar nas primeiras semanas. Resultados de saúde e absenteísmo aparecem ao longo do acompanhamento contínuo.</p></details>
+    <details class="faq"><summary>Como começa?</summary><p>Com um diagnóstico gratuito. A gente entende a realidade da sua equipe e propõe o formato ideal, sem compromisso.</p></details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="block cta-final" id="contato">
+  <div class="wrap">
+    <h2>Vamos começar com uma conversa?</h2>
+    <p>Sem proposta pronta, sem pressão. A gente quer entender a sua empresa e a sua cultura primeiro, e pensar junto se faz sentido.</p>
+    <a class="btn" href="#" onclick="return false;">Quero conversar</a>
+    <p style="font-size:13px;margin-top:18px">Ou fale direto no WhatsApp: <b style="color:var(--accent-soft)">[número a configurar]</b></p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><span class="mark" style="font-size:18px;width:34px;height:34px">🔱</span><span><b>Nutri Chedid</b><span>Projeto Mais Saúde</span></span></div>
+    <div class="note">Material de exemplo gerado para demonstração. Estatísticas e depoimentos são ilustrativos e devem ser substituídos por dados e fontes reais antes de publicar.</div>
+  </div>
+</footer>
+
+</body>
+</html>

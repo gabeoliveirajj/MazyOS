@@ -1,19 +1,34 @@
 # Estratégia
 
 > O que importa agora. Prioridades, metas, prazos.
-> O Claude usa isso pra decidir o que sugerir primeiro e o que adiar.
-> Atualize sempre que as prioridades mudarem.
+> O Claude usa isso pra decidir o que sugerir primeiro.
 
 ## Prioridade principal
+**Escalar comercialmente a consultoria online** (o ativo de escala infinita). Aumentar e **MANTER** as conversões enquanto escala o **tráfego pago**, com **CAC sob controle**. É exatamente onde o Gabriel entra: análise de funil, CAC e estratégias de escala junto com o Henrique e a Maria (tráfego).
 
-**Captação de alunos.** Aumentar o volume de pessoas que chegam até a aula experimental. Retenção tá excelente, conversão de experimental pra matrícula também — o gargalo é o topo do funil.
+Baselines reais a preservar ao escalar:
+- Lead → degustação: ~40%
+- Degustação → anual: ~30%
+- Plano de degustação: R$190
 
-## Tirar das costas
+## Segunda frente: estruturar o B2B (Projeto Mais Saúde)
+- Destravar o pipeline (30+ empresas, ~8 quentes) com a **abordagem comercial certa**.
+- O decisor entra mais por **cultura e storytelling** do que por venda dura.
+- Usar o **consultório presencial como porta de entrada** (atrair empresários — CFO, RH, financeiro — que levam ao decisor).
+- Alavancar o case de Floripa (prova social gravada).
 
-**Edição de vídeos (máxima prioridade).** Vídeos das posições semanais e conteúdo pra Instagram/redes sociais. Toma muito tempo seu. Também seria bom: automação de postagens nas redes e comunicação automática no WhatsApp.
+## Clínica presencial
+- Manter agenda cheia, **subir ticket médio**. Sem expandir dias (Henrique fica em até 2 dias/semana).
+- Tratar como **boca do funil B2B**.
 
-## Próximos passos
+## Métricas que importam
+- Conversão lead → degustação
+- Conversão degustação → anual
+- CAC vs. break-even
+- Empresas qualificadas no pipe B2B
+- Nº de ativos na consultoria (~200)
 
-1. Aumentar volume de captação (mais pessoas conhecendo a BJJ Nerd)
-2. Automatizar/simplificar edição de vídeos
-3. Potencialmente: automação de postagens e comunicação
+## Em aberto / próximos
+- **Rebranding:** nome definitivo da marca + do "Projeto Mais Saúde" + identidade visual.
+- Começar a **divulgar o uso de IA** no sistema (quando o público amadurecer).
+- Construir o **hub/gamificação** do B2B.

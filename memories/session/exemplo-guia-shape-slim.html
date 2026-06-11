@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>10 dicas para ter um shape slim | Nutri Chedid</title>
+<meta name="description" content="Guia gratuito: 10 dicas práticas para conquistar e manter um shape slim com saúde, sem dieta maluca. Por Henrique Chedid, baseado em evidência." />
+<style>
+  :root {
+    --paper: #fcf9f4; --ink: #1f1912; --text: #332c22; --muted: #6f6453; --muted-2: #9a8c79;
+    --line: #ece2d2; --accent: #b9975b; --accent-deep: #936f3a; --accent-soft: #f5ecdb;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-deep); }
+  h1,h2,h3,h4 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -0.02em; line-height: 1.12; }
+  img { display: block; max-width: 100%; }
+  .example-banner { background: #1f1912; color: #f5ecdb; text-align: center; font-size: 13px; padding: 8px; letter-spacing: 0.06em; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+  .narrow { max-width: 760px; }
+
+  /* ---------- CAPA ---------- */
+  .cover { position: relative; color: #f7f1e7; overflow: hidden; min-height: 460px; display: flex; align-items: flex-end;
+    background: linear-gradient(180deg, #1a130c, #0c0805); }
+  .cover .bgimg { position: absolute; inset: 0; z-index: 0; }
+  .cover .bgimg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.55; }
+  .cover .bgimg::after { content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(12,8,5,0.5) 0%, rgba(12,8,5,0.2) 35%, rgba(12,8,5,0.85) 100%),
+                radial-gradient(600px 360px at 88% 0%, rgba(185,151,91,0.35), transparent 60%); }
+  .cover .inner { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 64px 28px 56px; width: 100%; }
+  .cover .brand { display: inline-flex; align-items: center; gap: 11px; margin-bottom: 24px; }
+  .cover .brand .mark { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: rgba(200,168,106,0.22); border: 1px solid rgba(255,255,255,0.18); font-size: 20px; }
+  .cover .brand b { font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #eccf96; }
+  .cover .tag { display: inline-block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: #20180c; background: linear-gradient(160deg, #eccf96, #b9975b); padding: 7px 14px; border-radius: 999px; }
+  .cover h1 { font-size: clamp(38px, 6vw, 68px); color: #fff; margin: 20px 0 0; max-width: 760px; }
+  .cover h1 em { color: #eccf96; font-style: italic; }
+  .cover .sub { font-size: clamp(17px, 1.5vw, 21px); color: #d8cab2; margin: 18px 0 0; max-width: 560px; }
+  .cover .by { margin-top: 26px; font-size: 14px; color: #b6a487; }
+  .cover .by b { color: #eccf96; }
+
+  /* ---------- INTRO ---------- */
+  .intro { padding: 60px 0 8px; }
+  .intro .eyebrow { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); font-weight: 700; }
+  .intro h2 { font-size: clamp(26px, 3vw, 34px); margin: 12px 0 0; color: var(--ink); }
+  .intro p { font-size: 18px; margin: 16px 0 0; color: var(--muted); }
+
+  /* ---------- GRID DE DICAS ---------- */
+  .tips { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 36px 0 0; }
+  .tip { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 28px 28px 26px;
+    box-shadow: 0 10px 30px rgba(70,52,22,0.05); display: grid; gap: 8px; position: relative; overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .tip:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(70,52,22,0.10); }
+  .tip::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #eccf96, #b9975b); }
+  .tip .n { font-family: Georgia, serif; font-size: 40px; color: var(--accent); line-height: 1; }
+  .tip h3 { font-size: clamp(19px, 1.5vw, 22px); color: var(--ink); margin: 2px 0 0; }
+  .tip p { font-size: 16px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+  /* ---------- FAIXA DE FOTOS ---------- */
+  .photostrip { padding: 48px 0 0; }
+  .photostrip .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .photostrip figure { margin: 0; position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 3/4; box-shadow: 0 14px 36px rgba(70,52,22,0.10); }
+  .photostrip img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .photostrip figure:hover img { transform: scale(1.05); }
+  .photostrip figcaption { position: absolute; inset: auto 0 0 0; padding: 16px; color: #fff; font-size: 14px; font-weight: 600;
+    background: linear-gradient(to top, rgba(15,10,7,0.85), transparent); }
+
+  /* ---------- CHECKLIST ---------- */
+  .checklist { margin: 48px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 30px 32px; box-shadow: 0 10px 30px rgba(70,52,22,0.05); }
+  .checklist h3 { margin: 0 0 4px; font-size: 23px; color: var(--ink); }
+  .checklist .sub { margin: 4px 0 14px; color: var(--muted); font-size: 15px; }
+  .checklist .row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 17px; }
+  .checklist .row:last-child { border-bottom: none; }
+  .checklist .box { flex: none; width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 7px; margin-top: 2px; }
+
+  /* ---------- CTA ---------- */
+  .cta-box { background: linear-gradient(160deg, #1a130c, #0f0a07); color: #f3ead8; border-radius: 22px; padding: 44px; margin: 56px 0 0; text-align: center; }
+  .cta-box .tag { display: inline-block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #eccf96; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 999px; }
+  .cta-box h2 { color: #fff; font-size: clamp(26px, 3vw, 36px); margin: 16px 0 0; }
+  .cta-box p { color: #c2b39f; margin: 14px auto 24px; font-size: 17px; max-width: 540px; }
+  .cta-box a { display: inline-block; background: linear-gradient(160deg, #eccf96, #b9975b); color: #20180c; font-weight: 800; text-decoration: none; padding: 16px 32px; border-radius: 12px; }
+
+  /* ---------- AUTOR / FONTES ---------- */
+  .author-sign { margin: 50px 0 0; padding: 30px; background: #fff; border: 1px solid var(--line); border-radius: 18px; display: flex; gap: 22px; }
+  .author-sign .av { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(160deg, #eccf96, #936f3a); display: grid; place-items: center; font-size: 34px; flex: none; }
+  .author-sign h4 { margin: 0; font-size: 21px; color: var(--ink); }
+  .author-sign .crn { color: var(--accent-deep); font-weight: 700; font-size: 14px; margin-top: 3px; letter-spacing: 0.03em; }
+  .author-sign p { font-size: 15px; color: var(--muted); margin-top: 12px; }
+  .author-sign .signature { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: 30px; color: var(--accent-deep); margin-top: 10px; }
+
+  .disclaimer { margin: 28px 0 0; font-size: 14px; color: var(--muted); background: var(--accent-soft); border-radius: 12px; padding: 16px 20px; }
+  .references { margin: 44px 0 0; padding-top: 26px; border-top: 2px solid var(--line); }
+  .references h2 { margin: 0 0 8px; font-size: 22px; }
+  .references ol { font-size: 14px; color: var(--muted); line-height: 1.6; padding-left: 22px; }
+  .references li { margin: 11px 0; }
+  .references a { word-break: break-word; }
+
+  footer { background: #0a0705; color: #c2b39f; text-align: center; padding: 36px 24px; font-size: 13px; margin-top: 56px; }
+
+  @media (max-width: 760px) {
+    .tips, .photostrip .grid3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="example-banner">★ MATERIAL DE EXEMPLO · Material rico (guia) demonstrativo · lead magnet de topo de funil</div>
+
+<!-- CAPA -->
+<header class="cover">
+  <div class="bgimg"><img src="https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=1500&q=80&auto=format&fit=crop" alt="Mulher em forma" /></div>
+  <div class="inner">
+    <div class="brand"><span class="mark">🔱</span><b>Team Chedid</b></div>
+    <span class="tag">Guia gratuito</span>
+    <h1>10 dicas para ter um <em>shape slim</em></h1>
+    <p class="sub">Secar com saúde e manter o shape, com dieta de vida real: sem passar fome nem abrir mão da sua rotina.</p>
+    <p class="by">por <b>Henrique Chedid</b> · Nutricionista · baseado em evidência</p>
+  </div>
+</header>
+
+<article>
+  <div class="wrap narrow">
+    <section class="intro">
+      <span class="eyebrow">Antes de começar</span>
+      <h2>O shape vem da soma, não da mágica</h2>
+      <p>Esquece dieta restritiva e promessa de "secar em 7 dias". Um shape slim que dura vem de poucos hábitos simples, com dieta de vida real e constância. E fica muito mais fácil com a comunidade certa do seu lado. Aqui estão os 10 hábitos que mais fazem diferença.</p>
+    </section>
+  </div>
+
+  <!-- DICAS 1–6 -->
+  <div class="wrap">
+    <div class="tips">
+      <div class="tip"><div class="n">01</div><h3>Faça um déficit moderado</h3><p>Secar devagar preserva músculo e evita o efeito sanfona. Pressa demais só faz você perder força e recuperar tudo.</p></div>
+      <div class="tip"><div class="n">02</div><h3>Proteína em todas as refeições</h3><p>É o nutriente que mantém o shape, não só o número na balança. Distribua entre café, almoço e jantar.</p></div>
+      <div class="tip"><div class="n">03</div><h3>Metade do prato de vegetais</h3><p>Saciam muito com pouquíssima caloria. O jeito mais fácil de comer menos sem sentir que está comendo menos.</p></div>
+      <div class="tip"><div class="n">04</div><h3>Beba água o dia inteiro</h3><p>Boa parte da "fome" da tarde é sede disfarçada. Tenha a garrafa sempre à vista.</p></div>
+      <div class="tip"><div class="n">05</div><h3>Treine musculação 3–4x</h3><p>É o treino que desenha o corpo. A dieta tira a gordura; a musculação revela a forma por baixo.</p></div>
+      <div class="tip"><div class="n">06</div><h3>Some passos ao seu dia</h3><p>Andar, escada e movimento (o famoso NEAT) queimam muito mais ao longo do dia do que você imagina.</p></div>
+    </div>
+  </div>
+
+  <!-- FAIXA DE FOTOS -->
+  <div class="wrap photostrip">
+    <div class="grid3">
+      <figure><img src="https://images.unsplash.com/photo-1434596922112-19c563067271?w=800&q=80&auto=format&fit=crop" alt="Mulher correndo" loading="lazy" /><figcaption>Movimento que vira hábito</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?w=800&q=80&auto=format&fit=crop" alt="Mulher se alongando" loading="lazy" /><figcaption>Constância, não perfeição</figcaption></figure>
+      <figure><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&q=80&auto=format&fit=crop" alt="Mulher treinando com peso" loading="lazy" /><figcaption>Força desenha o shape</figcaption></figure>
+    </div>
+  </div>
+
+  <!-- DICAS 7–10 -->
+  <div class="wrap">
+    <div class="tips">
+      <div class="tip"><div class="n">07</div><h3>Priorize comida de verdade</h3><p>Antes de contar caloria, corte ultraprocessado e bebida açucarada. É onde mais sobra caloria escondida.</p></div>
+      <div class="tip"><div class="n">08</div><h3>Durma bem</h3><p>Noite ruim aumenta a fome e piora as escolhas do dia seguinte. Sono é parte do emagrecimento.</p></div>
+      <div class="tip"><div class="n">09</div><h3>Planeje as refeições</h3><p>Decisão tomada com fome é decisão ruim. Deixe o que comer já resolvido com antecedência.</p></div>
+      <div class="tip"><div class="n">10</div><h3>Seja constante, não perfeita</h3><p>80% bem feito, sempre, vale mais que 100% por uma semana. Escorregou? Volta na próxima refeição.</p></div>
+    </div>
+  </div>
+
+  <div class="wrap narrow">
+    <!-- CHECKLIST -->
+    <div class="checklist">
+      <h3>Checklist do dia</h3>
+      <p class="sub">Imprima ou salve. Marque o que cumpriu hoje:</p>
+      <div class="row"><span class="box"></span><span>Déficit moderado (sem passar fome)</span></div>
+      <div class="row"><span class="box"></span><span>Proteína nas 3 refeições</span></div>
+      <div class="row"><span class="box"></span><span>Metade do prato de vegetais</span></div>
+      <div class="row"><span class="box"></span><span>Musculação ou movimento no dia</span></div>
+      <div class="row"><span class="box"></span><span>Água por perto o dia inteiro</span></div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <span class="tag">Próximo passo</span>
+      <h2>Quer o shape feito pro seu corpo?</h2>
+      <p>Estas dicas são o começo. Na consultoria Team Chedid, você ganha um protocolo individual com dieta de vida real e uma comunidade que não te deixa parar. Já são +2.000 mulheres com resultado.</p>
+      <a href="#" onclick="return false;">Conhecer a consultoria</a>
+    </div>
+
+    <!-- DISCLAIMER -->
+    <div class="disclaimer"><b>Aviso:</b> conteúdo informativo, baseado em evidência, que não substitui avaliação individual de um nutricionista ou médico. Estratégias de emagrecimento devem ser ajustadas ao histórico de saúde, exames e objetivos de cada pessoa.</div>
+
+    <!-- AUTOR -->
+    <div class="author-sign">
+      <div class="av">🔱</div>
+      <div>
+        <h4>Henrique Chedid</h4>
+        <div class="crn">Nutricionista · CRN-X XXXXX</div>
+        <p>[Bio a preencher: formação, especializações e anos de experiência clínica. Responsável técnico pelo Nutri Chedid e pelo Projeto Mais Saúde.]</p>
+        <div class="signature">Henrique Chedid</div>
+      </div>
+    </div>
+
+    <!-- REFERÊNCIAS -->
+    <div class="references">
+      <h2>Referências</h2>
+      <ol>
+        <li>Institute of Medicine (US). <i>Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids</i>. National Academies Press; 2005. · <a href="https://nap.nationalacademies.org/catalog/10490/dietary-reference-intakes-for-energy-carbohydrate-fiber-fat-fatty-acids-cholesterol-protein-and-amino-acids" target="_blank" rel="noopener">Acessar ↗</a></li>
+        <li>Jäger R, Kerksick CM, Campbell BI, et al. ISSN Position Stand: protein and exercise. <i>J Int Soc Sports Nutr</i>. 2017;14:20. · <a href="https://doi.org/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">doi.org/10.1186/s12970-017-0177-8 ↗</a></li>
+        <li>Helms ER, Aragon AA, Fitschen PJ. Evidence-based recommendations for natural bodybuilding contest preparation: nutrition and supplementation. <i>J Int Soc Sports Nutr</i>. 2014;11:20. · <a href="https://doi.org/10.1186/1550-2783-11-20" target="_blank" rel="noopener">doi.org/10.1186/1550-2783-11-20 ↗</a></li>
+      </ol>
+      <p style="font-size:13px; color:var(--muted); margin-top:8px;">Fontes reais e verificáveis. Confirme a edição vigente e adapte às diretrizes brasileiras (CFN, SBAN) antes de publicar.</p>
+    </div>
+  </div>
+
+</article>
+
+<footer>Material de exemplo gerado para demonstração · Team Chedid 🔱 · Substitua CRN e bio reais antes de publicar.</footer>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Variações de criativo por frente | Nutri Chedid</title>
+<style>
+  :root {
+    --accent: #c8a86a; --accent-soft: #e3c48f; --accent-deep: #b9975b;
+    --text: #f5efe5; --muted: #c2b39f; --muted-2: #9a8c79; --line: rgba(255,255,255,0.10);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: radial-gradient(900px 500px at 10% -8%, rgba(200,168,106,0.16), transparent 55%), linear-gradient(180deg, #130d09, #0c0805);
+    color: var(--text); min-height: 100vh; -webkit-font-smoothing: antialiased;
+  }
+  .example-banner { background: #211b13; color: var(--accent-soft); text-align: center; font-size: 13px; padding: 8px; letter-spacing: 0.06em; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 0 28px; }
+
+  header.page { text-align: center; padding: 54px 0 8px; }
+  header.page .eyebrow { color: var(--accent); font-size: 13px; letter-spacing: 0.20em; text-transform: uppercase; font-weight: 700; }
+  header.page h1 { font-family: Georgia, serif; font-size: clamp(32px, 4vw, 50px); margin: 14px 0 0; letter-spacing: -0.02em; }
+  header.page h1 em { color: var(--accent); font-style: italic; }
+  header.page p { color: var(--muted); font-size: 18px; max-width: 700px; margin: 16px auto 0; line-height: 1.6; }
+
+  .front { padding: 46px 0 8px; }
+  .front-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 18px; margin-bottom: 30px; }
+  .front-head h2 { font-family: Georgia, serif; font-size: clamp(24px, 2.6vw, 34px); margin: 0; color: #fff; }
+  .front-head .tone { color: var(--muted-2); font-size: 14px; }
+  .front-head .pill { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; font-weight: 700; color: var(--accent); border: 1px solid rgba(200,168,106,0.35); padding: 5px 11px; border-radius: 999px; }
+
+  .board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; padding-bottom: 26px; }
+  .creative { display: flex; flex-direction: column; gap: 14px; }
+
+  .ad {
+    position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden;
+    border: 1px solid var(--line); box-shadow: 0 26px 60px rgba(0,0,0,0.42);
+    display: flex; flex-direction: column; justify-content: space-between; isolation: isolate;
+  }
+  .ad .bg { position: absolute; inset: 0; z-index: -2; }
+  .ad .bg img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ad .scrim { position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(15,10,7,0.72) 0%, rgba(15,10,7,0.12) 30%, rgba(15,10,7,0.55) 60%, rgba(15,10,7,0.95) 100%); }
+
+  .ad-top { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; }
+  .ad-brand { display: inline-flex; align-items: center; gap: 8px; }
+  .ad-brand .mark { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; background: rgba(200,168,106,0.18); border: 1px solid rgba(255,255,255,0.14); font-size: 16px; }
+  .ad-brand b { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #fff; }
+  .ad-sponsored { font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.22); padding: 4px 8px; border-radius: 999px; }
+
+  .ad-body { padding: 20px 20px 22px; display: grid; gap: 12px; }
+  .ad-head { font-family: Georgia, serif; font-size: clamp(20px, 1.7vw, 25px); line-height: 1.12; color: #fff; margin: 0; text-shadow: 0 2px 18px rgba(0,0,0,0.55); }
+  .ad-sub { margin: 0; font-size: 13px; line-height: 1.5; color: #eae0d0; text-shadow: 0 1px 12px rgba(0,0,0,0.5); }
+  .ad-cta { display: inline-flex; align-items: center; justify-content: center; width: fit-content; margin-top: 4px;
+    background: #fff; color: #20180c; font-weight: 800; font-size: 13px; padding: 11px 18px; border-radius: 11px; }
+  .ad-cta.gold { background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep)); }
+
+  .vcap { display: flex; align-items: center; gap: 10px; padding: 0 4px; }
+  .vbadge { flex: none; width: 26px; height: 26px; border-radius: 8px; display: grid; place-items: center; font-family: Georgia, serif; font-weight: 700; font-size: 14px; color: #20180c; background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep)); }
+  .vangle { font-size: 13px; color: var(--muted); }
+  .vangle b { color: var(--text); }
+
+  footer { text-align: center; color: var(--muted-2); font-size: 13px; padding: 30px 0 56px; }
+
+  @media (max-width: 920px) { .board { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
+</style>
+</head>
+<body>
+
+<div class="example-banner">★ MATERIAL DE EXEMPLO · 3 variações por frente para teste A/B (imagens de banco, copy ilustrativa)</div>
+
+<header class="page">
+  <div class="wrap">
+    <span class="eyebrow">Performance · Nutri Chedid 🔱</span>
+    <h1>Variações de criativo <em>por frente</em></h1>
+    <p>Três ângulos por frente para rodar teste A/B. Mesmo tom calibrado por público, gatilhos diferentes; escolha os vencedores pelos números.</p>
+  </div>
+</header>
+
+<!-- ============ FRENTE 1: CLÍNICA ============ -->
+<section class="front">
+  <div class="wrap">
+    <div class="front-head">
+      <span class="pill">Clínica · Presencial</span>
+      <h2>Clínica presencial</h2>
+      <span class="tone">Tom: autoridade e exclusividade · também é a porta do funil B2B</span>
+    </div>
+    <div class="board">
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=900&q=80&auto=format&fit=crop" alt="Prato saudável premium" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Nutrição de alta performance, no presencial.</h3>
+            <p class="ad-sub">Protocolo individual e acompanhado de perto. Agenda limitada a poucos dias por semana.</p>
+            <span class="ad-cta gold">Agendar consulta</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">A</span><span class="vangle"><b>Autoridade</b> · exclusividade</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=900&q=80&auto=format&fit=crop" alt="Prato com salmão" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">O protocolo mais preciso que você já seguiu.</h3>
+            <p class="ad-sub">Um método documentado por anos, calibrado pra cada detalhe do seu corpo.</p>
+            <span class="ad-cta gold">Agendar consulta</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">B</span><span class="vangle"><b>Método</b> · precisão</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=900&q=80&auto=format&fit=crop" alt="Tigela saudável" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Cuide de você. Depois, do seu time.</h3>
+            <p class="ad-sub">O cuidado que começa no consultório pode transformar a saúde da sua empresa.</p>
+            <span class="ad-cta">Quero conhecer</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">C</span><span class="vangle"><b>Empresário</b> · porta do B2B</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRENTE 2: CONSULTORIA ONLINE ============ -->
+<section class="front">
+  <div class="wrap">
+    <div class="front-head">
+      <span class="pill">Consultoria online · B2C</span>
+      <h2>Consultoria online</h2>
+      <span class="tone">Tom: shape slim + dieta de vida real · público feminino, compra emocional</span>
+    </div>
+    <div class="board">
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80&auto=format&fit=crop" alt="Pessoa treinando" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">+2.000 mulheres já conquistaram o shape slim.</h3>
+            <p class="ad-sub">Dieta de vida real, sem abrir mão da rotina. Comece pela degustação.</p>
+            <span class="ad-cta gold">Quero começar</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">A</span><span class="vangle"><b>Prova social</b> · impulso</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format&fit=crop" alt="Treino na academia" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Seu shape slim, por R$190.</h3>
+            <p class="ad-sub">Dieta de vida real, feita pra você. Sem fórmula genérica.</p>
+            <span class="ad-cta gold">Começar agora</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">B</span><span class="vangle"><b>Oferta</b> · valor</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=900&q=80&auto=format&fit=crop" alt="Pessoa se exercitando" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Cansada de dieta que não cabe na sua vida?</h3>
+            <p class="ad-sub">Shape slim com dieta de vida real, do seu jeito. Comece pela degustação.</p>
+            <span class="ad-cta gold">Quero experimentar</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">C</span><span class="vangle"><b>Dor</b> · desejo</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FRENTE 3: PROJETO MAIS SAÚDE ============ -->
+<section class="front">
+  <div class="wrap">
+    <div class="front-head">
+      <span class="pill">Projeto Mais Saúde · B2B</span>
+      <h2>Projeto Mais Saúde</h2>
+      <span class="tone">Tom: storytelling e cultura · sem venda dura</span>
+    </div>
+    <div class="board">
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&q=80&auto=format&fit=crop" alt="Equipe trabalhando" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">A saúde do seu time pode ser o próximo salto da empresa.</h3>
+            <p class="ad-sub">Uma empresa em Floripa bateu recorde de faturamento depois que o time começou a se cuidar.</p>
+            <span class="ad-cta">Vamos conversar</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">A</span><span class="vangle"><b>Resultado</b> · case</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=900&q=80&auto=format&fit=crop" alt="Pessoas no escritório" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Cultura forte começa por gente que se cuida.</h3>
+            <p class="ad-sub">Time com mais energia, sono melhor e menos ansiedade. Isso vira identidade.</p>
+            <span class="ad-cta">Vamos conversar</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">B</span><span class="vangle"><b>Cultura</b> · pertencimento</span></div>
+      </div>
+
+      <div class="creative">
+        <div class="ad">
+          <div class="bg"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Liderança no trabalho" loading="lazy" /></div>
+          <div class="scrim"></div>
+          <div class="ad-top"><div class="ad-brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div><span class="ad-sponsored">Patrocinado</span></div>
+          <div class="ad-body">
+            <h3 class="ad-head">Você cuida da sua saúde. E da do seu time?</h3>
+            <p class="ad-sub">Levamos o cuidado nutricional, pessoa por pessoa, pra dentro da sua empresa.</p>
+            <span class="ad-cta">Conhecer o projeto</span>
+          </div>
+        </div>
+        <div class="vcap"><span class="vbadge">C</span><span class="vangle"><b>CEO</b> · pessoal</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>Material de exemplo · formato feed 4:5 (1080×1350) · 3 variações por frente para teste A/B · copy e imagens ilustrativas.</footer>
+
+</body>
+</html>

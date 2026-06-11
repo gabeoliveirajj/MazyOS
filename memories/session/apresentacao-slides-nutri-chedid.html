@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estratégia Comercial — Nutri Chedid | Apresentação</title>
+<style>
+  :root {
+    --bg-dark: #100b08;
+    --accent: #b9975b;
+    --accent-soft: rgba(185, 151, 91, 0.18);
+    --text-light: #f2eee8;
+    --text-muted: #c4b8a2;
+    --card-bg: rgba(255, 255, 255, 0.06);
+    --card-border: rgba(255, 255, 255, 0.08);
+    --shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow: hidden;
+  }
+  .slide {
+    width: 1920px;
+    height: 1080px;
+    padding: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 40px;
+    page-break-after: always;
+    page-break-inside: avoid;
+    position: relative;
+    background: radial-gradient(circle at top left, rgba(185, 151, 91, 0.14), transparent 20%),
+                radial-gradient(circle at bottom right, rgba(185, 151, 91, 0.08), transparent 25%),
+                linear-gradient(135deg, #140f0b 0%, #100b08 100%);
+  }
+  .slide::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.04) 0%, transparent 28%),
+                      radial-gradient(circle at 80% 10%, rgba(185,151,91,0.1) 0%, transparent 22%);
+    pointer-events: none;
+  }
+  .slide > * { position: relative; z-index: 1; }
+  .hero {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .slide-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .logo-container {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    background: rgba(185, 151, 91, 0.14);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+  }
+  .logo-container svg { width: 86px; height: 86px; }
+  .slide-title-group { flex: 1; }
+  .slide-title { margin: 0; font-size: 62px; font-weight: 700; color: var(--accent); line-height: 1.08; }
+  .slide-subtitle { margin: 12px 0 0; font-size: 24px; color: var(--text-muted); font-weight: 400; }
+  h1 { margin: 0; font-size: 74px; font-weight: 800; letter-spacing: -1px; line-height: 1.04; color: var(--accent); }
+  h1.hero-title { font-size: 88px; }
+  h1.hero-subtitle { font-size: 34px; color: var(--text-muted); font-weight: 400; margin-top: 16px; }
+  h2 { font-size: 38px; font-weight: 700; color: var(--accent); margin: 0 0 18px; }
+  .content { flex: 1; display: flex; flex-direction: column; gap: 22px; }
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 28px;
+    padding: 36px;
+    box-shadow: var(--shadow);
+  }
+  ul { margin: 0; padding-left: 32px; }
+  li { font-size: 22px; line-height: 1.75; margin: 14px 0; color: var(--text-muted); }
+  li strong { color: var(--accent); font-weight: 700; }
+  .accent { color: var(--accent); font-weight: 700; }
+  .metric {
+    background: rgba(185, 151, 91, 0.12);
+    border-left: 5px solid var(--accent);
+    padding: 20px 26px;
+    border-radius: 16px;
+    margin: 16px 0;
+    font-size: 21px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .two-column { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 32px; }
+  .two-column > div { display: flex; flex-direction: column; gap: 22px; }
+  .two-column h3 { margin: 0; font-size: 28px; color: var(--accent); }
+  .two-column li { font-size: 20px; }
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-size: 15px;
+    color: var(--text-muted);
+    opacity: 0.9;
+  }
+  .page-number { font-weight: 700; }
+  .cta-button {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--bg-dark);
+    padding: 16px 36px;
+    border-radius: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    margin-top: 24px;
+    font-size: 20px;
+  }
+  .hero-content { text-align: center; max-width: 920px; margin: 0 auto; }
+  .hero-content p { font-size: 24px; color: var(--text-muted); margin: 28px auto 0; line-height: 1.7; max-width: 900px; }
+  .divider { height: 2px; background: rgba(185, 151, 91, 0.22); margin: 20px 0; border-radius: 999px; }
+  .highlights { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 24px; }
+  .tag {
+    background: rgba(185, 151, 91, 0.12);
+    color: var(--accent);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    border: 1px solid rgba(185,151,91,0.2);
+  }
+  .image-panel {
+    position: relative;
+    height: 440px;
+    border-radius: 32px;
+    overflow: hidden;
+    background: #111;
+    box-shadow: var(--shadow);
+  }
+  .image-panel img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transform: scale(1.02);
+  }
+  .image-panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(16,11,8,0.08) 0%, rgba(16,11,8,0.88) 100%);
+  }
+  .image-panel .panel-label {
+    position: absolute;
+    left: 34px;
+    bottom: 32px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .feature-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 28px;
+    padding: 34px;
+    display: grid;
+    gap: 18px;
+    box-shadow: var(--shadow);
+  }
+  .feature-card h3 { margin: 0; font-size: 28px; color: var(--accent); }
+  .feature-card p { margin: 0; color: var(--text-muted); line-height: 1.75; font-size: 20px; }
+  .feature-icon {
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    border-radius: 22px;
+    background: rgba(185,151,91,0.16);
+    color: var(--accent);
+    font-size: 28px;
+  }
+  .feature-row { display: flex; align-items: flex-start; gap: 20px; }
+  .feature-row p { margin: 0; }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 26px;
+  }
+  .step-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 26px;
+    padding: 36px;
+    min-height: 240px;
+    box-shadow: var(--shadow);
+  }
+  .step-badge {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg-dark);
+    display: grid;
+    place-items: center;
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 24px;
+  }
+  .step-card h3 { margin: 0 0 14px; font-size: 26px; color: var(--accent); }
+  .step-card p { margin: 0; color: var(--text-muted); line-height: 1.75; font-size: 20px; }
+  .icon-list { display: grid; gap: 22px; }
+  .icon-item { display: flex; gap: 22px; align-items: flex-start; }
+  .icon-item .icon {
+    min-width: 52px;
+    min-height: 52px;
+    border-radius: 18px;
+    display: grid;
+    place-items: center;
+    background: rgba(185,151,91,0.16);
+    color: var(--accent);
+    font-size: 24px;
+  }
+  .icon-item p { margin: 0; font-size: 21px; line-height: 1.75; color: var(--text-muted); }
+  @media print {
+    body { margin: 0; padding: 0; }
+    .slide { margin: 0; }
+  }
+</style>
+</head>
+<body>
+<section class="slide hero">
+  <div class="hero-content">
+    <div style="display: inline-flex; align-items: center; gap: 14px; justify-content: center; margin-bottom: 24px;">
+      <div class="logo-container" style="width: 88px; height: 88px; border-radius: 22px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="60" height="60">
+          <circle cx="60" cy="60" r="58" fill="none" stroke="#b9975b" stroke-width="2"/>
+          <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="44" font-weight="700" fill="#b9975b">NC</text>
+        </svg>
+      </div>
+      <span class="tag" style="background: rgba(255,255,255,0.08); color: #fff; border-color: rgba(255,255,255,0.12);">Nutri Chedid</span>
+    </div>
+    <h1 class="hero-title">Estratégia Comercial</h1>
+    <h1 class="hero-subtitle">Mais leads qualificados, mais conversões e menos retrabalho</h1>
+    <p>Apresentação para alinhamento com Henrique: operação comercial, conteúdo e tráfego pronta para escalar em 120 dias.</p>
+    <div class="highlights">
+      <span class="tag">11/06 às 9h</span>
+      <span class="tag">Piloto 120 dias</span>
+      <span class="tag">Gabriel — Gestor Comercial</span>
+    </div>
+  </div>
+  <div class="footer" style="border: none; justify-content: center; opacity: 0.9;">
+    <span style="font-size: 15px;">Design inspirado em Nutri Chedid — foco em clareza, movimento e autoridade.</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="logo-container">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="80" height="80">
+        <circle cx="60" cy="60" r="58" fill="none" stroke="#b9975b" stroke-width="1.5"/>
+        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="40" font-weight="700" fill="#b9975b">NC</text>
+      </svg>
+    </div>
+    <div class="slide-title-group">
+      <h2>Contexto atual</h2>
+      <p class="slide-subtitle">Visão rápida do estado atual e da oportunidade de crescimento</p>
+    </div>
+  </div>
+  <div class="image-panel">
+    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1200&q=80" alt="Equipe em reunião estratégica" crossorigin="anonymous" />
+    <div class="panel-label">Diagnóstico estratégico</div>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Nutrição presencial e online</strong> com Projeto Mais Saúde em expansão.</li>
+      <li><strong>Meta:</strong> escalar consultoria online e vendas corporativas.</li>
+      <li><strong>Desafio:</strong> captação, follow-up manual e produção limitada de criativos.</li>
+      <li><strong>Oportunidade:</strong> criar fluxo comercial profissional com conteúdo e IA.</li>
+    </ul>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 1</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>Objetivos principais</h2>
+      <p class="slide-subtitle">O que o projeto precisa entregar para o negócio crescer</p>
+    </div>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">🎯</div>
+        <div>
+          <h3>Aumentar captação</h3>
+          <p>Mais leads qualificados chegando com fluxo previsível e mensurável.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">🔁</div>
+        <div>
+          <h3>Melhorar conversão</h3>
+          <p>Transformar degustação em plano anual com mensagens e ofertas alinhadas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">🧠</div>
+        <div>
+          <h3>Desonerar a secretária</h3>
+          <p>Automação do follow-up operacional, liberando o time para atendimento e vendas.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">📈</div>
+        <div>
+          <h3>Escalar criativos + SEO</h3>
+          <p>Produção sistemática para tráfego, conteúdo e presença orgânica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 2</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>Serviços oferecidos</h2>
+      <p class="slide-subtitle">A composição estratégica para apoiar vendas, produção e SEO</p>
+    </div>
+  </div>
+  <div class="icon-list">
+    <div class="icon-item">
+      <div class="icon">⚙️</div>
+      <p><strong>Gestor comercial estratégico</strong> — alinhamento do funil, metas e priorização de oportunidades.</p>
+    </div>
+    <div class="icon-item">
+      <div class="icon">📞</div>
+      <p><strong>Inside sales</strong> — contato, qualificação, nutrição e fechamento dos leads.</p>
+    </div>
+    <div class="icon-item">
+      <div class="icon">✍️</div>
+      <p><strong>Copywriter</strong> — mensagens para landing pages, sequências e criativos que convertem.</p>
+    </div>
+    <div class="icon-item">
+      <div class="icon">🎨</div>
+      <p><strong>Produção de criativos</strong> — 60 artes/mês para redes sociais, tráfego e conteúdo comercial.</p>
+    </div>
+    <div class="icon-item">
+      <div class="icon">🔍</div>
+      <p><strong>Analista de SEO</strong> — conteúdo, blog e materiais ricos para reduzir custo por lead.</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 3</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>O que será feito</h2>
+      <p class="slide-subtitle">Execução clara para cada etapa do funil e do crescimento</p>
+    </div>
+  </div>
+  <div class="image-panel">
+    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="Trabalho criativo com notebook e análise" crossorigin="anonymous" />
+    <div class="panel-label">Plano de ação</div>
+  </div>
+  <div class="content">
+    <ul>
+      <li><strong>Diagnóstico do funil atual</strong> e melhorias no fluxo de leads.</li>
+      <li><strong>Landing pages de conversão</strong> e sequências de WhatsApp, e-mail e DM.</li>
+      <li><strong>60 criativos/mês</strong> para redes, tráfego pago e conversão.</li>
+      <li><strong>Materiais ricos</strong>: ebooks, guias, checklists e estudos de caso.</li>
+      <li><strong>Oferta para o Projeto Mais Saúde</strong>, com foco corporativo.</li>
+      <li><strong>Painel de métricas</strong> e revisão semanal.</li>
+      <li><strong>Implementação de IA</strong> nos processos de automação e copy.</li>
+    </ul>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 4</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>Resultados esperados</h2>
+      <p class="slide-subtitle">O impacto direto no negócio e na operação</p>
+    </div>
+  </div>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">📣</div>
+        <div>
+          <h3>Mais leads</h3>
+          <p>Geração contínua sem sobrecarregar o time administrativo.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">⚡</div>
+        <div>
+          <h3>Mais fechamentos</h3>
+          <p>Processo de vendas mais rápido, com taxa de conversão igual ou melhor.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">💸</div>
+        <div>
+          <h3>Menor dependência de tráfego pago</h3>
+          <p>Conteúdo e SEO para captar leads de forma sustentável.</p>
+        </div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-row">
+        <div class="feature-icon">🧭</div>
+        <div>
+          <h3>Atenção aos leads</h3>
+          <p>Nutrição estruturada para leads menos aquecidos, com mais chances de compra.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 5</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>Cenário proposto</h2>
+      <p class="slide-subtitle">Como vamos distribuir responsabilidades e gerar resultado</p>
+    </div>
+  </div>
+  <div class="two-column">
+    <div class="card">
+      <h3>Estrutura de trabalho</h3>
+      <div class="icon-item">
+        <div class="icon">🤝</div>
+        <p><strong>Gabriel:</strong> assume o comercial, inside sales e execução de campanhas.</p>
+      </div>
+      <div class="icon-item">
+        <div class="icon">🎯</div>
+        <p><strong>Henrique:</strong> foca em conteúdo, autoridade e atendimento clínico.</p>
+      </div>
+      <div class="icon-item">
+        <div class="icon">📊</div>
+        <p>O time de tráfego usa criativos e mensagens estruturadas para campanhas mais eficientes.</p>
+      </div>
+    </div>
+    <div class="image-panel" style="height: 520px;">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80" alt="Planejamento de equipe" crossorigin="anonymous" />
+      <div class="panel-label">Operação colaborativa</div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="metric">Revisão semanal de resultados + ajustes em tempo real</div>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 6</span>
+  </div>
+</section>
+<section class="slide">
+  <div class="slide-header">
+    <div class="slide-title-group">
+      <h2>Próximos passos</h2>
+      <p class="slide-subtitle">Do alinhamento à execução imediata</p>
+    </div>
+  </div>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-badge">1</div>
+      <h3>Iniciar piloto</h3>
+      <p>Lançar piloto de 120 dias com métricas definidas e ajustes semanais.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-badge">2</div>
+      <h3>Definir metas</h3>
+      <p>Estabelecer metas de leads, degustações e conversões para o plano anual.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-badge">3</div>
+      <h3>Revisar e otimizar</h3>
+      <p>Acompanhar performance com reuniões semanais e otimizar o funil em tempo real.</p>
+    </div>
+  </div>
+  <div class="footer">
+    <span>Nutri Chedid</span>
+    <span class="page-number">Slide 7</span>
+  </div>
+</section>
+<section class="slide hero">
+  <div class="hero-content">
+    <h1 class="hero-title">Vamos ativar o comercial</h1>
+    <p>Alinhar conteúdo, vendas e tráfego com um piloto claro, inteligente e escalável.</p>
+    <a class="cta-button">Confirmar piloto 120 dias</a>
+    <div class="highlights" style="justify-content: center; margin-top: 36px;">
+      <span class="tag">Mais leads</span>
+      <span class="tag">Menos retrabalho</span>
+      <span class="tag">Mais conversão</span>
+    </div>
+  </div>
+  <div class="footer" style="border: none; justify-content: center; opacity: 0.9;">
+    <span style="font-size: 15px;">Gabriel Oliveira | Gestor Comercial | Nutri Chedid</span>
+  </div>
+</section>
+</body>
+</html>

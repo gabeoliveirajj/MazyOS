@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia da Alimentação de Alta Performance | Nutri Chedid</title>
+<meta name="description" content="Guia gratuito: 5 pilares para ter mais energia, foco e disposição o dia inteiro. Conteúdo prático, baseado em evidência, por Henrique Chedid." />
+<style>
+  :root {
+    --paper: #fbf8f2; --paper-2: #f3ead8; --ink: #211b13; --text: #2f2920; --muted: #6f6453;
+    --line: #e7ddcc; --accent: #b9975b; --accent-deep: #936f3a; --accent-soft: #f3ead8; --good: #3f7d57;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--text);
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { color: var(--accent-deep); }
+  h1,h2,h3,h4 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -0.02em; line-height: 1.12; }
+  .example-banner { background: #211b13; color: #f3ead8; text-align: center; font-size: 13px; padding: 8px; letter-spacing: 0.06em; }
+
+  /* CAPA */
+  .cover { position: relative; color: #f5efe5; overflow: hidden;
+    background: radial-gradient(700px 400px at 85% -10%, rgba(185,151,91,0.30), transparent 60%), linear-gradient(180deg, #1a130c, #0c0805); }
+  .cover .bgimg { position: absolute; inset: 0; opacity: 0.18; z-index: 0; }
+  .cover .bgimg img { width: 100%; height: 100%; object-fit: cover; }
+  .cover .inner { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 70px 28px 64px; }
+  .cover .brand { display: inline-flex; align-items: center; gap: 11px; margin-bottom: 30px; }
+  .cover .brand .mark { width: 40px; height: 40px; border-radius: 11px; display: grid; place-items: center; background: rgba(200,168,106,0.18); border: 1px solid rgba(255,255,255,0.14); font-size: 20px; }
+  .cover .brand b { font-size: 14px; letter-spacing: 0.18em; text-transform: uppercase; color: #e3c48f; }
+  .cover .tag { display: inline-block; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: #20180c; background: linear-gradient(160deg, #e3c48f, #936f3a); padding: 7px 14px; border-radius: 999px; }
+  .cover h1 { font-size: clamp(36px, 5.5vw, 60px); color: #fff; margin: 22px 0 0; }
+  .cover h1 em { color: #e3c48f; font-style: italic; }
+  .cover .sub { font-size: clamp(18px, 1.5vw, 22px); color: #c2b39f; margin: 20px 0 0; max-width: 620px; line-height: 1.55; }
+  .cover .by { margin-top: 34px; font-size: 14px; color: #9a8c79; }
+  .cover .by b { color: #e3c48f; }
+
+  .wrap { max-width: 820px; margin: 0 auto; padding: 0 28px; }
+
+  /* TOC / intro */
+  .intro { padding: 56px 0 0; }
+  .intro .eyebrow { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent-deep); font-weight: 700; }
+  .intro h2 { font-size: clamp(26px, 3vw, 34px); margin: 12px 0 0; color: var(--ink); }
+  .intro p { font-size: 18px; margin: 16px 0 0; }
+  .toc { margin: 30px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 8px 8px; }
+  .toc a { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--text); padding: 13px 16px; border-radius: 12px; }
+  .toc a:hover { background: var(--accent-soft); }
+  .toc .n { font-family: Georgia, serif; font-weight: 700; color: var(--accent-deep); width: 26px; }
+  .toc a span { flex: 1; }
+  .toc a .arrow { color: var(--accent-deep); }
+
+  /* pilares */
+  .pillar { padding: 56px 0 0; }
+  .pillar .ph { display: flex; align-items: baseline; gap: 16px; }
+  .pillar .pnum { font-family: Georgia, serif; font-size: clamp(40px, 6vw, 64px); color: var(--accent); line-height: 0.9; }
+  .pillar h2 { font-size: clamp(24px, 3vw, 32px); color: var(--ink); margin: 0; }
+  .pillar p { font-size: 18px; margin: 16px 0 0; }
+  .pillar ul { font-size: 18px; margin: 14px 0 0; padding-left: 22px; }
+  .pillar li { margin: 8px 0; }
+
+  .tip { margin: 22px 0 0; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 18px 22px; font-size: 16px; }
+  .tip b { color: var(--accent-deep); }
+  .tip.warn { border-left-color: #c2762f; }
+  .tip.warn b { color: #b1641f; }
+
+  /* sample day table */
+  table { width: 100%; border-collapse: collapse; margin: 24px 0 0; font-size: 16px; background: #fff; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+  th, td { text-align: left; padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--accent-soft); color: var(--ink); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+  td b { color: var(--accent-deep); }
+  tr:last-child td { border-bottom: none; }
+
+  /* checklist */
+  .checklist { margin: 22px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 26px 28px; }
+  .checklist h3 { margin: 0 0 6px; font-size: 22px; color: var(--ink); }
+  .checklist .row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-bottom: 1px dashed var(--line); font-size: 17px; }
+  .checklist .row:last-child { border-bottom: none; }
+  .checklist .box { flex: none; width: 24px; height: 24px; border: 2px solid var(--accent); border-radius: 7px; margin-top: 2px; }
+
+  /* CTA */
+  .cta-box { background: linear-gradient(160deg, #1a130c, #0f0a07); color: #f3ead8; border-radius: 20px; padding: 40px; margin: 56px 0 0; text-align: center; }
+  .cta-box .tag { display: inline-block; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #e3c48f; border: 1px solid rgba(255,255,255,0.2); padding: 6px 12px; border-radius: 999px; }
+  .cta-box h2 { color: #fff; font-size: clamp(26px, 3vw, 34px); margin: 16px 0 0; }
+  .cta-box p { color: #c2b39f; margin: 14px auto 24px; font-size: 17px; max-width: 540px; }
+  .cta-box a { display: inline-block; background: linear-gradient(160deg, #e3c48f, #936f3a); color: #20180c; font-weight: 800; text-decoration: none; padding: 15px 30px; border-radius: 12px; }
+
+  /* author */
+  .author-sign { margin: 50px 0 0; padding: 30px; background: #fff; border: 1px solid var(--line); border-radius: 18px; display: flex; gap: 22px; }
+  .author-sign .av { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(160deg, #e3c48f, #936f3a); display: grid; place-items: center; font-size: 34px; flex: none; }
+  .author-sign h4 { margin: 0; font-size: 21px; color: var(--ink); }
+  .author-sign .crn { color: var(--accent-deep); font-weight: 700; font-size: 14px; margin-top: 3px; letter-spacing: 0.03em; }
+  .author-sign p { font-size: 15px; color: var(--muted); margin-top: 12px; }
+  .author-sign .signature { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: 30px; color: var(--accent-deep); margin-top: 10px; }
+
+  .disclaimer { margin: 28px 0 0; font-size: 14px; color: var(--muted); background: var(--accent-soft); border-radius: 12px; padding: 16px 20px; }
+  .references { margin: 44px 0 0; padding-top: 26px; border-top: 2px solid var(--line); }
+  .references h2 { margin: 0 0 8px; font-size: 22px; }
+  .references ol { font-size: 14px; color: var(--muted); line-height: 1.6; padding-left: 22px; }
+  .references li { margin: 11px 0; }
+  .references a { word-break: break-word; }
+
+  footer { background: #0a0705; color: #c2b39f; text-align: center; padding: 36px 24px; font-size: 13px; margin-top: 56px; }
+  @media (max-width: 600px) { .author-sign { flex-direction: column; } }
+</style>
+</head>
+<body>
+
+<div class="example-banner">★ MATERIAL DE EXEMPLO · Material rico (guia) demonstrativo — lead magnet de topo de funil</div>
+
+<!-- CAPA -->
+<header class="cover">
+  <div class="bgimg"><img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=1400&q=80&auto=format&fit=crop" alt="" /></div>
+  <div class="inner">
+    <div class="brand"><span class="mark">🔱</span><b>Nutri Chedid</b></div>
+    <span class="tag">Guia gratuito</span>
+    <h1>O Guia da Alimentação de <em>Alta Performance</em></h1>
+    <p class="sub">5 pilares práticos para ter mais energia, foco e disposição o dia inteiro — sem dieta maluca.</p>
+    <p class="by">por <b>Henrique Chedid</b> · Nutricionista · baseado em evidência científica</p>
+  </div>
+</header>
+
+<article class="wrap">
+
+  <!-- INTRO + TOC -->
+  <section class="intro">
+    <span class="eyebrow">Antes de começar</span>
+    <h2>Pra quem é este guia</h2>
+    <p>Pra quem trabalha muito, vive na correria e sente a energia despencar ao longo do dia. Aqui você não vai encontrar dieta restritiva nem promessa milagrosa — e sim 5 pilares simples, baseados em evidência, que sustentam disposição e foco de verdade. Pequenas mudanças, aplicadas com constância, mudam o jogo.</p>
+    <nav class="toc">
+      <a href="#p1"><span class="n">1</span><span>Proteína em todas as refeições</span><span class="arrow">↘</span></a>
+      <a href="#p2"><span class="n">2</span><span>Energia estável: o segredo está nos picos</span><span class="arrow">↘</span></a>
+      <a href="#p3"><span class="n">3</span><span>Hidratação que sustenta o foco</span><span class="arrow">↘</span></a>
+      <a href="#p4"><span class="n">4</span><span>Comer para dormir (e recuperar) melhor</span><span class="arrow">↘</span></a>
+      <a href="#p5"><span class="n">5</span><span>Constância vence perfeição</span><span class="arrow">↘</span></a>
+    </nav>
+  </section>
+
+  <!-- PILAR 1 -->
+  <section class="pillar" id="p1">
+    <div class="ph"><div class="pnum">1</div><h2>Proteína em todas as refeições</h2></div>
+    <p>A proteína é o nutriente que mais sustenta saciedade e preserva massa muscular — e a maioria das pessoas concentra tudo no jantar. O corpo aproveita melhor quando ela é distribuída: uma fonte no café, no almoço e no jantar.</p>
+    <ul>
+      <li>Mire ~20 a 40 g de proteína por refeição principal.</li>
+      <li>Fontes práticas: ovos, iogurte, carnes magras, peixes, leguminosas, tofu.</li>
+      <li>Comece o dia com proteína — segura a fome e estabiliza a energia da manhã.</li>
+    </ul>
+    <div class="tip"><b>Dica rápida:</b> se bater fome 1h depois de comer, provavelmente faltou proteína (ou fibra) naquela refeição.</div>
+  </section>
+
+  <!-- PILAR 2 -->
+  <section class="pillar" id="p2">
+    <div class="ph"><div class="pnum">2</div><h2>Energia estável: o segredo está nos picos</h2></div>
+    <p>Aquela queda das 15h costuma ser efeito de um pico e uma queda brusca de glicose. Refeições que combinam carboidrato + proteína + fibra liberam energia de forma mais constante.</p>
+    <ul>
+      <li>Prefira carboidratos com fibra (integrais, raízes, frutas com casca) aos refinados.</li>
+      <li>Nunca coma carboidrato "sozinho" — sempre acompanhe de proteína e/ou gordura boa.</li>
+      <li>Vegetais no prato = mais fibra = energia mais estável.</li>
+    </ul>
+    <div class="tip warn"><b>Evite:</b> começar o dia só com café e pão branco. É o roteiro perfeito pra fome e sonolência no meio da manhã.</div>
+  </section>
+
+  <!-- PILAR 3 -->
+  <section class="pillar" id="p3">
+    <div class="ph"><div class="pnum">3</div><h2>Hidratação que sustenta o foco</h2></div>
+    <p>Desidratação leve já reduz concentração e aumenta a sensação de cansaço. Muita gente confunde sede com fome.</p>
+    <ul>
+      <li>Tenha uma garrafa sempre à vista — o que está à mão, você bebe.</li>
+      <li>Comece a manhã com um copo de água antes do café.</li>
+      <li>Bateu "fome" fora de hora? Beba água e espere 10 minutos.</li>
+    </ul>
+  </section>
+
+  <!-- PILAR 4 -->
+  <section class="pillar" id="p4">
+    <div class="ph"><div class="pnum">4</div><h2>Comer para dormir (e recuperar) melhor</h2></div>
+    <p>Sono ruim derruba energia, foco e até as escolhas alimentares do dia seguinte. A alimentação influencia diretamente a qualidade do sono.</p>
+    <ul>
+      <li>Evite cafeína na segunda metade do dia.</li>
+      <li>Jantar muito pesado e tarde atrapalha o sono — prefira algo mais leve à noite.</li>
+      <li>Álcool "ajuda a dormir", mas piora a qualidade do sono.</li>
+    </ul>
+    <div class="tip"><b>Dica rápida:</b> energia boa não nasce só no prato — nasce no ciclo prato + sono + movimento funcionando juntos.</div>
+  </section>
+
+  <!-- PILAR 5 -->
+  <section class="pillar" id="p5">
+    <div class="ph"><div class="pnum">5</div><h2>Constância vence perfeição</h2></div>
+    <p>O erro mais comum é tentar mudar tudo de uma vez, falhar no terceiro dia e desistir. Resultado vem da soma de pequenas escolhas repetidas — não de uma semana "perfeita" seguida de abandono.</p>
+    <ul>
+      <li>Mude um hábito por vez. Domine, depois adicione o próximo.</li>
+      <li>Planeje as refeições da semana — decisão tomada com fome é decisão ruim.</li>
+      <li>80% bem feito, sempre, vale mais que 100% por três dias.</li>
+    </ul>
+  </section>
+
+  <!-- UM DIA NA PRÁTICA -->
+  <section class="pillar">
+    <div class="ph"><h2>Um dia na prática</h2></div>
+    <p>Um exemplo de como os 5 pilares se encaixam numa rotina corrida (ajuste às suas necessidades):</p>
+    <table>
+      <thead><tr><th>Momento</th><th>O que comer</th><th>Pilar</th></tr></thead>
+      <tbody>
+        <tr><td><b>Café da manhã</b></td><td>Ovos + fruta + aveia. Água antes.</td><td>1, 2, 3</td></tr>
+        <tr><td><b>Almoço</b></td><td>Proteína + arroz/raiz + bastante vegetal.</td><td>1, 2</td></tr>
+        <tr><td><b>Lanche da tarde</b></td><td>Iogurte com fruta ou um punhado de castanhas.</td><td>1, 2</td></tr>
+        <tr><td><b>Jantar</b></td><td>Algo leve com proteína e vegetais, mais cedo.</td><td>1, 4</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- CHECKLIST -->
+  <section class="pillar">
+    <div class="checklist">
+      <h3>Checklist do dia</h3>
+      <p style="margin:6px 0 14px; color:var(--muted); font-size:15px;">Imprima ou salve. Marque o que cumpriu hoje:</p>
+      <div class="row"><span class="box"></span><span>Proteína nas 3 refeições principais</span></div>
+      <div class="row"><span class="box"></span><span>Vegetais no almoço e no jantar</span></div>
+      <div class="row"><span class="box"></span><span>Água por perto o dia inteiro</span></div>
+      <div class="row"><span class="box"></span><span>Sem cafeína depois das 16h</span></div>
+      <div class="row"><span class="box"></span><span>Jantar leve e mais cedo</span></div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-box">
+    <span class="tag">Próximo passo</span>
+    <h2>Quer um plano feito pro seu corpo e sua rotina?</h2>
+    <p>Este guia é o começo. Na consultoria, montamos o protocolo individual com base nos seus objetivos, exames e dia a dia — o mesmo método que já cuidou de milhares de pessoas em mais de 20 países.</p>
+    <a href="#" onclick="return false;">Conhecer a consultoria</a>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer"><b>Aviso:</b> conteúdo informativo, baseado em evidência, mas que não substitui avaliação individual de um nutricionista ou médico. Necessidades variam conforme histórico de saúde, exames e objetivos.</div>
+
+  <!-- ASSINATURA DO AUTOR (padrão E-E-A-T) -->
+  <div class="author-sign">
+    <div class="av">🔱</div>
+    <div>
+      <h4>Henrique Chedid</h4>
+      <div class="crn">Nutricionista · CRN-X XXXXX</div>
+      <p>[Bio a preencher: formação, especializações e anos de experiência clínica. Responsável técnico pelo Nutri Chedid e pelo Projeto Mais Saúde.]</p>
+      <div class="signature">Henrique Chedid</div>
+    </div>
+  </div>
+
+  <!-- REFERÊNCIAS -->
+  <div class="references">
+    <h2>Referências</h2>
+    <ol>
+      <li>Institute of Medicine (US). <i>Dietary Reference Intakes for Energy, Carbohydrate, Fiber, Fat, Fatty Acids, Cholesterol, Protein, and Amino Acids</i>. National Academies Press; 2005. · <a href="https://nap.nationalacademies.org/catalog/10490/dietary-reference-intakes-for-energy-carbohydrate-fiber-fat-fatty-acids-cholesterol-protein-and-amino-acids" target="_blank" rel="noopener">Acessar ↗</a></li>
+      <li>Jäger R, Kerksick CM, Campbell BI, et al. ISSN Position Stand: protein and exercise. <i>J Int Soc Sports Nutr</i>. 2017;14:20. · <a href="https://doi.org/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">doi.org/10.1186/s12970-017-0177-8 ↗</a></li>
+      <li>World Health Organization, FAO, UNU. <i>Protein and amino acid requirements in human nutrition</i>. WHO TRS 935; 2007. · <a href="https://iris.who.int/handle/10665/43411" target="_blank" rel="noopener">Acessar ↗</a></li>
+    </ol>
+    <p style="font-size:13px; color:var(--muted); margin-top:8px;">Fontes reais e verificáveis. Confirme a edição vigente e adapte às diretrizes brasileiras (CFN, SBAN) antes de publicar.</p>
+  </div>
+
+</article>
+
+<footer>Material de exemplo gerado para demonstração · Nutri Chedid 🔱 · Substitua CRN e bio reais antes de publicar.</footer>
+
+</body>
+</html>

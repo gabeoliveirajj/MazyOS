@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nutri Chedid · Plano de Crescimento</title>
+<style>
+  :root {
+    --bg: #0f0a07;
+    --surface: rgba(255,255,255,0.05);
+    --surface-2: rgba(255,255,255,0.035);
+    --border: rgba(255,255,255,0.10);
+    --border-strong: rgba(255,255,255,0.16);
+    --accent: #c8a86a;
+    --accent-soft: #e3c48f;
+    --accent-deep: #b9975b;
+    --text: #f5efe5;
+    --muted: #c2b39f;
+    --muted-2: #9a8c79;
+    --good: #8fd0a0;
+    --warn: #e0a86a;
+    --shadow: 0 30px 90px rgba(0,0,0,0.45);
+    --radius: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100%;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(900px 500px at 12% -5%, rgba(200,168,106,0.18), transparent 55%),
+      radial-gradient(700px 500px at 100% 110%, rgba(185,151,91,0.10), transparent 55%),
+      linear-gradient(180deg, #130d09 0%, #0c0805 100%);
+    color: var(--text); overflow: hidden;
+  }
+  body { display: flex; align-items: center; justify-content: center; }
+  button, a { font: inherit; }
+
+  .deck {
+    width: 100vw; height: 100vh; max-width: 1600px; max-height: 1000px;
+    position: relative; overflow: hidden; border-radius: 30px;
+    box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(13,9,6,0.85);
+  }
+  .deck.fullscreen { border-radius: 0; box-shadow: none; border: none; max-width: none; max-height: none; }
+
+  .slide {
+    position: absolute; inset: 0; padding: 58px 64px 92px 64px;
+    display: grid; grid-template-rows: auto 1fr auto; gap: 22px;
+    opacity: 0; pointer-events: none; transform: translateY(24px) scale(0.99);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; transform: none; }
+
+  /* header / brand */
+  .header { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: inline-flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center;
+    background: rgba(200,168,106,0.12); border: 1px solid rgba(255,255,255,0.10);
+  }
+  .brand-mark svg { width: 40px; height: 40px; }
+  .brand-mark .logo-emoji { font-size: 34px; line-height: 1; }
+  .brand-name { display: flex; flex-direction: column; gap: 3px; }
+  .brand-name strong { font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .brand-name span { color: var(--muted-2); font-size: 13px; letter-spacing: 0.04em; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 14px;
+    color: var(--text); font-weight: 600; font-size: 14px;
+  }
+  .badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px rgba(200,168,106,0.8); }
+
+  /* typography */
+  .eyebrow { color: var(--accent); font-size: 13px; letter-spacing: 0.20em; text-transform: uppercase; font-weight: 700; }
+  .slide-title {
+    margin: 0; font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(40px, 4.4vw, 66px); line-height: 1.02; letter-spacing: -0.025em; color: var(--text);
+  }
+  .slide-title em { color: var(--accent); font-style: italic; }
+  .lead { margin: 0; font-size: clamp(18px, 1.35vw, 23px); color: var(--muted); line-height: 1.6; max-width: 920px; }
+
+  .body { display: grid; gap: 22px; align-content: start; }
+
+  /* cards / grids */
+  .grid { display: grid; gap: 18px; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px; display: grid; gap: 12px; align-content: start; position: relative;
+  }
+  .card.tinted { background: linear-gradient(160deg, rgba(200,168,106,0.10), rgba(255,255,255,0.02)); }
+  .card .kicker { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .card h3 { margin: 0; font-size: clamp(19px, 1.4vw, 24px); color: var(--text); font-weight: 700; }
+  .card p { margin: 0; color: var(--muted); line-height: 1.6; font-size: clamp(15px, 1.05vw, 17px); }
+  .card .ic { font-size: 26px; line-height: 1; }
+  .card .num { font-family: Georgia, serif; font-size: 34px; color: var(--accent); line-height: 1; }
+  .card .state {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em; padding: 5px 11px; border-radius: 999px; width: fit-content;
+  }
+  .state.solid { background: rgba(143,208,160,0.14); color: var(--good); border: 1px solid rgba(143,208,160,0.25); }
+  .state.gap { background: rgba(224,168,106,0.14); color: var(--warn); border: 1px solid rgba(224,168,106,0.25); }
+  .state.open { background: rgba(200,168,106,0.14); color: var(--accent); border: 1px solid rgba(200,168,106,0.25); }
+
+  /* list with markers */
+  .stack { display: grid; gap: 14px; }
+  .row { display: flex; gap: 16px; align-items: flex-start; }
+  .row .dot-ic {
+    flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
+    background: rgba(200,168,106,0.14); color: var(--accent); font-size: 20px; border: 1px solid rgba(255,255,255,0.07);
+  }
+  .row .dot-ic.num-ic { font-family: Georgia, serif; font-weight: 700; font-size: 17px; }
+  .row h4 { margin: 0 0 4px; font-size: clamp(17px,1.2vw,20px); color: var(--text); }
+  .row p { margin: 0; color: var(--muted); font-size: clamp(14px,1vw,16px); line-height: 1.55; }
+
+  /* SMART layout */
+  .smart { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; }
+  .smart-rows { display: grid; gap: 12px; }
+  .smart-row {
+    display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: center;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 14px 18px;
+  }
+  .smart-letter {
+    width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center;
+    font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: #1a120a;
+    background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep));
+  }
+  .smart-row .t { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .smart-row .d { font-size: clamp(14px,1vw,16px); color: var(--text); line-height: 1.45; margin-top: 2px; }
+  .smart-panel {
+    background: linear-gradient(160deg, rgba(200,168,106,0.12), rgba(255,255,255,0.02));
+    border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 26px; display: grid; gap: 16px; align-content: start;
+  }
+  .smart-panel .pt { font-family: Georgia, serif; font-size: 22px; color: var(--accent); }
+  .target { display: grid; gap: 6px; }
+  .target .tk { font-size: 13px; color: var(--muted-2); }
+  .target .tv { font-size: clamp(20px,1.6vw,26px); color: var(--text); font-weight: 700; }
+  .target .tv b { color: var(--accent); }
+
+  /* timeline / phases */
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; position: relative; }
+  .phase {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 24px; display: grid; gap: 12px; align-content: start; position: relative;
+  }
+  .phase .ph-tag {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    color: var(--accent); padding: 6px 12px; border-radius: 999px; background: rgba(200,168,106,0.12);
+    border: 1px solid rgba(255,255,255,0.08); width: fit-content;
+  }
+  .phase h3 { margin: 0; font-size: clamp(18px,1.3vw,22px); color: var(--text); }
+  .phase ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .phase li { position: relative; padding-left: 20px; color: var(--muted); font-size: clamp(14px,1vw,16px); line-height: 1.45; }
+  .phase li::before { content: ''; position: absolute; left: 2px; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+
+  .metric-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .metric {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 22px; display: grid; gap: 8px;
+  }
+  .metric .mlabel { font-size: 13px; color: var(--muted-2); letter-spacing: 0.04em; }
+  .metric .mflow { font-size: clamp(16px,1.2vw,19px); color: var(--text); font-weight: 700; }
+  .metric .marrow { color: var(--accent); }
+
+  .callout {
+    background: linear-gradient(120deg, rgba(200,168,106,0.16), rgba(255,255,255,0.02));
+    border: 1px solid var(--border-strong); border-left: 4px solid var(--accent);
+    border-radius: 18px; padding: 22px 26px; font-size: clamp(16px,1.2vw,20px); color: var(--text); font-weight: 600; line-height: 1.5;
+  }
+  .callout b { color: var(--accent); }
+
+  .chips { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border-radius: 999px;
+    background: rgba(200,168,106,0.12); border: 1px solid rgba(255,255,255,0.08); color: var(--accent); font-weight: 600; font-size: 14px;
+  }
+
+  /* cover */
+  .cover { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  .cover .copy { display: grid; gap: 22px; }
+  .cover .slide-title { font-size: clamp(44px, 5vw, 76px); }
+  .cover-art {
+    align-self: stretch; min-height: 360px; border-radius: 28px; overflow: hidden; position: relative;
+    background: linear-gradient(150deg, rgba(200,168,106,0.18), rgba(15,10,7,0.9));
+    border: 1px solid var(--border-strong);
+  }
+  .cover-art svg { width: 100%; height: 100%; display: block; }
+
+  /* footer / nav */
+  .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 13px; color: var(--muted-2); }
+  .footer .step-note { color: var(--accent); font-weight: 600; }
+  .footer .next-hint { font-size: 11px; color: var(--muted-2); display: inline-flex; align-items: center; gap: 7px; letter-spacing: 0.04em; }
+  .footer .next-hint .lbl { text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.65; }
+  .footer .next-hint b { color: var(--accent); font-weight: 600; font-size: 12px; }
+  .footer .next-hint::after { content: '↗'; color: var(--accent); opacity: 0.85; font-size: 12px; }
+  .footer .next-hint.end::after { content: ''; }
+  .progress { position: absolute; left: 64px; right: 64px; bottom: 30px; height: 6px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.06); }
+  .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-deep), var(--accent-soft)); transition: width 0.5s ease; }
+  .nav { position: absolute; inset: auto 34px 30px auto; display: flex; gap: 12px; align-items: center; }
+  .nav button {
+    width: 50px; height: 50px; border-radius: 15px; border: 1px solid var(--border);
+    background: rgba(18,14,11,0.9); color: var(--text); cursor: pointer; font-size: 18px;
+    transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+  .nav button:hover { background: rgba(200,168,106,0.18); border-color: var(--accent); transform: translateY(-2px); }
+  .dots { position: absolute; left: 34px; bottom: 36px; display: flex; gap: 9px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.16); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease, width 0.2s ease; }
+  .dot.active { background: var(--accent); width: 26px; border-radius: 999px; }
+
+  /* per-slide entrance for children */
+  .slide.active .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal:nth-child(1) { transition-delay: 0.05s; }
+  .reveal:nth-child(2) { transition-delay: 0.14s; }
+  .reveal:nth-child(3) { transition-delay: 0.23s; }
+  .reveal:nth-child(4) { transition-delay: 0.32s; }
+  .reveal:nth-child(5) { transition-delay: 0.41s; }
+  .reveal:nth-child(6) { transition-delay: 0.50s; }
+
+  @media (max-width: 1180px) {
+    .slide { padding: 40px; }
+    .cover, .smart { grid-template-columns: 1fr; }
+    .grid-3, .grid-4, .phases, .metric-strip { grid-template-columns: 1fr 1fr; }
+    .cover-art { min-height: 240px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .dot, .nav button, .reveal, .progress-bar { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" aria-label="Apresentação Nutri Chedid · Plano de Crescimento">
+
+  <!-- 1 · CAPA -->
+  <section class="slide active" data-title="Capa">
+    <div class="header reveal">
+      <div class="brand">
+        <div class="brand-mark"><span class="logo-emoji">🔱</span></div>
+        <div class="brand-name"><strong>Nutri Chedid</strong><span>Plano de crescimento</span></div>
+      </div>
+      <div class="badge">Call com Henrique · Jun 2026</div>
+    </div>
+
+    <div class="cover">
+      <div class="copy">
+        <span class="eyebrow reveal">Plano de crescimento comercial</span>
+        <h1 class="slide-title reveal">O próximo passo para <em>@nutri.chedid</em></h1>
+        <p class="lead reveal">Estratégias para escalar os resultados da consultoria online, aumentar o ticket médio das consultas e estruturar o Projeto Mais Saúde como frente B2B.</p>
+        <div class="chips reveal">
+          <span class="chip">Escalar a consultoria</span>
+          <span class="chip">Estruturar o B2B</span>
+          <span class="chip">Piloto de 120 dias</span>
+        </div>
+      </div>
+      <div class="cover-art reveal">
+        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" font-family="Inter, system-ui, sans-serif">
+          <defs>
+            <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff3da" stop-opacity="0.20"/>
+              <stop offset="100%" stop-color="#b9975b" stop-opacity="0.05"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="560" height="380" rx="28" fill="rgba(255,255,255,0.02)"/>
+
+          <!-- Funil 1: Consultoria online (B2C), cx=105 -->
+          <g>
+            <rect x="55" y="40" width="100" height="26" rx="13" fill="rgba(200,168,106,0.16)" stroke="rgba(255,255,255,0.12)"/>
+            <text x="105" y="58" text-anchor="middle" fill="#e3c48f" font-size="13" font-weight="700" letter-spacing="1">B2C</text>
+            <path d="M45 90 H165 L121 196 V246 H89 V196 Z" fill="url(#cg)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <line x1="67" y1="118" x2="143" y2="118" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="79" y1="146" x2="131" y2="146" stroke="rgba(255,255,255,0.14)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="91" y1="174" x2="119" y2="174" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="105" cy="272" r="7" fill="#c8a86a"/>
+            <circle cx="105" cy="292" r="5" fill="#c8a86a" opacity="0.55"/>
+            <text x="105" y="332" text-anchor="middle" fill="#f5efe5" font-size="17" font-weight="600">Consultoria</text>
+            <text x="105" y="352" text-anchor="middle" fill="#9a8c79" font-size="12">online</text>
+          </g>
+
+          <!-- Funil 2: Clínica (base), cx=280 -->
+          <g>
+            <rect x="230" y="40" width="100" height="26" rx="13" fill="rgba(200,168,106,0.16)" stroke="rgba(255,255,255,0.12)"/>
+            <text x="280" y="58" text-anchor="middle" fill="#e3c48f" font-size="13" font-weight="700" letter-spacing="1">BASE</text>
+            <path d="M220 90 H340 L296 196 V246 H264 V196 Z" fill="url(#cg)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <line x1="242" y1="118" x2="318" y2="118" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="254" y1="146" x2="306" y2="146" stroke="rgba(255,255,255,0.14)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="266" y1="174" x2="294" y2="174" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="280" cy="272" r="7" fill="#c8a86a"/>
+            <circle cx="280" cy="292" r="5" fill="#c8a86a" opacity="0.55"/>
+            <text x="280" y="332" text-anchor="middle" fill="#f5efe5" font-size="17" font-weight="600">Clínica</text>
+            <text x="280" y="352" text-anchor="middle" fill="#9a8c79" font-size="12">presencial</text>
+          </g>
+
+          <!-- Funil 3: Mais Saúde (B2B), cx=455 -->
+          <g>
+            <rect x="405" y="40" width="100" height="26" rx="13" fill="rgba(200,168,106,0.16)" stroke="rgba(255,255,255,0.12)"/>
+            <text x="455" y="58" text-anchor="middle" fill="#e3c48f" font-size="13" font-weight="700" letter-spacing="1">B2B</text>
+            <path d="M395 90 H515 L471 196 V246 H439 V196 Z" fill="url(#cg)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <line x1="417" y1="118" x2="493" y2="118" stroke="rgba(255,255,255,0.18)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="429" y1="146" x2="481" y2="146" stroke="rgba(255,255,255,0.14)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="441" y1="174" x2="469" y2="174" stroke="rgba(255,255,255,0.12)" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="455" cy="272" r="7" fill="#c8a86a"/>
+            <circle cx="455" cy="292" r="5" fill="#c8a86a" opacity="0.55"/>
+            <text x="455" y="332" text-anchor="middle" fill="#f5efe5" font-size="17" font-weight="600">Mais Saúde</text>
+            <text x="455" y="352" text-anchor="middle" fill="#9a8c79" font-size="12">empresas</text>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="footer reveal"><span>Slide 1 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O cenário</b></span></div>
+  </section>
+
+  <!-- 2 · ÍNDICE -->
+  <section class="slide" data-title="Índice">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Índice da call</span></div></div>
+      <div class="badge">O que vamos ver</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Índice</span>
+        <h2 class="slide-title">O que vamos <em>conversar hoje</em></h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <div class="stack">
+            <div class="row"><div class="dot-ic num-ic">01</div><div><h4>O cenário</h4><p>Onde o Nutri Chedid está hoje</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">02</div><div><h4>O desafio</h4><p>Crescer com qualidade</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">03</div><div><h4>A solução</h4><p>Uma estratégia comercial estruturada</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">04</div><div><h4>A meta</h4><p>O norte dos 120 dias</p></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="stack">
+            <div class="row"><div class="dot-ic num-ic">05</div><div><h4>A execução</h4><p>O motor comercial, peça a peça</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">06</div><div><h4>A operação</h4><p>Quem faz o quê</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">07</div><div><h4>As métricas</h4><p>Como vamos medir</p></div></div>
+            <div class="row"><div class="dot-ic num-ic">08</div><div><h4>A decisão</h4><p>O próximo passo</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 2 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O cenário</b></span></div>
+  </section>
+
+  <!-- 3 · CENÁRIO / 3 FRENTES -->
+  <section class="slide" data-title="Cenário">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O cenário hoje</span></div></div>
+      <div class="badge">3 frentes, alto potencial de escala</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Onde estamos</span>
+        <h2 class="slide-title">Três frentes com espaço para escalar</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card">
+          <span class="ic">🏥</span>
+          <span class="state solid">● Madura</span>
+          <h3>Clínica presencial</h3>
+          <p>A base do B2B. Aumentar ticket, atrair o público A+ e testar modelo com link ao Projeto Mais Saúde.</p>
+        </div>
+        <div class="card">
+          <span class="ic">💻</span>
+          <span class="state solid">● Madura</span>
+          <h3>Consultoria online</h3>
+          <p>Madura e com potencial infinito de escala. O funil degustação → plano anual já converte.</p>
+        </div>
+        <div class="card">
+          <span class="ic">🏢</span>
+          <span class="state open">● Em estruturação</span>
+          <h3>Projeto Mais Saúde</h3>
+          <p>Já roda, mas está em estruturação. Produto parecido com a consultoria, mas para empresas. Potencial alto de escala.</p>
+        </div>
+      </div>
+      <div class="callout reveal">A base é forte. O que falta é <b>um sistema comercial</b> que conecte as três frentes e transforme reputação em fluxo.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 3 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O desafio</b></span></div>
+  </section>
+
+  <!-- 3 · O GARGALO -->
+  <section class="slide" data-title="Gargalo">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O gargalo</span></div></div>
+      <div class="badge">Onde o valor vaza</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Diagnóstico · parte 2</span>
+        <h2 class="slide-title">O desafio de <em>crescer com qualidade.</em></h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <div class="row"><div class="dot-ic">🔻</div><div><h4>Mais leads no topo</h4><p>Aumentar o volume de entrada sem perder conversão.</p></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="dot-ic">🖐️</div><div><h4>Recuperação na mão errada</h4><p>O follow-up e o resgate de leads ficam com a secretária, quando deveriam estar com alguém de vendas olhando de perto.</p></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="dot-ic">🎬</div><div><h4>Conteúdo consistente</h4><p>Produção de criativos e materiais é pontual. Tráfego e orgânico ficam sem combustível.</p></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="dot-ic">🚪</div><div><h4>Definir estratégias do Mais Saúde</h4><p>O projeto B2B está validado e já roda, mas ainda não gera contatos qualificados consistentemente.</p></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 4 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A solução</b></span></div>
+  </section>
+
+  <!-- 4 · A PROPOSTA -->
+  <section class="slide" data-title="Proposta">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>A proposta</span></div></div>
+      <div class="badge">Uma cadeira, um dono</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">A solução</span>
+        <h2 class="slide-title">Uma <em>estratégia comercial</em> estruturada</h2>
+        <p class="lead">Captação, conversão, conteúdo de venda e B2B operando de forma organizada e previsível, pra você focar no que só você faz: clínica, conteúdo e autoridade.</p>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card tinted">
+          <span class="kicker">Clínica presencial</span>
+          <h3>Proteger e alavancar</h3>
+          <p>Subir o ticket médio e conectar o público com a oferta B2B.</p>
+        </div>
+        <div class="card tinted">
+          <span class="kicker">Consultoria online</span>
+          <h3>Converter mais e melhor</h3>
+          <p>Subir a conversão de degustação → plano anual com o CAC sob controle.</p>
+        </div>
+        <div class="card tinted">
+          <span class="kicker">Projeto Mais Saúde</span>
+          <h3>Alavancar o B2B</h3>
+          <p>Estruturar a oferta para empresas e iniciar um funil de contatos qualificados.</p>
+        </div>
+      </div>
+      <div class="callout reveal"><b>Um objetivo principal por frente.</b> Sem reinventar a entrega: escalando o que já funciona.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 5 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A meta</b></span></div>
+  </section>
+
+  <!-- 5 · META SMART -->
+  <section class="slide" data-title="Meta SMART">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Meta SMART</span></div></div>
+      <div class="badge">O norte dos 120 dias</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">A meta</span>
+        <h2 class="slide-title">Um funil <em>previsível</em> em 120 dias</h2>
+      </div>
+      <div class="smart reveal">
+        <div class="smart-rows">
+          <div class="smart-row"><div class="smart-letter">S</div><div><div class="t">Específico</div><div class="d">Implementar a estratégia comercial nas 3 frentes, com foco em converter degustação → plano anual e alavancar o funil B2B do Mais Saúde.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">M</div><div><div class="t">Mensurável</div><div class="d">Conversão, volume de leads qualificados, CAC e empresas no funil, todos acompanhados em painel semanal.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">A</div><div><div class="t">Atingível</div><div class="d">O produto é um sucesso e já tem um funil online que converte. Escala, não reinvenção.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">R</div><div><div class="t">Relevante</div><div class="d">Ataca o gargalo real (topo de funil e conversão), preservando a qualidade da entrega, o ativo da marca.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">T</div><div><div class="t">Temporal</div><div class="d">Piloto de 120 dias, com revisão semanal e checkpoints aos 30, 60 e 120 dias.</div></div></div>
+        </div>
+        <div class="smart-panel">
+          <div class="pt">Alvos do piloto</div>
+          <div class="target"><span class="tk">Conversão degustação → anual</span><span class="tv"><b>+12 pts</b> sobre o baseline</span></div>
+          <div class="target"><span class="tk">Leads qualificados / mês</span><span class="tv">fluxo <b>constante</b> e medido</span></div>
+          <div class="target"><span class="tk">Projeto Mais Saúde</span><span class="tv"><b>5 empresas</b> qualificadas no funil</span></div>
+          <div class="target"><span class="tk">CAC por lead</span><span class="tv">dentro da <b>meta acordada</b></span></div>
+          <p style="margin:6px 0 0; font-size:13px; color:var(--muted-2); line-height:1.5;">★ Metas propostas, a calibrar com os números reais na call.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 6 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A execução</b></span></div>
+  </section>
+
+
+  <!-- 7 · O QUE SERÁ FEITO -->
+  <section class="slide" data-title="Execução">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O motor de execução</span></div></div>
+      <div class="badge">Ações concretas</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Entregáveis</span>
+        <h2 class="slide-title">O motor comercial, peça a peça</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card"><span class="ic">🔎</span><h3>Diagnóstico do funil</h3><p>Mapa do fluxo atual e dos pontos de perda, com dados.</p></div>
+        <div class="card"><span class="ic">🌐</span><h3>Landing + sequências</h3><p>Páginas e fluxos de WhatsApp, e-mail e DM que convertem.</p></div>
+        <div class="card"><span class="ic">📸</span><h3>60 criativos / mês</h3><p>Artes para redes, tráfego e campanhas de conversão.</p></div>
+        <div class="card"><span class="ic">📚</span><h3>Materiais ricos + SEO</h3><p>Ebooks, guias e conteúdo para baixar o custo por lead.</p></div>
+        <div class="card"><span class="ic">🏢</span><h3>Oferta Mais Saúde</h3><p>Proposta B2B estruturada e jornada para empresas.</p></div>
+        <div class="card"><span class="ic">🎯</span><h3>Follow-up especializado</h3><p>Resgate e acompanhamento de leads tratado na área de vendas.</p></div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 7 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A operação</b></span></div>
+  </section>
+
+  <!-- 8 · QUEM FAZ O QUÊ -->
+  <section class="slide" data-title="Operação">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Quem faz o quê</span></div></div>
+      <div class="badge">Papéis alinhados</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Operação</span>
+        <h2 class="slide-title">Cada um no que rende mais</h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card">
+          <div class="row"><div class="dot-ic">🧑‍💼</div><div><h4>Gabriel</h4><p>Comercial ponta a ponta: inside sales, copy, conteúdo, gestão de campanha e o funil B2B.</p></div></div>
+        </div>
+        <div class="card">
+          <div class="row"><div class="dot-ic">🧑‍⚕️</div><div><h4>Henrique</h4><p>O rosto da marca: atendimento clínico, conteúdo e autoridade. Foco no que só ele faz.</p></div></div>
+        </div>
+      </div>
+      <div class="callout reveal"><b>Revisão semanal</b> com todos os números na mesa, decisões rápidas, sem reuniões longas.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 8 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>As métricas</b></span></div>
+  </section>
+
+  <!-- 9 · MÉTRICAS E RITMO -->
+  <section class="slide" data-title="Métricas">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Métricas e ritmo</span></div></div>
+      <div class="badge">O que vamos medir</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Painel</span>
+        <h2 class="slide-title">Quatro números que guiam tudo</h2>
+      </div>
+      <div class="metric-strip reveal">
+        <div class="metric"><span class="mlabel">Captação</span><span class="mflow">Lead <span class="marrow">→</span> Degustação</span></div>
+        <div class="metric"><span class="mlabel">Conversão</span><span class="mflow">Degustação <span class="marrow">→</span> Anual</span></div>
+        <div class="metric"><span class="mlabel">Eficiência</span><span class="mflow">CAC por lead</span></div>
+        <div class="metric"><span class="mlabel">B2B</span><span class="mflow">Empresas no funil</span></div>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card tinted"><span class="num">30</span><h3>1º checkpoint</h3><p>Diagnóstico fechado e primeiros ajustes no ar.</p></div>
+        <div class="card tinted"><span class="num">60</span><h3>2º checkpoint</h3><p>Sequências e criativos rodando, conversão começa a mover.</p></div>
+        <div class="card tinted"><span class="num">120</span><h3>Balanço</h3><p>Escala validada, B2B aberto e processo documentado.</p></div>
+      </div>
+      <div class="callout reveal">O que não se mede não escala. <b>Painel semanal</b> torna cada ajuste uma decisão informada.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 9 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A decisão</b></span></div>
+  </section>
+
+  <!-- 10 · PRÓXIMO PASSO -->
+  <section class="slide" data-title="Próximo passo">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Próximo passo</span></div></div>
+      <div class="badge">Decisão</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Daqui pra frente</span>
+        <h2 class="slide-title">O próximo passo é <em>uma decisão</em></h2>
+      </div>
+      <div class="phases reveal">
+        <div class="phase">
+          <span class="ph-tag">Passo 1</span>
+          <h3>Aprovar o piloto</h3>
+          <ul><li>120 dias com escopo definido</li><li>Revisão semanal acordada</li></ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Passo 2</span>
+          <h3>Calibrar as metas</h3>
+          <ul><li>Plugar os números reais na meta SMART</li><li>Definir o CAC-alvo juntos</li></ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Passo 3</span>
+          <h3>Iniciar o diagnóstico</h3>
+          <ul><li>Começar essa semana</li><li>Primeiros ajustes em 30 dias</li></ul>
+        </div>
+      </div>
+      <div class="callout reveal">A base já existe. <b>Falta só ligar o motor comercial</b> e medir o resultado semana a semana.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 10 de 10</span><span class="next-hint end"><b>Fim da apresentação</b></span></div>
+  </section>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="nav" role="navigation" aria-label="Navegação">
+    <button id="prevBtn" aria-label="Anterior">←</button>
+    <button id="fullscreenBtn" aria-label="Tela cheia">⛶</button>
+    <button id="nextBtn" aria-label="Próximo">→</button>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('dots');
+  const progressBar = document.getElementById('progressBar');
+  let current = 0;
+
+  function updateSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('active', idx === current));
+    dotsContainer.querySelectorAll('.dot').forEach((dot, idx) => dot.classList.toggle('active', idx === current));
+    progressBar.style.width = (((current + 1) / slides.length) * 100) + '%';
+  }
+
+  slides.forEach((slide, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.title = slide.dataset.title;
+    dot.addEventListener('click', () => updateSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+
+  prevBtn.addEventListener('click', () => updateSlide(current - 1));
+  nextBtn.addEventListener('click', () => updateSlide(current + 1));
+
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  fullscreenBtn.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (e) { console.warn('Fullscreen falhou', e); }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    document.querySelector('.deck').classList.toggle('fullscreen', !!document.fullscreenElement);
+    fullscreenBtn.textContent = document.fullscreenElement ? '⤡' : '⛶';
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); updateSlide(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); updateSlide(current - 1); }
+    if (e.key === 'f' || e.key === 'F') fullscreenBtn.click();
+  });
+
+  let startX = null;
+  document.addEventListener('pointerdown', (e) => startX = e.clientX);
+  document.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const diff = e.clientX - startX;
+    if (diff > 80) updateSlide(current - 1);
+    if (diff < -80) updateSlide(current + 1);
+    startX = null;
+  });
+
+  updateSlide(0);
+</script>
+</body>
+</html>
