@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Nutri Chedid · Plano de Crescimento</title>
+<title>Nutri Chedid — Plano de Crescimento</title>
 <style>
   :root {
     --bg: #0f0a07;
@@ -59,7 +59,7 @@
     background: rgba(200,168,106,0.12); border: 1px solid rgba(255,255,255,0.10);
   }
   .brand-mark svg { width: 40px; height: 40px; }
-  .brand-mark .logo-emoji { font-size: 34px; line-height: 1; }
+  .brand-mark .brand-emoji { font-size: 34px; line-height: 1; }
   .brand-name { display: flex; flex-direction: column; gap: 3px; }
   .brand-name strong { font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
   .brand-name span { color: var(--muted-2); font-size: 13px; letter-spacing: 0.04em; }
@@ -112,7 +112,6 @@
     flex: none; width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center;
     background: rgba(200,168,106,0.14); color: var(--accent); font-size: 20px; border: 1px solid rgba(255,255,255,0.07);
   }
-  .row .dot-ic.num-ic { font-family: Georgia, serif; font-weight: 700; font-size: 17px; }
   .row h4 { margin: 0 0 4px; font-size: clamp(17px,1.2vw,20px); color: var(--text); }
   .row p { margin: 0; color: var(--muted); font-size: clamp(14px,1vw,16px); line-height: 1.55; }
 
@@ -139,6 +138,11 @@
   .target .tk { font-size: 13px; color: var(--muted-2); }
   .target .tv { font-size: clamp(20px,1.6vw,26px); color: var(--text); font-weight: 700; }
   .target .tv b { color: var(--accent); }
+  .smart-panel .panel-note { margin: 0; color: var(--muted); line-height: 1.55; font-size: clamp(14px,1vw,16px); }
+  .smart-panel .panel-note b { color: var(--accent); font-weight: 700; }
+  .smart-panel .panel-sub { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 2px; }
+  .smart-panel .chips .chip { font-size: 13px; padding: 8px 13px; }
+  .smart-row .d b { color: var(--accent-soft); font-weight: 600; }
 
   /* timeline / phases */
   .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; position: relative; }
@@ -189,13 +193,14 @@
   .cover-art svg { width: 100%; height: 100%; display: block; }
 
   /* footer / nav */
-  .footer { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 13px; color: var(--muted-2); }
-  .footer .step-note { color: var(--accent); font-weight: 600; }
-  .footer .next-hint { font-size: 11px; color: var(--muted-2); display: inline-flex; align-items: center; gap: 7px; letter-spacing: 0.04em; }
-  .footer .next-hint .lbl { text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.65; }
-  .footer .next-hint b { color: var(--accent); font-weight: 600; font-size: 12px; }
-  .footer .next-hint::after { content: '↗'; color: var(--accent); opacity: 0.85; font-size: 12px; }
-  .footer .next-hint.end::after { content: ''; }
+  .footer {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    color: var(--muted-2); font-size: 13px; letter-spacing: 0.02em;
+  }
+  .next-hint { display: inline-flex; align-items: center; gap: 8px; }
+  .next-hint .lbl { color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .next-hint b { color: var(--accent); font-weight: 700; }
+  .next-hint.end b { color: var(--accent-soft); }
   .progress { position: absolute; left: 64px; right: 64px; bottom: 30px; height: 6px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.06); }
   .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-deep), var(--accent-soft)); transition: width 0.5s ease; }
   .nav { position: absolute; inset: auto 34px 30px auto; display: flex; gap: 12px; align-items: center; }
@@ -231,13 +236,13 @@
 </style>
 </head>
 <body>
-<div class="deck" aria-label="Apresentação Nutri Chedid · Plano de Crescimento">
+<div class="deck" aria-label="Apresentação Nutri Chedid — Plano de Crescimento">
 
-  <!-- 1 · CAPA -->
+  <!-- 1 — CAPA -->
   <section class="slide active" data-title="Capa">
     <div class="header reveal">
       <div class="brand">
-        <div class="brand-mark"><span class="logo-emoji">🔱</span></div>
+        <div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div>
         <div class="brand-name"><strong>Nutri Chedid</strong><span>Plano de crescimento</span></div>
       </div>
       <div class="badge">Call com Henrique · Jun 2026</div>
@@ -309,46 +314,13 @@
       </div>
     </div>
 
-    <div class="footer reveal"><span>Slide 1 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O cenário</b></span></div>
+    <div class="footer reveal"><span>Slide 1 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O cenário</b></span></div>
   </section>
 
-  <!-- 2 · ÍNDICE -->
-  <section class="slide" data-title="Índice">
-    <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Índice da call</span></div></div>
-      <div class="badge">O que vamos ver</div>
-    </div>
-    <div class="body">
-      <div class="reveal">
-        <span class="eyebrow">Índice</span>
-        <h2 class="slide-title">O que vamos <em>conversar hoje</em></h2>
-      </div>
-      <div class="grid grid-2 reveal">
-        <div class="card">
-          <div class="stack">
-            <div class="row"><div class="dot-ic num-ic">01</div><div><h4>O cenário</h4><p>Onde o Nutri Chedid está hoje</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">02</div><div><h4>O desafio</h4><p>Crescer com qualidade</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">03</div><div><h4>A solução</h4><p>Uma estratégia comercial estruturada</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">04</div><div><h4>A meta</h4><p>O norte dos 120 dias</p></div></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="stack">
-            <div class="row"><div class="dot-ic num-ic">05</div><div><h4>A execução</h4><p>O motor comercial, peça a peça</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">06</div><div><h4>A operação</h4><p>Quem faz o quê</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">07</div><div><h4>As métricas</h4><p>Como vamos medir</p></div></div>
-            <div class="row"><div class="dot-ic num-ic">08</div><div><h4>A decisão</h4><p>O próximo passo</p></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer reveal"><span>Slide 2 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O cenário</b></span></div>
-  </section>
-
-  <!-- 3 · CENÁRIO / 3 FRENTES -->
+  <!-- 2 — CENÁRIO / 3 FRENTES -->
   <section class="slide" data-title="Cenário">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O cenário hoje</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O cenário hoje</span></div></div>
       <div class="badge">3 frentes, alto potencial de escala</div>
     </div>
     <div class="body">
@@ -378,13 +350,13 @@
       </div>
       <div class="callout reveal">A base é forte. O que falta é <b>um sistema comercial</b> que conecte as três frentes e transforme reputação em fluxo.</div>
     </div>
-    <div class="footer reveal"><span>Slide 3 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O desafio</b></span></div>
+    <div class="footer reveal"><span>Slide 2 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O gargalo</b></span></div>
   </section>
 
-  <!-- 3 · O GARGALO -->
+  <!-- 3 — O GARGALO -->
   <section class="slide" data-title="Gargalo">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O gargalo</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O gargalo</span></div></div>
       <div class="badge">Onde o valor vaza</div>
     </div>
     <div class="body">
@@ -403,17 +375,17 @@
           <div class="row"><div class="dot-ic">🎬</div><div><h4>Conteúdo consistente</h4><p>Produção de criativos e materiais é pontual. Tráfego e orgânico ficam sem combustível.</p></div></div>
         </div>
         <div class="card">
-          <div class="row"><div class="dot-ic">🚪</div><div><h4>Definir estratégias do Mais Saúde</h4><p>O projeto B2B está validado e já roda, mas ainda não gera contatos qualificados consistentemente.</p></div></div>
+          <div class="row"><div class="dot-ic">🚪</div><div><h4>Mais Saúde sem estratégia definida</h4><p>O projeto B2B está validado e já roda, mas ainda não gera contatos qualificados consistentemente.</p></div></div>
         </div>
       </div>
     </div>
-    <div class="footer reveal"><span>Slide 4 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A solução</b></span></div>
+    <div class="footer reveal"><span>Slide 3 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A solução</b></span></div>
   </section>
 
-  <!-- 4 · A PROPOSTA -->
+  <!-- 4 — A PROPOSTA -->
   <section class="slide" data-title="Proposta">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>A proposta</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>A proposta</span></div></div>
       <div class="badge">Uma cadeira, um dono</div>
     </div>
     <div class="body">
@@ -441,13 +413,146 @@
       </div>
       <div class="callout reveal"><b>Um objetivo principal por frente.</b> Sem reinventar a entrega: escalando o que já funciona.</div>
     </div>
-    <div class="footer reveal"><span>Slide 5 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A meta</b></span></div>
+    <div class="footer reveal"><span>Slide 4 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>Por frente</b></span></div>
   </section>
 
-  <!-- 5 · META SMART -->
+  <!-- 5 — DIRECIONAMENTO POR FRENTE -->
+  <section class="slide" data-title="Por frente">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Direcionamento por frente</span></div></div>
+      <div class="badge">O que queremos e como faremos</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">O plano, frente a frente</span>
+        <h2 class="slide-title">O que <em>queremos</em> e <em>como</em> faremos</h2>
+      </div>
+      <div class="phases reveal">
+        <div class="phase">
+          <span class="ph-tag">🏥 Clínica presencial</span>
+          <h3>Subir o ticket e virar a porta de entrada do B2B</h3>
+          <p style="margin:2px 0 6px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700;">Como faremos</p>
+          <ul>
+            <li>Mapear pacientes-empresário com perfil de decisão</li>
+            <li>Gancho de conversa para apresentar o Mais Saúde no atendimento</li>
+            <li>Estratégia de aumento de ticket (foco no público com perfil decisor)</li>
+            <li>One-pager do Mais Saúde para deixar na mão certa</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">💻 Consultoria online</span>
+          <h3>Escalar o tráfego mantendo conversão e qualidade</h3>
+          <p style="margin:2px 0 6px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700;">Como faremos</p>
+          <ul>
+            <li>Painel de funil + CAC com leitura semanal</li>
+            <li>Escala de verba em degraus, validando a conversão a cada passo com o time de tráfego</li>
+            <li>Revisar cada etapa do funil para ganhar conversão</li>
+            <li>Criativos e copy B2C — e, no tempo certo, divulgar o uso de IA no método</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">🏢 Projeto Mais Saúde</span>
+          <h3>Destravar o pipeline chegando ao decisor pela confiança</h3>
+          <p style="margin:2px 0 6px; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); font-weight:700;">Como faremos</p>
+          <ul>
+            <li>Abordagem consultiva: relação e autoridade primeiro, venda construída no tempo certo</li>
+            <li>Empacotar o case de Floripa (vídeo + one-pager) como prova social</li>
+            <li>Ângulo de cultura (saúde do time → performance) trabalhado com o time</li>
+            <li>Usar o consultório como porta de entrada para o decisor</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 5 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>Clínica · 90 dias</b></span></div>
+  </section>
+
+  <!-- 6 — PLANO 90 DIAS · CLÍNICA -->
+  <section class="slide" data-title="Clínica · 90 dias">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Plano de ação · Clínica</span></div></div>
+      <div class="badge">🏥 Clínica presencial · 90 dias</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Plano de ação · primeiros 90 dias</span>
+        <h2 class="slide-title">Clínica: <em>ticket maior</em>, porta do B2B</h2>
+        <p class="lead">Objetivo: subir o ticket médio e transformar o consultório na porta de entrada do B2B — sem expandir dias de atendimento.</p>
+      </div>
+      <div class="smart-panel reveal" style="padding:30px 34px;">
+        <div class="pt">Estratégia</div>
+        <p class="panel-note" style="font-size:clamp(16px,1.2vw,19px); line-height:1.7;">Levantar a carteira e segmentar por perfil, marcando quem ocupa <b>cargo de decisão</b> (financeiro, RH, dono). Encaminhar os empresários interessados para o <b>pipeline B2B</b> e padronizar o roteiro de consulta + gancho que mais converteu. Ticket sobe por <b>valor percebido</b>. O consultório vira fonte de <b>leads B2B qualificados</b>.</p>
+        <div class="panel-sub">Materiais que vamos criar</div>
+        <div class="chips">
+          <span class="chip">One-pager do Mais Saúde</span>
+          <span class="chip">Roteiro de gancho B2B</span>
+          <span class="chip">Tabela de ticket e valor</span>
+          <span class="chip">Script de encaminhamento</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 6 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>Consultoria · 90 dias</b></span></div>
+  </section>
+
+  <!-- 7 — PLANO 90 DIAS · CONSULTORIA ONLINE -->
+  <section class="slide" data-title="Consultoria · 90 dias">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Plano de ação · Consultoria online</span></div></div>
+      <div class="badge">💻 Consultoria online · 90 dias</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Plano de ação · primeiros 90 dias</span>
+        <h2 class="slide-title">Consultoria: <em>escalar</em> sem perder conversão</h2>
+        <p class="lead">Objetivo: escalar o tráfego pago mantendo os baselines — lead → degustação ~40% e degustação → anual ~30% — com o CAC sob controle.</p>
+      </div>
+      <div class="smart-panel reveal" style="padding:30px 34px;">
+        <div class="pt">Estratégia</div>
+        <p class="panel-note" style="font-size:clamp(16px,1.2vw,19px); line-height:1.7;">Escalar <b>em degraus</b>: só sobe a verba depois de validar que conversão e CAC se mantêm. Crescer volume sem quebrar a qualidade da degustação — que é o que converte para o plano anual. Montar o <b>painel de funil + CAC</b> com dados reais e identificar as etapas de maior perda (lead → degustação → anual). Otimizar landing, bot de WhatsApp e criativos das etapas fracas, com testes A/B de copy B2C (desejo de resultado + comunidade). Documentar o <b>funil vencedor</b> (criativos, copy, fluxo) para replicar.</p>
+        <div class="panel-sub">Materiais que vamos criar</div>
+        <div class="chips">
+          <span class="chip">Painel de funil + CAC</span>
+          <span class="chip">Banco de criativos B2C</span>
+          <span class="chip">Landing + variações de copy</span>
+          <span class="chip">Roteiros de bot de WhatsApp</span>
+          <span class="chip">Plano de testes A/B</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 7 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>Mais Saúde · 90 dias</b></span></div>
+  </section>
+
+  <!-- 8 — PLANO 90 DIAS · PROJETO MAIS SAÚDE -->
+  <section class="slide" data-title="Mais Saúde · 90 dias">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Plano de ação · Projeto Mais Saúde</span></div></div>
+      <div class="badge">🏢 Projeto Mais Saúde · 90 dias</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Plano de ação · primeiros 90 dias</span>
+        <h2 class="slide-title">Mais Saúde: <em>destravar</em> o pipeline B2B</h2>
+        <p class="lead">Objetivo: chegar ao decisor pela confiança e avançar as oportunidades quentes — meta de 5 empresas qualificadas no funil em 90 dias.</p>
+      </div>
+      <div class="smart-panel reveal" style="padding:30px 34px;">
+        <div class="pt">Estratégia</div>
+        <p class="panel-note" style="font-size:clamp(16px,1.2vw,19px); line-height:1.7;">Venda <b>construída no tempo certo</b>: cultura e confiança antes da oferta. O decisor entra por storytelling e prova social (case real), não por venda dura. <b>Indicação</b> como motor de escala. Empacotar o <b>case de Floripa</b> (vídeo + one-pager) e estruturar a oferta e a jornada para empresas (diagnóstico → protocolo 1-a-1 → acompanhamento com gamificação). Construir com o time o ângulo de cultura. Documentar a abordagem e os materiais que mais avançaram para replicar via indicação.</p>
+        <div class="panel-sub">Materiais que vamos criar</div>
+        <div class="chips">
+          <span class="chip">Vídeo + one-pager do case Floripa</span>
+          <span class="chip">Apresentação da oferta B2B</span>
+          <span class="chip">Roteiro de abordagem consultiva</span>
+          <span class="chip">Deck do ângulo de cultura</span>
+          <span class="chip">Jornada/proposta para empresas</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 8 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A meta</b></span></div>
+  </section>
+
+  <!-- 9 — META SMART -->
   <section class="slide" data-title="Meta SMART">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Meta SMART</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Meta SMART</span></div></div>
       <div class="badge">O norte dos 120 dias</div>
     </div>
     <div class="body">
@@ -473,19 +578,19 @@
         </div>
       </div>
     </div>
-    <div class="footer reveal"><span>Slide 6 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A execução</b></span></div>
+    <div class="footer reveal"><span>Slide 9 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A execução</b></span></div>
   </section>
 
 
-  <!-- 7 · O QUE SERÁ FEITO -->
+  <!-- 7 — O QUE SERÁ FEITO -->
   <section class="slide" data-title="Execução">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O motor de execução</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>O motor de execução</span></div></div>
       <div class="badge">Ações concretas</div>
     </div>
     <div class="body">
       <div class="reveal">
-        <span class="eyebrow">Entregáveis</span>
+        <span class="eyebrow">O que entra no ar</span>
         <h2 class="slide-title">O motor comercial, peça a peça</h2>
       </div>
       <div class="grid grid-3 reveal">
@@ -494,16 +599,16 @@
         <div class="card"><span class="ic">📸</span><h3>60 criativos / mês</h3><p>Artes para redes, tráfego e campanhas de conversão.</p></div>
         <div class="card"><span class="ic">📚</span><h3>Materiais ricos + SEO</h3><p>Ebooks, guias e conteúdo para baixar o custo por lead.</p></div>
         <div class="card"><span class="ic">🏢</span><h3>Oferta Mais Saúde</h3><p>Proposta B2B estruturada e jornada para empresas.</p></div>
-        <div class="card"><span class="ic">🎯</span><h3>Follow-up especializado</h3><p>Resgate e acompanhamento de leads tratado na área de vendas.</p></div>
+        <div class="card"><span class="ic">🎯</span><h3>Follow-up especializado</h3><p>Resgate e acompanhamento de leads tratados por vendas, não mais pela secretária.</p></div>
       </div>
     </div>
-    <div class="footer reveal"><span>Slide 7 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A operação</b></span></div>
+    <div class="footer reveal"><span>Slide 10 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A operação</b></span></div>
   </section>
 
-  <!-- 8 · QUEM FAZ O QUÊ -->
+  <!-- 8 — QUEM FAZ O QUÊ -->
   <section class="slide" data-title="Operação">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Quem faz o quê</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Quem faz o quê</span></div></div>
       <div class="badge">Papéis alinhados</div>
     </div>
     <div class="body">
@@ -521,13 +626,13 @@
       </div>
       <div class="callout reveal"><b>Revisão semanal</b> com todos os números na mesa, decisões rápidas, sem reuniões longas.</div>
     </div>
-    <div class="footer reveal"><span>Slide 8 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>As métricas</b></span></div>
+    <div class="footer reveal"><span>Slide 11 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>As métricas</b></span></div>
   </section>
 
-  <!-- 9 · MÉTRICAS E RITMO -->
+  <!-- 9 — MÉTRICAS E RITMO -->
   <section class="slide" data-title="Métricas">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Métricas e ritmo</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Métricas e ritmo</span></div></div>
       <div class="badge">O que vamos medir</div>
     </div>
     <div class="body">
@@ -548,13 +653,13 @@
       </div>
       <div class="callout reveal">O que não se mede não escala. <b>Painel semanal</b> torna cada ajuste uma decisão informada.</div>
     </div>
-    <div class="footer reveal"><span>Slide 9 de 10</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A decisão</b></span></div>
+    <div class="footer reveal"><span>Slide 12 de 13</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A decisão</b></span></div>
   </section>
 
-  <!-- 10 · PRÓXIMO PASSO -->
+  <!-- 10 — PRÓXIMO PASSO -->
   <section class="slide" data-title="Próximo passo">
     <div class="header reveal">
-      <div class="brand"><div class="brand-mark"><span class="logo-emoji">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Próximo passo</span></div></div>
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Nutri Chedid</strong><span>Próximo passo</span></div></div>
       <div class="badge">Decisão</div>
     </div>
     <div class="body">
@@ -581,7 +686,7 @@
       </div>
       <div class="callout reveal">A base já existe. <b>Falta só ligar o motor comercial</b> e medir o resultado semana a semana.</div>
     </div>
-    <div class="footer reveal"><span>Slide 10 de 10</span><span class="next-hint end"><b>Fim da apresentação</b></span></div>
+    <div class="footer reveal"><span>Slide 13 de 13</span><span class="next-hint end"><b>Fim da apresentação</b></span></div>
   </section>
 
   <div class="progress"><div class="progress-bar" id="progressBar"></div></div>

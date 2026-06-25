@@ -14,6 +14,13 @@ Thumbs.db
 .claude/file-history/
 .claude/backups/
 
+# Credenciais (NUNCA versionar)
+.env
+*.env
+
+# Dados pessoais de leads/clientes (PII) — regeneráveis via /reativar-leads
+saidas/leads-reativacao-*.csv
+
 # Dependências
 node_modules/
 

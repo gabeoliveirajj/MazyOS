@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Projeto Mais Saúde — Destravar o B2B</title>
+<style>
+  :root {
+    --bg: #120c07;
+    --surface: rgba(255,255,255,0.07);
+    --surface-2: rgba(255,255,255,0.04);
+    --border: rgba(255,255,255,0.14);
+    --border-strong: rgba(255,255,255,0.22);
+    --accent: #d4b878;
+    --accent-soft: #ecd29a;
+    --accent-deep: #b9975b;
+    --text: #f7f2ea;
+    --muted: #d8cab4;
+    --muted-2: #ab9d88;
+    --good: #8fd0a0;
+    --warn: #e0a86a;
+    --shadow: 0 30px 90px rgba(0,0,0,0.45);
+    --radius: 26px;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; min-height: 100%;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(1000px 560px at 10% -8%, rgba(212,184,120,0.22), transparent 56%),
+      radial-gradient(760px 540px at 102% 112%, rgba(185,151,91,0.14), transparent 56%),
+      linear-gradient(180deg, #1c140d 0%, #110b07 100%);
+    color: var(--text); overflow: hidden;
+  }
+  body { display: flex; align-items: center; justify-content: center; }
+  button, a { font: inherit; }
+
+  .deck {
+    width: 100vw; height: 100vh; max-width: 1600px; max-height: 1000px;
+    position: relative; overflow: hidden; border-radius: 30px;
+    box-shadow: var(--shadow); border: 1px solid rgba(255,255,255,0.07);
+    background: rgba(22,15,10,0.82);
+  }
+  .deck.fullscreen { border-radius: 0; box-shadow: none; border: none; max-width: none; max-height: none; }
+
+  .slide {
+    position: absolute; inset: 0; padding: 58px 64px 92px 64px;
+    display: grid; grid-template-rows: auto 1fr auto; gap: 22px;
+    opacity: 0; pointer-events: none; transform: translateY(24px) scale(0.99);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .slide.active { opacity: 1; pointer-events: auto; transform: none; }
+
+  .header { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .brand { display: inline-flex; align-items: center; gap: 16px; }
+  .brand-mark {
+    width: 60px; height: 60px; border-radius: 18px; display: grid; place-items: center;
+    background: rgba(200,168,106,0.12); border: 1px solid rgba(255,255,255,0.10);
+  }
+  .brand-mark svg { width: 40px; height: 40px; }
+  .brand-mark .brand-emoji { font-size: 34px; line-height: 1; }
+  .brand-name { display: flex; flex-direction: column; gap: 3px; }
+  .brand-name strong { font-size: 15px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); }
+  .brand-name span { color: var(--muted-2); font-size: 13px; letter-spacing: 0.04em; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px; padding: 11px 18px;
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 14px;
+    color: var(--text); font-weight: 600; font-size: 14px;
+  }
+  .badge::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px rgba(200,168,106,0.8); }
+
+  .eyebrow { color: var(--accent); font-size: 13px; letter-spacing: 0.20em; text-transform: uppercase; font-weight: 700; }
+  .slide-title {
+    margin: 0; font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(40px, 4.4vw, 66px); line-height: 1.02; letter-spacing: -0.025em; color: var(--text);
+  }
+  .slide-title em { color: var(--accent); font-style: italic; }
+  .lead { margin: 0; font-size: clamp(18px, 1.35vw, 23px); color: var(--muted); line-height: 1.6; max-width: 920px; }
+
+  .body { display: grid; gap: 22px; align-content: start; }
+
+  .grid { display: grid; gap: 18px; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+
+  .card {
+    background: linear-gradient(165deg, rgba(255,255,255,0.085), rgba(255,255,255,0.028));
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 28px; display: grid; gap: 14px; align-content: start; position: relative;
+    box-shadow: 0 16px 44px rgba(0,0,0,0.30);
+  }
+  .card.tinted { background: linear-gradient(160deg, rgba(212,184,120,0.16), rgba(255,255,255,0.03)); border-color: rgba(212,184,120,0.24); }
+  .card .kicker { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .card h3 { margin: 0; font-size: clamp(20px, 1.45vw, 25px); color: var(--text); font-weight: 700; letter-spacing: -0.01em; }
+  .card p { margin: 0; color: var(--muted); line-height: 1.62; font-size: clamp(15.5px, 1.1vw, 18px); }
+  .card .ic {
+    width: 58px; height: 58px; border-radius: 16px; display: grid; place-items: center;
+    font-size: 28px; line-height: 1; margin-bottom: 2px;
+    background: linear-gradient(160deg, rgba(212,184,120,0.26), rgba(212,184,120,0.05));
+    border: 1px solid rgba(212,184,120,0.32);
+  }
+  .card .num { font-family: Georgia, serif; font-size: 48px; color: var(--accent); line-height: 1; }
+  .card .state {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em; padding: 5px 11px; border-radius: 999px; width: fit-content;
+  }
+  .state.solid { background: rgba(143,208,160,0.14); color: var(--good); border: 1px solid rgba(143,208,160,0.25); }
+  .state.gap { background: rgba(224,168,106,0.14); color: var(--warn); border: 1px solid rgba(224,168,106,0.25); }
+  .state.open { background: rgba(200,168,106,0.14); color: var(--accent); border: 1px solid rgba(200,168,106,0.25); }
+
+  .stack { display: grid; gap: 14px; }
+  .row { display: flex; gap: 16px; align-items: flex-start; }
+  .row .dot-ic {
+    flex: none; width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center;
+    background: linear-gradient(160deg, rgba(212,184,120,0.26), rgba(212,184,120,0.05));
+    color: var(--accent); font-size: 23px; border: 1px solid rgba(212,184,120,0.32);
+  }
+  .row h4 { margin: 0 0 4px; font-size: clamp(17px,1.2vw,20px); color: var(--text); }
+  .row p { margin: 0; color: var(--muted); font-size: clamp(14px,1vw,16px); line-height: 1.55; }
+
+  .smart { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; }
+  .smart-rows { display: grid; gap: 12px; }
+  .smart-row {
+    display: grid; grid-template-columns: 56px 1fr; gap: 16px; align-items: center;
+    background: linear-gradient(165deg, rgba(255,255,255,0.07), rgba(255,255,255,0.025));
+    border: 1px solid var(--border); border-radius: 18px; padding: 15px 18px;
+    box-shadow: 0 10px 28px rgba(0,0,0,0.22);
+  }
+  .smart-letter {
+    width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center;
+    font-family: Georgia, serif; font-size: 30px; font-weight: 700; color: #1a120a;
+    background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep));
+  }
+  .smart-row .t { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 700; }
+  .smart-row .d { font-size: clamp(14px,1vw,16px); color: var(--text); line-height: 1.45; margin-top: 2px; }
+  .smart-panel {
+    background: linear-gradient(160deg, rgba(200,168,106,0.12), rgba(255,255,255,0.02));
+    border: 1px solid var(--border-strong); border-radius: var(--radius); padding: 26px; display: grid; gap: 16px; align-content: start;
+  }
+  .smart-panel .pt { font-family: Georgia, serif; font-size: 22px; color: var(--accent); }
+  .target { display: grid; gap: 6px; }
+  .target .tk { font-size: 13px; color: var(--muted-2); }
+  .target .tv { font-size: clamp(20px,1.6vw,26px); color: var(--text); font-weight: 700; }
+  .target .tv b { color: var(--accent); }
+  .smart-panel .panel-note { margin: 0; color: var(--muted); line-height: 1.55; font-size: clamp(14px,1vw,16px); }
+  .smart-panel .panel-note b { color: var(--accent); font-weight: 700; }
+  .smart-panel .panel-sub { font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-top: 2px; }
+  .smart-panel .chips .chip { font-size: 13px; padding: 8px 13px; }
+  .smart-row .d b { color: var(--accent-soft); font-weight: 600; }
+
+  .phases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; position: relative; }
+  .phase {
+    background: linear-gradient(165deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+    border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 26px; display: grid; gap: 13px; align-content: start; position: relative;
+    box-shadow: 0 16px 44px rgba(0,0,0,0.30);
+  }
+  .phase .ph-tag {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.04em;
+    color: #1a120a; padding: 7px 14px; border-radius: 999px;
+    background: linear-gradient(160deg, var(--accent-soft), var(--accent-deep));
+    border: 1px solid rgba(255,255,255,0.10); width: fit-content;
+  }
+  .phase h3 { margin: 0; font-size: clamp(19px,1.35vw,23px); color: var(--text); letter-spacing: -0.01em; }
+  .phase ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 11px; }
+  .phase li { position: relative; padding-left: 22px; color: var(--muted); font-size: clamp(15px,1.05vw,17px); line-height: 1.5; }
+  .phase li::before { content: ''; position: absolute; left: 2px; top: 9px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px rgba(212,184,120,0.5); }
+
+  .metric-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+  .metric {
+    background: linear-gradient(165deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+    border: 1px solid var(--border); border-radius: 20px; padding: 24px; display: grid; gap: 9px;
+    box-shadow: 0 14px 38px rgba(0,0,0,0.28);
+  }
+  .metric .mlabel { font-size: 12px; color: var(--accent); letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; }
+  .metric .mflow { font-size: clamp(16px,1.2vw,19px); color: var(--text); font-weight: 700; }
+  .metric .marrow { color: var(--accent); }
+
+  .callout {
+    background: linear-gradient(120deg, rgba(200,168,106,0.16), rgba(255,255,255,0.02));
+    border: 1px solid var(--border-strong); border-left: 4px solid var(--accent);
+    border-radius: 18px; padding: 22px 26px; font-size: clamp(16px,1.2vw,20px); color: var(--text); font-weight: 600; line-height: 1.5;
+  }
+  .callout b { color: var(--accent); }
+
+  .chips { display: flex; gap: 12px; flex-wrap: wrap; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border-radius: 999px;
+    background: rgba(200,168,106,0.12); border: 1px solid rgba(255,255,255,0.08); color: var(--accent); font-weight: 600; font-size: 14px;
+  }
+
+  .cover { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+  .cover .copy { display: grid; gap: 22px; }
+  .cover .slide-title { font-size: clamp(44px, 5vw, 76px); }
+  .cover-art {
+    align-self: stretch; min-height: 360px; border-radius: 28px; overflow: hidden; position: relative;
+    background: linear-gradient(150deg, rgba(200,168,106,0.18), rgba(15,10,7,0.9));
+    border: 1px solid var(--border-strong);
+  }
+  .cover-art svg { width: 100%; height: 100%; display: block; }
+
+  .footer {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px;
+    color: var(--muted-2); font-size: 13px; letter-spacing: 0.02em;
+  }
+  .next-hint { display: inline-flex; align-items: center; gap: 8px; }
+  .next-hint .lbl { color: var(--muted-2); text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px; }
+  .next-hint b { color: var(--accent); font-weight: 700; }
+  .next-hint.end b { color: var(--accent-soft); }
+  .progress { position: absolute; left: 64px; right: 64px; bottom: 30px; height: 6px; border-radius: 999px; overflow: hidden; background: rgba(255,255,255,0.06); }
+  .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-deep), var(--accent-soft)); transition: width 0.5s ease; }
+  .nav { position: absolute; inset: auto 34px 30px auto; display: flex; gap: 12px; align-items: center; }
+  .nav button {
+    width: 50px; height: 50px; border-radius: 15px; border: 1px solid var(--border);
+    background: rgba(18,14,11,0.9); color: var(--text); cursor: pointer; font-size: 18px;
+    transition: transform 0.2s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+  .nav button:hover { background: rgba(200,168,106,0.18); border-color: var(--accent); transform: translateY(-2px); }
+  .dots { position: absolute; left: 34px; bottom: 36px; display: flex; gap: 9px; }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.16); cursor: pointer; transition: transform 0.2s ease, background 0.2s ease, width 0.2s ease; }
+  .dot.active { background: var(--accent); width: 26px; border-radius: 999px; }
+
+  .slide.active .reveal { opacity: 1; transform: none; }
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal:nth-child(1) { transition-delay: 0.05s; }
+  .reveal:nth-child(2) { transition-delay: 0.14s; }
+  .reveal:nth-child(3) { transition-delay: 0.23s; }
+  .reveal:nth-child(4) { transition-delay: 0.32s; }
+  .reveal:nth-child(5) { transition-delay: 0.41s; }
+  .reveal:nth-child(6) { transition-delay: 0.50s; }
+
+  @media (max-width: 1180px) {
+    .slide { padding: 40px; }
+    .cover, .smart { grid-template-columns: 1fr; }
+    .grid-3, .grid-4, .phases, .metric-strip { grid-template-columns: 1fr 1fr; }
+    .cover-art { min-height: 240px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .slide, .dot, .nav button, .reveal, .progress-bar { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="deck" aria-label="Apresentação Projeto Mais Saúde — Destravar o B2B">
+
+  <!-- 1 — CAPA -->
+  <section class="slide active" data-title="Capa">
+    <div class="header reveal">
+      <div class="brand">
+        <div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div>
+        <div class="brand-name"><strong>Projeto Mais Saúde</strong><span>Frente B2B · nome provisório</span></div>
+      </div>
+      <div class="badge">Proposta · Jun 2026</div>
+    </div>
+
+    <div class="cover">
+      <div class="copy">
+        <span class="eyebrow reveal">Plano de 60 dias · 1 frente, 1 objetivo</span>
+        <h1 class="slide-title reveal">Destravar o <em>Projeto Mais Saúde</em></h1>
+        <p class="lead reveal">Um projeto focado: transformar um produto já validado e um pipeline parado em reuniões com o decisor e empresas avançando — pela confiança, não pela venda dura.</p>
+        <div class="chips reveal">
+          <span class="chip">Chegar ao decisor</span>
+          <span class="chip">Prova social pronta</span>
+          <span class="chip">Pipeline em movimento</span>
+        </div>
+      </div>
+      <div class="cover-art reveal">
+        <svg viewBox="0 0 560 380" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" font-family="Inter, system-ui, sans-serif">
+          <defs>
+            <linearGradient id="cg" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff3da" stop-opacity="0.20"/>
+              <stop offset="100%" stop-color="#b9975b" stop-opacity="0.05"/>
+            </linearGradient>
+          </defs>
+          <rect x="0" y="0" width="560" height="380" rx="28" fill="rgba(255,255,255,0.02)"/>
+
+          <!-- etapa 1: porta de entrada (consultório) -->
+          <g>
+            <rect x="44" y="120" width="132" height="140" rx="18" fill="url(#cg)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <circle cx="110" cy="168" r="20" fill="none" stroke="#e3c48f" stroke-width="3"/>
+            <path d="M84 222 q26 -34 52 0" fill="none" stroke="#e3c48f" stroke-width="3" stroke-linecap="round"/>
+            <text x="110" y="288" text-anchor="middle" fill="#f5efe5" font-size="15" font-weight="600">Consultório</text>
+            <text x="110" y="308" text-anchor="middle" fill="#9a8c79" font-size="12">porta de entrada</text>
+          </g>
+
+          <!-- etapa 2: decisor -->
+          <g>
+            <rect x="214" y="120" width="132" height="140" rx="18" fill="url(#cg)" stroke="rgba(255,255,255,0.22)" stroke-width="2"/>
+            <circle cx="280" cy="166" r="18" fill="#c8a86a" opacity="0.85"/>
+            <path d="M256 224 q24 -32 48 0" fill="none" stroke="#e3c48f" stroke-width="3" stroke-linecap="round"/>
+            <text x="280" y="288" text-anchor="middle" fill="#f5efe5" font-size="15" font-weight="600">Decisor</text>
+            <text x="280" y="308" text-anchor="middle" fill="#9a8c79" font-size="12">CEO / cultura</text>
+          </g>
+
+          <!-- etapa 3: empresa -->
+          <g>
+            <rect x="384" y="120" width="132" height="140" rx="18" fill="rgba(200,168,106,0.30)" stroke="rgba(255,255,255,0.30)" stroke-width="2"/>
+            <rect x="430" y="150" width="40" height="64" rx="4" fill="none" stroke="#f5efe5" stroke-width="3"/>
+            <line x1="440" y1="164" x2="446" y2="164" stroke="#f5efe5" stroke-width="3"/>
+            <line x1="454" y1="164" x2="460" y2="164" stroke="#f5efe5" stroke-width="3"/>
+            <line x1="440" y1="182" x2="446" y2="182" stroke="#f5efe5" stroke-width="3"/>
+            <line x1="454" y1="182" x2="460" y2="182" stroke="#f5efe5" stroke-width="3"/>
+            <text x="450" y="288" text-anchor="middle" fill="#f5efe5" font-size="15" font-weight="600">Empresa</text>
+            <text x="450" y="308" text-anchor="middle" fill="#9a8c79" font-size="12">500+ colaboradores</text>
+          </g>
+
+          <!-- setas -->
+          <g stroke="#c8a86a" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M182 190 H208"/><path d="M200 182 L210 190 L200 198"/>
+            <path d="M352 190 H378"/><path d="M370 182 L380 190 L370 198"/>
+          </g>
+          <text x="280" y="64" text-anchor="middle" fill="#e3c48f" font-size="15" font-weight="700" letter-spacing="1">CONFIANÇA → CULTURA → CONTRATO</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="footer reveal"><span>Slide 1 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O que já temos</b></span></div>
+  </section>
+
+  <!-- 2 — ONDE ESTAMOS -->
+  <section class="slide" data-title="O ativo">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>O que já temos</span></div></div>
+      <div class="badge">Produto validado, pipeline parado</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Ponto de partida</span>
+        <h2 class="slide-title">O produto já <em>provou</em> que funciona</h2>
+        <p class="lead">O Mais Saúde leva o sistema da consultoria pra dentro das empresas, 1-a-1 com cada colaborador. Já roda, tem case real e um pipeline cheio. O que falta é método comercial pra destravar.</p>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card tinted"><span class="ic">🏆</span><h3>Case de Floripa</h3><p>Empresa relatou os <b>3 meses em que mais faturou</b>. Depoimento gravado. Renovou.</p></div>
+        <div class="card tinted"><span class="ic">📋</span><h3>30+ empresas no radar</h3><p><b>~8 quentes.</b> O interesse existe — falta conduzir até o decisor.</p></div>
+        <div class="card tinted"><span class="ic">⚙️</span><h3>Sistema comprovado</h3><p>O mesmo método da consultoria (3.000+ pessoas), agora para times.</p></div>
+      </div>
+      <div class="callout reveal">Não falta produto nem prova. <b>Falta o caminho comercial até quem decide.</b></div>
+    </div>
+    <div class="footer reveal"><span>Slide 2 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O gargalo</b></span></div>
+  </section>
+
+  <!-- 3 — O GARGALO -->
+  <section class="slide" data-title="Gargalo">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>O gargalo</span></div></div>
+      <div class="badge">Por que o pipeline trava</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Diagnóstico</span>
+        <h2 class="slide-title">O desafio é <em>chegar ao decisor</em></h2>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card"><div class="row"><div class="dot-ic">🚪</div><div><h4>O decisor é difícil de alcançar</h4><p>A compra depende da cultura do CEO. Sem alguém que já cuida da própria saúde, a conversa não avança.</p></div></div></div>
+        <div class="card"><div class="row"><div class="dot-ic">⏳</div><div><h4>"Não é prioridade agora"</h4><p>A resistência mais comum: a empresa não vê urgência e adia. Falta um ângulo que conecte saúde a resultado.</p></div></div></div>
+        <div class="card"><div class="row"><div class="dot-ic">🎭</div><div><h4>Venda dura não funciona aqui</h4><p>Spin-selling e copy genérica afastam. O decisor entra por história e confiança, não por esquema de vendas.</p></div></div></div>
+        <div class="card"><div class="row"><div class="dot-ic">📂</div><div><h4>Prova social ainda solta</h4><p>O case de Floripa existe, mas não está empacotado num material que abre porta sozinho.</p></div></div></div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 3 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A proposta</b></span></div>
+  </section>
+
+  <!-- 4 — A PROPOSTA -->
+  <section class="slide" data-title="Proposta">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>A proposta</span></div></div>
+      <div class="badge">Relação primeiro, venda depois</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">A solução</span>
+        <h2 class="slide-title">Uma <em>abordagem consultiva</em>, não uma cartada de venda</h2>
+        <p class="lead">Chegar "na moralzinha": entender o que a empresa quer, contar a história do Henrique e do projeto, com storytelling e o case real. Autoridade e confiança primeiro — a venda é construída no tempo certo.</p>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card tinted"><span class="kicker">Ângulo</span><h3>Cultura, não custo</h3><p>Saúde do time → menos ansiedade, mais energia, melhor performance.</p></div>
+        <div class="card tinted"><span class="kicker">Porta de entrada</span><h3>O consultório</h3><p>Empresários atendidos na clínica levam ao decisor da empresa.</p></div>
+        <div class="card tinted"><span class="kicker">Motor de escala</span><h3>Indicação</h3><p>Cada empresa satisfeita abre a próxima. Prova social que se multiplica.</p></div>
+      </div>
+      <div class="callout reveal">Você é o <b>rosto e a história</b>. Eu estruturo a abordagem, os materiais e conduzo o pipeline até a reunião.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 4 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O que eu entrego</b></span></div>
+  </section>
+
+  <!-- 5 — O QUE EU ENTREGO -->
+  <section class="slide" data-title="Entregas">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>O que eu entrego</span></div></div>
+      <div class="badge">Entregáveis concretos</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Sem dúvida do que sai da minha mão</span>
+        <h2 class="slide-title">O que vou <em>entregar</em> em 60 dias</h2>
+      </div>
+      <div class="grid grid-3 reveal">
+        <div class="card"><span class="ic">🎬</span><h3>Case Floripa empacotado</h3><p>Vídeo do depoimento + one-pager de resultado pra abrir porta sozinho.</p></div>
+        <div class="card"><span class="ic">📑</span><h3>Apresentação da oferta B2B</h3><p>Deck da proposta para empresas, claro e pronto pra mandar ao decisor.</p></div>
+        <div class="card"><span class="ic">🗺️</span><h3>Jornada para empresas</h3><p>Diagnóstico → protocolo 1-a-1 → acompanhamento com gamificação, descrita.</p></div>
+        <div class="card"><span class="ic">🗣️</span><h3>Roteiro de abordagem consultiva</h3><p>Como abrir conversa pelo storytelling, sem venda dura.</p></div>
+        <div class="card"><span class="ic">💛</span><h3>Deck do ângulo de cultura</h3><p>Construído com a Alice: saúde do time → performance da empresa.</p></div>
+        <div class="card"><span class="ic">🤝</span><h3>Gancho B2B no consultório</h3><p>Roteiro pra identificar empresários e apresentar o projeto no atendimento.</p></div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 5 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>Como funciona</b></span></div>
+  </section>
+
+  <!-- 6 — COMO FUNCIONA (JORNADA) -->
+  <section class="slide" data-title="Como funciona">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>Como funciona</span></div></div>
+      <div class="badge">Da confiança ao contrato</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">O caminho até a venda</span>
+        <h2 class="slide-title">Conduzir o decisor, <em>passo a passo</em></h2>
+      </div>
+      <div class="phases reveal">
+        <div class="phase">
+          <span class="ph-tag">1 · Abrir</span>
+          <h3>Chegar pela confiança</h3>
+          <ul>
+            <li>Identificar empresários na clínica e no pipeline</li>
+            <li>Storytelling do Henrique e do projeto</li>
+            <li>Mandar o case de Floripa como prova</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">2 · Avançar</span>
+          <h3>Levar à reunião com o decisor</h3>
+          <ul>
+            <li>Ângulo de cultura → performance do time</li>
+            <li>Apresentação da oferta e da jornada</li>
+            <li>Tratar a objeção de "não é prioridade"</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">3 · Fechar e escalar</span>
+          <h3>Entregar e multiplicar</h3>
+          <ul>
+            <li>Diagnóstico → protocolo 1-a-1 → acompanhamento</li>
+            <li>Gamificação para aderência</li>
+            <li>Indicação como motor da próxima empresa</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout reveal">A entrega já está validada no case real. <b>O que estruturamos é o caminho até o sim.</b></div>
+    </div>
+    <div class="footer reveal"><span>Slide 6 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O plano de 60 dias</b></span></div>
+  </section>
+
+  <!-- 7 — PLANO 60 DIAS -->
+  <section class="slide" data-title="60 dias">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>Plano de 60 dias</span></div></div>
+      <div class="badge">Ritmo e checkpoints</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">A linha do tempo</span>
+        <h2 class="slide-title">60 dias, <em>dois marcos</em> claros</h2>
+      </div>
+      <div class="metric-strip reveal">
+        <div class="metric"><span class="mlabel">Prova</span><span class="mflow">Materiais <span class="marrow">→</span> prontos</span></div>
+        <div class="metric"><span class="mlabel">Abordagem</span><span class="mflow">Empresas <span class="marrow">→</span> contatadas</span></div>
+        <div class="metric"><span class="mlabel">Avanço</span><span class="mflow">Reuniões c/ decisor</span></div>
+        <div class="metric"><span class="mlabel">Resultado</span><span class="mflow">Empresas no funil</span></div>
+      </div>
+      <div class="grid grid-2 reveal">
+        <div class="card tinted"><span class="num">30</span><h3>Dia 30 · Munição pronta</h3><p>Case empacotado, oferta e jornada montadas, roteiro de abordagem no ar. As ~8 quentes reabordadas com o novo método.</p></div>
+        <div class="card tinted"><span class="num">60</span><h3>Dia 60 · Pipeline em movimento</h3><p>Reuniões com decisores acontecendo, empresas avançando no funil e a abordagem vencedora documentada pra replicar via indicação.</p></div>
+      </div>
+      <div class="callout reveal">Revisão <b>semanal</b> do pipeline: quem avançou, quem travou e qual o próximo passo de cada empresa.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 7 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>A meta</b></span></div>
+  </section>
+
+  <!-- 8 — META SMART -->
+  <section class="slide" data-title="Meta SMART">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>Meta SMART</span></div></div>
+      <div class="badge">O norte dos 60 dias</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">A meta</span>
+        <h2 class="slide-title">Empresas <em>avançando</em> até o decisor</h2>
+      </div>
+      <div class="smart reveal">
+        <div class="smart-rows">
+          <div class="smart-row"><div class="smart-letter">S</div><div><div class="t">Específico</div><div class="d">Estruturar a abordagem comercial do Mais Saúde e levar as empresas quentes à reunião com o decisor.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">M</div><div><div class="t">Mensurável</div><div class="d">Empresas contatadas, reuniões com decisor e empresas qualificadas no funil — acompanhadas no pipeline semanal.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">A</div><div><div class="t">Atingível</div><div class="d">Produto validado, case gravado e 30+ empresas no radar. É conduzir, não criar do zero.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">R</div><div><div class="t">Relevante</div><div class="d">Abre uma frente de escala infinita por indicação, sem depender de mais dias de atendimento.</div></div></div>
+          <div class="smart-row"><div class="smart-letter">T</div><div><div class="t">Temporal</div><div class="d">60 dias, revisão semanal e checkpoints aos 30 e 60 dias.</div></div></div>
+        </div>
+        <div class="smart-panel">
+          <div class="pt">Alvos do piloto</div>
+          <div class="target"><span class="tk">Materiais de prova</span><span class="tv"><b>prontos</b> até o dia 30</span></div>
+          <div class="target"><span class="tk">Empresas quentes reabordadas</span><span class="tv">as <b>~8</b> com novo método</span></div>
+          <div class="target"><span class="tk">Reuniões com decisor</span><span class="tv">fluxo <b>iniciado</b> e medido</span></div>
+          <div class="target"><span class="tk">Empresas qualificadas no funil</span><span class="tv">meta de <b>3–5</b> avançando</span></div>
+          <p style="margin:6px 0 0; font-size:13px; color:var(--muted-2); line-height:1.5;">★ Números a calibrar com o pipeline real na call.</p>
+        </div>
+      </div>
+    </div>
+    <div class="footer reveal"><span>Slide 8 de 9</span><span class="next-hint"><span class="lbl">A seguir</span> <b>O próximo passo</b></span></div>
+  </section>
+
+  <!-- 9 — PRÓXIMO PASSO -->
+  <section class="slide" data-title="Próximo passo">
+    <div class="header reveal">
+      <div class="brand"><div class="brand-mark"><span class="brand-emoji" role="img" aria-label="Tridente">🔱</span></div><div class="brand-name"><strong>Projeto Mais Saúde</strong><span>Próximo passo</span></div></div>
+      <div class="badge">Decisão</div>
+    </div>
+    <div class="body">
+      <div class="reveal">
+        <span class="eyebrow">Daqui pra frente</span>
+        <h2 class="slide-title">O próximo passo é <em>uma decisão</em></h2>
+      </div>
+      <div class="phases reveal">
+        <div class="phase">
+          <span class="ph-tag">Passo 1</span>
+          <h3>Aprovar o piloto</h3>
+          <ul><li>60 dias, escopo desta apresentação</li><li>Revisão semanal do pipeline</li></ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Passo 2</span>
+          <h3>Revisar o pipeline</h3>
+          <ul><li>Olhar as ~8 empresas quentes juntos</li><li>Priorizar quem reabordar primeiro</li></ul>
+        </div>
+        <div class="phase">
+          <span class="ph-tag">Passo 3</span>
+          <h3>Gravar a munição</h3>
+          <ul><li>Fechar o vídeo do case Floripa</li><li>Primeiros materiais em 30 dias</li></ul>
+        </div>
+      </div>
+      <div class="callout reveal">A prova já existe. <b>Falta só conduzir o decisor até o sim</b> — com método, no tempo certo.</div>
+    </div>
+    <div class="footer reveal"><span>Slide 9 de 9</span><span class="next-hint end"><b>Fim da apresentação</b></span></div>
+  </section>
+
+  <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="dots" id="dots"></div>
+  <div class="nav" role="navigation" aria-label="Navegação">
+    <button id="prevBtn" aria-label="Anterior">←</button>
+    <button id="fullscreenBtn" aria-label="Tela cheia">⛶</button>
+    <button id="nextBtn" aria-label="Próximo">→</button>
+  </div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const dotsContainer = document.getElementById('dots');
+  const progressBar = document.getElementById('progressBar');
+  let current = 0;
+
+  function updateSlide(index) {
+    current = (index + slides.length) % slides.length;
+    slides.forEach((slide, idx) => slide.classList.toggle('active', idx === current));
+    dotsContainer.querySelectorAll('.dot').forEach((dot, idx) => dot.classList.toggle('active', idx === current));
+    progressBar.style.width = (((current + 1) / slides.length) * 100) + '%';
+  }
+
+  slides.forEach((slide, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    dot.title = slide.dataset.title;
+    dot.addEventListener('click', () => updateSlide(idx));
+    dotsContainer.appendChild(dot);
+  });
+
+  prevBtn.addEventListener('click', () => updateSlide(current - 1));
+  nextBtn.addEventListener('click', () => updateSlide(current + 1));
+
+  const fullscreenBtn = document.getElementById('fullscreenBtn');
+  fullscreenBtn.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+      else await document.exitFullscreen();
+    } catch (e) { console.warn('Fullscreen falhou', e); }
+  });
+  document.addEventListener('fullscreenchange', () => {
+    document.querySelector('.deck').classList.toggle('fullscreen', !!document.fullscreenElement);
+    fullscreenBtn.textContent = document.fullscreenElement ? '⤡' : '⛶';
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); updateSlide(current + 1); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); updateSlide(current - 1); }
+    if (e.key === 'f' || e.key === 'F') fullscreenBtn.click();
+  });
+
+  let startX = null;
+  document.addEventListener('pointerdown', (e) => startX = e.clientX);
+  document.addEventListener('pointerup', (e) => {
+    if (startX === null) return;
+    const diff = e.clientX - startX;
+    if (diff > 80) updateSlide(current - 1);
+    if (diff < -80) updateSlide(current + 1);
+    startX = null;
+  });
+
+  updateSlide(0);
+</script>
+</body>
+</html>

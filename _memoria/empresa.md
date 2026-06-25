@@ -28,7 +28,7 @@
 - **Gargalo: o COMERCIAL.** Struggling pra escalar.
 
 **O funil (implementado em março — "funil de múltiplas escadas"):**
-1. Recebe conteúdo → 2. cai no perfil do Henrique → 3. landing page → 4. bot de WhatsApp que filtra → 5. compra o **plano de degustação (R$190)**.
+1. Recebe conteúdo → 2. cai no perfil do Henrique → 3. landing page → 4. bot de WhatsApp que filtra → 5. compra o **plano de degustação (R$197)**.
 - Na degustação ele **entrega tudo** (experiência muito boa) — por isso a conversão é alta.
 - **Números reais (últimos 3 meses):**
   - ~**40%** dos leads que entram compram a degustação.
@@ -51,7 +51,8 @@
 
 ## Equipe
 - **Henrique Chedid** — nutricionista (Nutrição Esportiva e Estética, ~6 anos), CEO, clínica, conteúdo, cabeça criativa. CRN: **[a confirmar]**.
-- **Gabriel** — comercial/análise: funil, CAC e estratégias de escala (consultoria online e B2B).
+- **Gabriel** — **Inside Sales operacional e estratégico** (fechou com o Henrique em jun/2026). Responsável por: atender novos leads, converter/reativar leads parados na base e propor melhorias no processo comercial. Foco atual: **1º Consultoria online, 2º Clínica presencial**. Também segue cuidando de análise de funil, CAC e estratégias de escala.
+- **João Luz** — usuário do CRM Kommo (vendedor/comercial). joaoluz642@gmail.com.
 - **Alice** — marketing; ângulo de cultura do Projeto Mais Saúde.
 - **Maria** — gestora de tráfego.
 - **Equipe de 7 pessoas** — operação do sistema da consultoria online.
@@ -65,5 +66,21 @@
 - WhatsApp comercial: **(48) 99212-2712** (DDD 48 = Florianópolis)
 - CTA principal do site: "QUERO TRANSFORMAR MEU CORPO"
 
+## Ferramentas
+- **CRM: Kommo** (`comercialhenriquechedid.kommo.com`, account_id 35408136). Conectado via API (token de longa duração em `.env`, fora do Git). O Claude consegue ler funis, etapas e leads ao vivo.
+  - **Funis:** "Funil de vendas" (principal, consultoria online), "DEGUSTAÇÃO" (onde a venda real acontece hoje), "Funil de Indicação", "Clínica Chedid".
+  - **Raio-x jun/2026 (871 leads):** "Funil de vendas" com ~600 leads parados há meses (431 na entrada nunca triados) — mina de reativação. "DEGUSTAÇÃO" é o funil ativo. Clínica quase sem uso no CRM (1 lead). Motivo de perda **desligado** (não medem o porquê das perdas).
+
+## Preços (confirmados via scripts comerciais, jun/2026)
+**Consultoria online (Team Chedid):**
+- Plano degustação (30 dias de acompanhamento): **R$197**
+- Plano anual: **12x R$147**
+
+**Clínica presencial (Clínica Chedid & Cruz):**
+- Consulta avulsa: **R$650** (2x cartão) ou **R$600** à vista (pix/dinheiro). Inclui avaliação física, dieta individualizada na hora, suplementos e guias.
+- Acompanhamento **Nutri Signature** (consulta + WhatsApp direto + Health Score semanal + comunidade + consulta a cada 45 dias): Trimestral **R$470/mês** · Semestral **R$440/mês** · Anual **R$395/mês**.
+- **Depósito de R$50** pra confirmar agendamento (abatido no plano). Chave PIX: 10366978942. App pré-consulta: Webdiet (código profissional 27210-0929).
+- Endereço: Clínica Chedid & Cruz — Ed. Black Office Class, Av. Santa Catarina, 1197, Sala 804, Estreito, Florianópolis/SC, CEP 88075-500.
+
 ## A confirmar (preencher quando tiver)
-- **CRN do Henrique** · endereço do consultório · números exatos de CAC/ticket · preço da consultoria · **nome definitivo do "Projeto Mais Saúde"**.
+- **CRN do Henrique** · números exatos de CAC/ticket · **nome definitivo do "Projeto Mais Saúde"**.

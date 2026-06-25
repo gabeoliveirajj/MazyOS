@@ -6,10 +6,16 @@
 ## Prioridade principal
 **Escalar comercialmente a consultoria online** (o ativo de escala infinita). Aumentar e **MANTER** as conversões enquanto escala o **tráfego pago**, com **CAC sob controle**. É exatamente onde o Gabriel entra: análise de funil, CAC e estratégias de escala junto com o Henrique e a Maria (tráfego).
 
+### Foco do Gabriel como Inside Sales (a partir de jun/2026)
+Sucesso medido principalmente por **venda**. Ordem de prioridade: **1º Consultoria online, 2º Clínica presencial**. Frentes de trabalho:
+1. **Atender novos leads** que entram (converter).
+2. **Reativar a base parada** no Kommo (~600 leads no "Funil de vendas" parados há meses) — dinheiro na mesa.
+3. **Propor melhorias no processo comercial** (ex.: ligar motivo de perda, conectar "Funil de vendas" → "DEGUSTAÇÃO", cadências de follow-up).
+
 Baselines reais a preservar ao escalar:
 - Lead → degustação: ~40%
 - Degustação → anual: ~30%
-- Plano de degustação: R$190
+- Plano de degustação: R$197
 
 ## Segunda frente: estruturar o B2B (Projeto Mais Saúde)
 - Destravar o pipeline (30+ empresas, ~8 quentes) com a **abordagem comercial certa**.
