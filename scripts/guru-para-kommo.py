@@ -31,7 +31,11 @@ BASE = ENV['KOMMO_BASE_URL']; TOKEN = ENV['KOMMO_LONG_LIVED_TOKEN']
 
 PID_DEG = 13257796           # Funil Degustação
 PID_SUP = 14050808           # Funil Suporte
-ST_ONBOARD = 108457804       # Suporte / Onboarding (D0)
+ST_ONBOARD = 108457804       # Suporte / Onboarding (D0) — onde a esteira dispara
+ST_AGUARD = 108761732        # Suporte / Aguardando ativação — landing pós-compra
+# Joga em "Aguardando ativação": a esteira só entrega com chat aberto, então o
+# cliente manda a 1ª msg pra Kami e uma regra do Kommo move dali pro Onboarding.
+HANDOFF_ALVO = ST_AGUARD
 FECHADOS = {142, 143, 103047284}  # won/lost genéricos + venda perdida
 TAG = "CLIENTE DEGUSTAÇÃO"
 
@@ -92,7 +96,7 @@ def mover_e_taguear(lead, executar=False):
     _, ld = api(f"/api/v4/leads/{lead['id']}?with=contacts")
     tags = [t['name'] for t in (ld.get('_embedded', {}).get('tags') or [])]
     if TAG not in tags: tags.append(TAG)
-    body = {"pipeline_id": PID_SUP, "status_id": ST_ONBOARD,
+    body = {"pipeline_id": PID_SUP, "status_id": HANDOFF_ALVO,
             "_embedded": {"tags": [{"name": t} for t in tags]}}
     if not executar:
         return "DRY-RUN (nada alterado)"

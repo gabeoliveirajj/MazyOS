@@ -47,7 +47,12 @@ PRODUCT_NAME_CONTAINS = (_env('GURU_PRODUCT_NAME_CONTAINS', '') or '').strip().l
 
 PID_DEG    = 13257796          # Funil Degustação
 PID_SUP    = 14050808          # Funil Suporte
-ST_ONBOARD = 108457804         # Suporte / Onboarding (D0)
+ST_ONBOARD = 108457804         # Suporte / Onboarding (D0) — onde a esteira dispara
+ST_AGUARD  = 108761732         # Suporte / Aguardando ativação — landing pós-compra
+# O handoff joga o lead em "Aguardando ativação" (não no Onboarding). A esteira só
+# entrega com chat aberto, então o cliente manda a 1ª msg pra Kami (botão wa.me na
+# página de obrigado) e uma regra no Kommo move dali pro Onboarding D0 → esteira roda.
+HANDOFF_ALVO = ST_AGUARD
 FECHADOS   = {142, 143, 103047284}   # won/lost genéricos + venda perdida
 TAG        = "CLIENTE DEGUSTAÇÃO"
 
@@ -110,7 +115,7 @@ def mover_e_taguear(lead, executar=True):
     tags = [t['name'] for t in (ld.get('_embedded', {}).get('tags') or [])]
     if TAG not in tags:
         tags.append(TAG)
-    body = {"pipeline_id": PID_SUP, "status_id": ST_ONBOARD,
+    body = {"pipeline_id": PID_SUP, "status_id": HANDOFF_ALVO,
             "_embedded": {"tags": [{"name": t} for t in tags]}}
     if not executar:
         return {"acao": "mover", "lead_id": lead['id'], "executado": False}
@@ -122,7 +127,7 @@ def criar_lead(nome, telefone, executar=True):
     nome = nome or "Cliente Degustação"
     body = [{
         "name": f"Degustação — {nome}",
-        "pipeline_id": PID_SUP, "status_id": ST_ONBOARD,
+        "pipeline_id": PID_SUP, "status_id": HANDOFF_ALVO,
         "_embedded": {
             "tags": [{"name": TAG}],
             "contacts": [{
