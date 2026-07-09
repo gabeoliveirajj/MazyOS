@@ -1,0 +1,2 @@
+# Webhook handoff (api/handoff.py) roda com a stdlib do Python — sem dependências.
+# Este arquivo existe só pra a Vercel detectar o runtime Python.
