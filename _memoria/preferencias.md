@@ -19,6 +19,7 @@ A abordagem muda conforme o público:
   Público principal: **mulheres** querendo transformação estética ("shape slim", barriga seca, cintura fina, glúteos/pernas definidos) com **dieta de vida real**, sem abrir mão da rotina e da vida social. Compra **emocional e por impulso**. Copy direta, com desejo de resultado, **empoderamento** e senso de **comunidade**. Exemplos do tom real da marca: *"Sozinha, você para. No lugar certo e com as pessoas certas, você evolui"* · *"A diferença entre quem consegue e quem desiste não é sorte. É ter o método certo para você."*
 
 ## O que evitar
+- **Travessões (—) e traços longos (–): NUNCA usar** (regra do Henrique, jul/2026). Ele acha que faz o texto parecer escrito por IA. Trocar por vírgula, dois-pontos ou ponto. Vale pra tudo: copy, textos de áudio, apresentações, mensagens.
 - Spin-selling e fórmulas genéricas de venda (principalmente no B2B)
 - Corporativês, jargão de guru, frases de autoajuda vazias
 - Promessa sem prova (sempre ancorar em resultado/prova social real)

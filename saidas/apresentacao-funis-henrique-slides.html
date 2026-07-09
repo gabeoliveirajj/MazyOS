@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apresentação (clique) · Funis Team Chedid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#120f09; --gold:#b9975b; --gold-deep:#8a6d3a; --cream:#fcf5ed; --cream2:#f8f3ea;
+    --line:#e6dfd6; --mute:#6b6459; --success:#1a9a52; --success-d:#0f7a3e;
+    --alert:#c62828; --info:#2f5bd6; --white:#fff;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; color:var(--ink); background:#e9e4dc;}
+  h1,h2,h3{font-family:'Playfair Display',Georgia,serif; line-height:1.1;}
+  .slide{
+    position:relative; width:1280px; min-height:720px; margin:26px auto; background:var(--white);
+    padding:64px 72px; box-shadow:0 10px 40px rgba(0,0,0,.12); border-radius:6px; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .kicker{font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--gold-deep); margin-bottom:14px;}
+  .slide h2{font-size:42px; color:var(--ink); margin-bottom:8px;}
+  .slide h2 .em{color:var(--gold-deep);}
+  .lead{font-size:19px; color:var(--mute); max-width:900px; line-height:1.5;}
+  .foot{position:absolute; bottom:22px; left:72px; right:72px; display:flex; justify-content:space-between; font-size:12px; color:#a99f8f; border-top:1px solid var(--line); padding-top:10px;}
+  .tag{display:inline-block; background:var(--cream); color:var(--gold-deep); font-weight:700; font-size:12px; padding:5px 12px; border-radius:999px; border:1px solid var(--line);}
+
+  /* pipeline pills */
+  .pipe{display:flex; align-items:center; gap:0; flex-wrap:nowrap;}
+  .stage{background:var(--white); border:1.5px solid var(--line); border-radius:12px; padding:12px 14px; font-size:13px; font-weight:600; text-align:center; min-width:96px; line-height:1.25;}
+  .stage small{display:block; font-weight:500; color:var(--mute); font-size:11px; margin-top:3px;}
+  .stage.gold{border-color:var(--gold); background:var(--cream); box-shadow:0 3px 10px rgba(185,151,91,.18);}
+  .stage.win{border-color:var(--success); background:#eafaf0; color:var(--success-d);}
+  .stage.lost{border-color:#e3b7b7; background:#fdeeee; color:var(--alert);}
+  .arrow{color:var(--gold); font-size:20px; padding:0 8px; font-weight:700;}
+  .pipe-label{font-size:13px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink); margin-bottom:12px; display:flex; align-items:center; gap:10px;}
+  .pipe-label .dot{width:10px; height:10px; border-radius:50%;}
+
+  /* funnel shape */
+  .funnel{display:flex; flex-direction:column; align-items:center; gap:8px; margin-top:8px;}
+  .fbar{color:#fff; text-align:center; padding:16px; border-radius:8px; font-weight:700;}
+  .fbar b{font-size:26px; display:block;}
+  .fbar span{font-weight:500; font-size:13px; opacity:.92;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:26px; margin-top:22px;}
+  .grid3{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:22px;}
+  .card{background:var(--cream); border:1px solid var(--line); border-radius:16px; padding:22px 24px;}
+  .card h3{font-family:'Inter'; font-size:17px; margin-bottom:8px; color:var(--ink);}
+  .card p, .card li{font-size:14px; color:#403a30; line-height:1.5;}
+  .card ul{margin-left:18px;}
+  .card.hl{background:#fff; border:2px solid var(--gold);}
+  .pill-num{display:inline-flex; align-items:center; justify-content:center; width:30px; height:30px; border-radius:50%; background:var(--ink); color:#fff; font-weight:800; font-size:15px; margin-bottom:10px;}
+
+  .step{display:flex; gap:16px; align-items:flex-start; margin:14px 0;}
+  .step .n{flex:none; width:34px; height:34px; border-radius:50%; background:var(--gold); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px;}
+  .step .body{font-size:15px; line-height:1.5;}
+  .step .body b{color:var(--ink);}
+
+  .who{display:inline-flex; align-items:center; gap:6px; font-size:12px; font-weight:700; padding:4px 10px; border-radius:999px;}
+  .who.bot{background:#eef3ff; color:var(--info);}
+  .who.human{background:#eafaf0; color:var(--success-d);}
+
+  .cmp{border-radius:16px; overflow:hidden; border:1px solid var(--line);}
+  .cmp .hd{padding:16px 20px; font-weight:800; font-size:16px; color:#fff;}
+  .cmp .bd{background:#fff; padding:18px 20px;}
+  .cmp .bd li{font-size:13.5px; margin:9px 0; list-style:none; padding-left:22px; position:relative; line-height:1.45;}
+  .cmp .bd li::before{position:absolute; left:0; top:0;}
+  .cmp .bd li.y::before{content:"✓"; color:var(--success);}
+  .cmp .bd li.n::before{content:"✕"; color:var(--alert);}
+  .verdict{margin-top:14px; font-size:13px; font-weight:700; padding:12px 14px; border-radius:10px;}
+
+  table{width:100%; border-collapse:collapse; margin-top:16px; font-size:14px;}
+  th,td{text-align:left; padding:11px 12px; border-bottom:1px solid var(--line);}
+  th{background:var(--cream); font-weight:700; font-size:12px; text-transform:uppercase; letter-spacing:.05em;}
+  .chk{color:var(--success-d); font-weight:700;}
+  .todo{color:var(--gold-deep); font-weight:700;}
+
+  .handoff-arrow{display:flex; flex-direction:column; align-items:center; margin:6px 0; color:var(--gold-deep);}
+  .handoff-arrow .lbl{background:var(--gold); color:#fff; font-weight:800; font-size:13px; padding:8px 18px; border-radius:999px; letter-spacing:.04em;}
+  .handoff-arrow .stem{font-size:26px; line-height:1;}
+
+  @media print{
+    body{background:#fff;}
+    .slide{margin:0; box-shadow:none; border-radius:0; page-break-after:always; width:100%; min-height:100vh;}
+    @page{size:A4 landscape; margin:0;}
+  }
+</style>
+
+<style id="present-mode">
+  body{ background:#141109; overflow:hidden; }
+  .slide{ display:none !important; position:fixed; top:50%; left:50%; margin:0;
+    transform:translate(-50%,-50%) scale(var(--s,1)); transform-origin:center center;
+    box-shadow:0 24px 70px rgba(0,0,0,.55); }
+  .slide.active{ display:flex !important; }
+  #nav{ position:fixed; bottom:14px; right:18px; z-index:99; color:#e7ddc9;
+    font:700 13px Inter,sans-serif; background:rgba(0,0,0,.45); padding:7px 14px; border-radius:999px; letter-spacing:.03em;}
+  #hint{ position:fixed; bottom:14px; left:18px; z-index:99; color:#8a7d63; font:500 12px Inter,sans-serif;}
+  @media print{ body{overflow:visible; background:#fff;} .slide{ display:flex !important; position:static; transform:none; margin:0;} #nav,#hint{display:none;} }
+</style>
+</head>
+<body>
+
+<!-- 1 · ONDE ESTAMOS -->
+<section class="slide">
+  <div class="kicker">O ponto de partida</div>
+  <h2>🔱 Onde estamos hoje</h2>
+  <p class="lead">O funil converte bem. O gargalo é que ele depende de trabalho manual pra rodar. Três furos foram mapeados; dois já resolvidos.</p>
+  <div class="grid3">
+    <div class="card"><span class="pill-num">1</span><h3>Motivo de perda</h3><p>Estava desligado. <b style="color:var(--success-d)">✓ Ligado (jun/26)</b> com 7 motivos sob medida. Agora medimos por que perdemos venda.</p></div>
+    <div class="card"><span class="pill-num">2</span><h3>Cadência não roda</h3><p>Os áudios de acompanhamento são enviados <b>na mão</b>, um a um. Não escala. <b style="color:var(--gold-deep)">→ é a pauta de hoje.</b></p></div>
+    <div class="card"><span class="pill-num">3</span><h3>Handoff quebrado</h3><p>Tudo acontece em um funil só. Fica difícil de ter clareza dos dados. <b style="color:var(--gold-deep)">→ é a pauta de hoje.</b></p></div>
+  </div>
+  <div class="card hl" style="margin-top:24px;">
+    <p style="font-size:15px;"><b>Baselines que a gente PRECISA preservar ao automatizar:</b> &nbsp; Lead → degustação <b>~40%</b> &nbsp;·&nbsp; Degustação → anual <b>~30%</b> &nbsp;·&nbsp; Degustação <b>R$197</b> &nbsp;·&nbsp; Anual <b>12x R$147</b>.</p>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>01</span></div>
+</section>
+
+<!-- 2 · REORGANIZAÇÃO -->
+<section class="slide">
+  <div class="kicker">Antes dos funis · a base da operação</div>
+  <h2>🔱 Separar o <span class="em">comercial</span> do <span class="em">cliente</span></h2>
+  <p class="lead">Um ajuste de operação que vem primeiro: hoje um número só faz tudo. Vamos dividir por função, cada número com um foco.</p>
+
+  <div class="card" style="margin-top:22px; border:1.5px dashed var(--line); background:#faf7f1;">
+    <span class="tag" style="background:#fdeeee; color:var(--alert); border-color:#e3b7b7;">Hoje</span>
+    <p style="margin-top:12px; font-size:15px;"><b>Um número (Kami)</b> conectado no Kommo faz <b>tudo</b>: primeiro contato · negociação · venda · suporte pós-venda. Tudo misturado no mesmo lugar.</p>
+  </div>
+
+  <div class="handoff-arrow"><div class="stem">▼</div><div class="lbl">SEPARAR POR FUNÇÃO</div><div class="stem">▼</div></div>
+
+  <div class="grid2">
+    <div class="card hl">
+      <h3><span class="who human">🎯 Gabriel</span></h3>
+      <p style="margin-top:10px; font-size:15px;"><b>Número Comercial · API oficial.</b> Toda a esteira comercial: lead novo → degustação (com os áudios) → fechamento do anual. <b>É onde a automação roda.</b></p>
+    </div>
+    <div class="card hl">
+      <h3><span class="who" style="background:#eef3ff; color:var(--info);">💬 Kami</span></h3>
+      <p style="margin-top:10px; font-size:15px;"><b>Número Cliente.</b> Suporte ao cliente ativo (pós-venda). Recebe o cliente no handoff, quando ele fecha o anual.</p>
+    </div>
+  </div>
+  <p style="margin-top:18px; font-size:14px; color:var(--mute);"><b>Por quê:</b> foco (cada um numa função), a automação da esteira roda isolada sem se misturar com o suporte, e as métricas de venda ficam limpas.</p>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>02</span></div>
+</section>
+
+<!-- 3 · A IDEIA -->
+<section class="slide">
+  <div class="kicker">A proposta em uma frase</div>
+  <h2>🔱 Duas mudanças que se encaixam</h2>
+  <div class="grid2" style="margin-top:30px;">
+    <div class="card hl">
+      <div class="tag">Mudança 1</div>
+      <h3 style="font-size:22px; margin-top:12px;">Degustação vira esteira automática</h3>
+      <p style="font-size:15px;">Os 8 áudios que o Henrique já grava passam a disparar sozinhos, no dia certo, ao longo dos 30 dias.</p>
+    </div>
+    <div class="card hl">
+      <div class="tag">Mudança 2</div>
+      <h3 style="font-size:22px; margin-top:12px;">Nasce o Funil Anual</h3>
+      <p style="font-size:15px;">Quem termina os 30 dias cai automático num funil dedicado a converter degustação → anual. A métrica-chave do negócio finalmente isolada e medível.</p>
+    </div>
+  </div>
+  <div class="card" style="margin-top:26px; background:var(--ink); color:#fff; border:none;">
+    <p style="font-size:16px; color:#f0e9db;">Resultado: <b style="color:var(--gold)">o robô faz o trabalho repetitivo dos 30 dias</b>, humano entra no momento de maior valor: <b style="color:#fff">o fechamento do anual</b>.</p>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>03</span></div>
+</section>
+
+<!-- 4 · ARQUITETURA (HANDOFF) -->
+<section class="slide">
+  <div class="kicker">A arquitetura</div>
+  <h2>🔱 Dois funis, um <span class="em">handoff</span> automático</h2>
+  <p class="lead">O lead percorre a degustação recebendo a esteira. No D26, o bot o entrega pro Funil Anual. Nada de trabalho manual no meio.</p>
+
+  <div style="margin-top:24px;">
+    <div class="pipe-label"><span class="dot" style="background:var(--gold)"></span> Funil Degustação · aquisição + experiência de 30 dias</div>
+    <div class="pipe">
+      <div class="stage">Leads<br>Entrantes</div><span class="arrow">›</span>
+      <div class="stage">Apresentando</div><span class="arrow">›</span>
+      <div class="stage">Follow-up</div><span class="arrow">›</span>
+      <div class="stage">Muito<br>quente</div><span class="arrow">›</span>
+      <div class="stage gold">🎧 degustação ativo<small>esteira de 8 áudios · D0→D26</small></div>
+    </div>
+  </div>
+
+  <div class="handoff-arrow">
+    <div class="stem">▼</div>
+    <div class="lbl">HANDOFF AUTOMÁTICO · D26 · o bot move o lead sozinho</div>
+    <div class="stem">▼</div>
+  </div>
+
+  <div>
+    <div class="pipe-label"><span class="dot" style="background:var(--info)"></span> Funil Anual · máquina de conversão pro plano principal</div>
+    <div class="pipe">
+      <div class="stage gold">Saiu da<br>degustação</div><span class="arrow">›</span>
+      <div class="stage">Aquecendo</div><span class="arrow">›</span>
+      <div class="stage">Oferta anual<br>feita</div><span class="arrow">›</span>
+      <div class="stage">Negociação<br>/ objeção</div><span class="arrow">›</span>
+      <div class="stage">Follow-up</div><span class="arrow">›</span>
+      <div class="stage win">✓ Efetivou<br>Anual</div>
+      <div class="stage lost" style="margin-left:8px;">✕ Não<br>efetivou</div>
+    </div>
+  </div>
+  <div style="margin-top:16px; display:flex; align-items:center; gap:12px; background:#eef3ff; border:1px solid #cdd9f7; border-radius:12px; padding:12px 16px;">
+    <span style="font-weight:800; color:var(--info); font-size:13px;">🤝 Handoff final:</span>
+    <span style="font-size:13.5px; color:#2c3c66;">ao <b>efetivar o anual</b>, o cliente passa do número comercial para o <b>atendimento da Kami</b> (número cliente).</span>
+  </div>
+  <p style="margin-top:12px; font-size:13px; color:var(--mute);">✅ O Funil Anual já foi criado no Kommo (pronto pra receber os leads assim que aprovarmos o desenho).</p>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>04</span></div>
+</section>
+
+<!-- 5 · ESTEIRA DE ÁUDIOS -->
+<section class="slide">
+  <div class="kicker">Funil Degustação · a esteira</div>
+  <h2>🔱 Os 8 áudios, distribuídos nos 30 dias</h2>
+  <p class="lead">Todos já gravados. É só programar o dia de cada um. <span class="who bot">🤖 100% automático</span></p>
+  <table>
+    <tr><th>Dia</th><th>Áudio</th><th>Conteúdo</th></tr>
+    <tr><td><b>D0</b></td><td>1</td><td>Boas-vindas: os 30 dias, "confie no teu nutri", aderência</td></tr>
+    <tr><td><b>D2</b></td><td>2</td><td>Check-in dos primeiros dias: "conseguiu começar o plano?"</td></tr>
+    <tr><td><b>D5</b></td><td>3</td><td>Dica: sono (recuperação, cortisol, queima de gordura)</td></tr>
+    <tr><td><b>D7</b></td><td>4</td><td>Reforço 7 dias: corpo já responde, "não se apega à balança"</td></tr>
+    <tr><td><b>D10</b></td><td>5</td><td>Constância: não compensar deslize, "feito melhor que perfeito"</td></tr>
+    <tr><td><b>D13</b></td><td>6</td><td>Dica: água (retenção, definição, metabolismo)</td></tr>
+    <tr><td><b>D15</b></td><td>7</td><td>Metade do caminho: check-in de 3 perguntas</td></tr>
+    <tr><td><b>D26</b></td><td>8</td><td>Reta final: pede fotos + feedback, prepara o próximo passo → <b>handoff</b></td></tr>
+  </table>
+  <p style="margin-top:16px; font-size:13.5px; color:var(--mute);">Os dias são sugestão pra distribuir bem. O Henrique confirma o dia ideal de cada um.</p>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>05</span></div>
+</section>
+
+<!-- 6 · COMO O BOT FUNCIONA -->
+<section class="slide">
+  <div class="kicker">A mecânica</div>
+  <h2>🔱 Como cada áudio dispara sozinho</h2>
+  <p class="lead">No WhatsApp oficial existe a "janela de 24h": fora dela, só sai texto (áudio bloqueado). Como os áudios são espaçados, cada um é precedido por um micro-ciclo que reabre a conversa:</p>
+  <div style="margin-top:20px;">
+    <div class="step"><div class="n">1</div><div class="body"><b>Template de texto dispara</b> no dia certo, curto e curioso: <i>"Gravei uma dica que quase ninguém cuida. Quer que eu te mande?"</i> <span class="who bot">🤖 bot</span></div></div>
+    <div class="step"><div class="n">2</div><div class="body"><b>A pessoa toca no botão</b> ("Quero a dica") e isso conta como mensagem dela, <b>reabre a janela de 24h</b>. Tocar é mais fácil que digitar → mais gente reabre.</div></div>
+    <div class="step"><div class="n">3</div><div class="body"><b>O áudio do Henrique dispara</b> em seguida, dentro da janela agora aberta. <span class="who bot">🤖 bot</span></div></div>
+  </div>
+  <div class="card hl" style="margin-top:22px;">
+    <p style="font-size:15px;">Esse ciclo de 3 passos <b>se repete 8 vezes</b> ao longo dos 30 dias, sem ninguém tocar em nada. Precisamos aprovar <b>~8 templates de texto</b> na Meta. <b style="color:var(--gold-deep)">Os áudios já existem.</b></p>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>06</span></div>
+</section>
+
+<!-- 7 · DECISÃO WHATSAPP -->
+<section class="slide">
+  <div class="kicker">Decisão a tomar juntos</div>
+  <h2>🔱 Qual WhatsApp usar?</h2>
+  <p class="lead">A estrutura dos funis é a mesma nos dois caminhos, muda só a camada de entrega. É uma escolha estratégica de risco × simplicidade.</p>
+  <div class="grid2" style="margin-top:20px;">
+    <div class="cmp">
+      <div class="hd" style="background:var(--success-d)">API Oficial (Meta) · o que temos</div>
+      <div class="bd">
+        <ul>
+          <li class="y">Feita pra <b>escalar</b>, não bane por volume</li>
+          <li class="y">Estável, oficial, com suporte</li>
+          <li class="n">Exige a janela de 24h + templates aprovados</li>
+          <li class="n">Um pouco mais de custo e de setup</li>
+        </ul>
+        <div class="verdict" style="background:#eafaf0; color:var(--success-d)">Chato de configurar, mas aguenta escala sem risco de perder o número.</div>
+      </div>
+    </div>
+    <div class="cmp">
+      <div class="hd" style="background:var(--alert)">Não-oficial (WhatsApp Web)</div>
+      <div class="bd">
+        <ul>
+          <li class="y">Sem janela, sem template, áudio sai direto</li>
+          <li class="y">Setup em minutos, custo quase zero</li>
+          <li class="n"><b>Risco de banimento</b> do número, sem aviso</li>
+          <li class="n">Instável e <b>não escala com segurança</b></li>
+        </ul>
+        <div class="verdict" style="background:#fdeeee; color:var(--alert)">Simples, mas quebra justamente quando dá certo (volume = risco).</div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:18px; font-size:14px;"><b>Recomendação:</b> como a estratégia é <b>escalar</b>, o caminho oficial protege o ativo mais crítico: o número que roda todo dia. Vale a complexidade dos templates.</p>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>07</span></div>
+</section>
+
+<!-- 8 · FUNIL ANUAL + ONDE EU ENTRO -->
+<section class="slide">
+  <div class="kicker">Funil Anual · onde a venda acontece</div>
+  <h2>🔱 Automático até a oferta. <span class="em">Humano</span> no fechamento.</h2>
+  <p class="lead">O bot aquece e entrega o lead quente. O fechamento continua sendo pessoal, do jeito que já converte os ~30%.</p>
+  <div class="pipe" style="margin-top:26px; justify-content:center;">
+    <div class="stage gold">Saiu da<br>degustação<small>🤖 entra sozinho</small></div><span class="arrow">›</span>
+    <div class="stage">Aquecendo<small>🤖 template</small></div><span class="arrow">›</span>
+    <div class="stage" style="border-color:var(--info); background:#eef3ff;">Oferta anual<small>🤖 template + cria tarefa</small></div><span class="arrow">›</span>
+    <div class="stage win" style="min-width:120px;">🤝 EU FECHO<small>ao vivo, personalizado</small></div>
+  </div>
+  <div class="grid3" style="margin-top:30px;">
+    <div class="card"><h3><span class="who bot">🤖 Bot</span></h3><p>Aquece e dispara o template da oferta, que <b>reabre a janela</b> e <b>cria uma tarefa pra mim</b> no Kommo.</p></div>
+    <div class="card hl"><h3><span class="who human">🤝 Eu entro AQUI</span></h3><p>Recebo o lead <b>quente, na janela aberta</b>, com todo o histórico (feedback, evolução). Faço o fechamento pessoal do anual.</p></div>
+    <div class="card"><h3>Resultado</h3><p>Ganho → <b style="color:var(--success-d)">Efetivou Anual</b>. Sem fechar → <b style="color:var(--alert)">Não efetivou</b>, com <b>motivo de perda</b> registrado.</p></div>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>08</span></div>
+</section>
+
+<!-- 9 · A CONVERSÃO EM NÚMEROS -->
+<section class="slide">
+  <div class="kicker">Por que isso importa</div>
+  <h2>🔱 A conversão que a gente vai blindar</h2>
+  <p class="lead">Exemplo real dos últimos 3 meses. Cada etapa que "vaza" por falta de follow-up é dinheiro na mesa. A automação existe pra <b>não deixar ninguém cair no vão</b>.</p>
+  <div class="funnel" style="margin-top:20px;">
+    <div class="fbar" style="background:var(--ink); width:78%;"><b>140 leads</b><span>entram no funil</span></div>
+    <div class="fbar" style="background:var(--gold-deep); width:52%;"><b>~60 degustações</b><span>compram o R$197 · ~40%</span></div>
+    <div class="fbar" style="background:var(--gold); width:26%;"><b>~16 anuais</b><span>viram plano anual · ~30% da degustação</span></div>
+  </div>
+  <div class="grid2" style="margin-top:26px;">
+    <div class="card"><h3>A esteira protege a etapa do meio</h3><p>Ninguém passa os 30 dias esquecido. Experiência consistente = mais gente chega quente na oferta.</p></div>
+    <div class="card"><h3>O Funil Anual mede a etapa final</h3><p>Pela primeira vez a gente sabe, etapa a etapa, <b>por que</b> perde (ou ganha) a conversão anual.</p></div>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>09</span></div>
+</section>
+
+<!-- 10 · AJUSTES DE FUNIL -->
+<section class="slide">
+  <div class="kicker">Ajustes de estrutura</div>
+  <h2>🔱 Dois ajustes de limpeza</h2>
+  <div class="grid2" style="margin-top:22px;">
+    <div class="card">
+      <div class="tag">Ajuste A</div>
+      <h3 style="margin-top:12px;">Limpar o Funil Degustação</h3>
+      <p>Hoje ele tem etapas de conversão anual dentro dele (<i>Efetivou Anual, Não efetivou, venda perdida</i>), mas esse trabalho migrou pro Funil Anual.</p>
+      <p style="margin-top:10px;"><b>Proposta:</b> a degustação termina no handoff (D26). Sai a sobreposição, a métrica <i>degustação → anual</i> fica limpa e num lugar só.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Ajuste B</div>
+      <h3 style="margin-top:12px;">Motivos de perda do anual</h3>
+      <p>Os 7 motivos atuais são de aquisição. O anual precisa dos dele:</p>
+      <ul style="margin-top:8px;">
+        <li>Achou caro o anual</li>
+        <li>Resultado da degustação abaixo do esperado</li>
+        <li>Sumiu pós-degustação</li>
+        <li>Vai pensar / enrolou</li>
+      </ul>
+      <p style="margin-top:8px;">Sem isso, não sabemos <b>por que</b> perdemos a conversão que mais importa.</p>
+    </div>
+  </div>
+  <p style="margin-top:20px; font-size:13.5px; color:var(--mute);">⚠️ Nenhum ajuste será feito no CRM sem tua aprovação. Isto é proposta.</p>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>10</span></div>
+</section>
+
+<!-- 11 · PLANO DE EXECUÇÃO -->
+<section class="slide">
+  <div class="kicker">Como saímos daqui</div>
+  <h2>🔱 Plano de execução</h2>
+  <table>
+    <tr><th>#</th><th>Tarefa</th><th>Quem</th><th>Status</th></tr>
+    <tr><td>1</td><td>Funil Anual criado (pipeline + etapas)</td><td>Gabriel</td><td class="chk">✓ feito</td></tr>
+    <tr><td>2</td><td>Os 8 áudios da degustação</td><td>Henrique</td><td class="chk">✓ gravados</td></tr>
+    <tr><td>3</td><td>Templates de texto escritos (11 prontos)</td><td>Gabriel</td><td class="chk">✓ feito</td></tr>
+    <tr><td>4</td><td>Aprovar os templates na Meta</td><td>Gabriel</td><td class="todo">⬜ próximo</td></tr>
+    <tr><td>5</td><td>Definir o dia de cada áudio na cadência</td><td>Henrique + Gabriel</td><td class="todo">⬜ 5 min</td></tr>
+    <tr><td>6</td><td>Montar os 2 bots no Kommo (Salesbot)</td><td>Gabriel</td><td class="todo">⬜</td></tr>
+    <tr><td>7</td><td>Ajustes de funil (A e B) + testar com 1 lead</td><td>Gabriel</td><td class="todo">⬜</td></tr>
+  </table>
+  <div class="card hl" style="margin-top:18px;">
+    <p style="font-size:15px;"><b>A boa notícia:</b> o que costuma travar esse tipo de projeto, gravar os áudios, <b>já está feito</b>. O único item no caminho crítico é aprovar os templates, e dá pra começar hoje.</p>
+  </div>
+  <div class="foot"><span>Team Chedid · Proposta de Funis</span><span>11</span></div>
+</section>
+
+<!-- 12 · DECISÕES -->
+<section class="slide" style="background:var(--ink); color:#fff;">
+  <div class="kicker" style="color:var(--gold)">Para decidir hoje</div>
+  <h2 style="color:#fff;">🔱 4 decisões e a gente sai construindo</h2>
+  <div class="grid2" style="margin-top:26px;">
+    <div class="card" style="background:#211a0f; border:1px solid #3a3020; color:#f0e9db;"><span class="pill-num" style="background:var(--gold)">1</span><h3 style="color:#fff;">WhatsApp: oficial ou não-oficial?</h3><p style="color:#d9cfba;">Recomendação: oficial, pra escalar sem risco de perder o número.</p></div>
+    <div class="card" style="background:#211a0f; border:1px solid #3a3020; color:#f0e9db;"><span class="pill-num" style="background:var(--gold)">2</span><h3 style="color:#fff;">O dia de cada áudio</h3><p style="color:#d9cfba;">Confirmar a distribuição dos 8 áudios nos 30 dias.</p></div>
+    <div class="card" style="background:#211a0f; border:1px solid #3a3020; color:#f0e9db;"><span class="pill-num" style="background:var(--gold)">3</span><h3 style="color:#fff;">Close do anual: humano</h3><p style="color:#d9cfba;">Confirmar que o fechamento continua ao vivo (Gabriel/Henrique).</p></div>
+    <div class="card" style="background:#211a0f; border:1px solid #3a3020; color:#f0e9db;"><span class="pill-num" style="background:var(--gold)">4</span><h3 style="color:#fff;">Aval nos ajustes A e B</h3><p style="color:#d9cfba;">Limpar a degustação + motivos de perda do anual.</p></div>
+  </div>
+  <p style="margin-top:34px; font-size:19px; color:var(--gold); font-family:'Playfair Display';">Aprovado o desenho, em poucos dias a esteira está no ar.</p>
+  <div class="foot" style="border-color:#3a3020; color:#8a7d63;"><span>Team Chedid · Proposta de Funis</span><span>12</span></div>
+</section>
+
+
+<div id="hint">← → ou clique para navegar · F tela cheia</div>
+<div id="nav"></div>
+<script>
+  const slides=[...document.querySelectorAll('.slide')];
+  let i=0;
+  const nav=document.getElementById('nav');
+  function fit(){ const s=Math.min(window.innerWidth/1280, window.innerHeight/720)*0.96;
+    document.documentElement.style.setProperty('--s', s); }
+  function show(n){ i=Math.max(0,Math.min(slides.length-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    nav.textContent=(i+1)+' / '+slides.length; }
+  window.addEventListener('resize',fit);
+  document.addEventListener('keydown',e=>{
+    if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1);}
+    else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1);}
+    else if(e.key==='Home'){show(0);} else if(e.key==='End'){show(slides.length-1);}
+    else if(e.key.toLowerCase()==='f'){ if(!document.fullscreenElement){document.documentElement.requestFullscreen();} else {document.exitFullscreen();} }
+  });
+  document.addEventListener('click',e=>{
+    if(e.target.closest('a')) return;
+    if(e.clientX < window.innerWidth*0.22){ show(i-1);} else { show(i+1);} });
+  fit(); show(0);
+</script>
+</body>
+</html>

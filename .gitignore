@@ -19,7 +19,7 @@ Thumbs.db
 *.env
 
 # Dados pessoais de leads/clientes (PII) — regeneráveis via /reativar-leads
-saidas/leads-reativacao-*.csv
+saidas/leads-*.csv
 
 # Dependências
 node_modules/

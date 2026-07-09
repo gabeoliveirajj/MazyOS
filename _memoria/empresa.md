@@ -53,6 +53,7 @@
 - **Henrique Chedid** — nutricionista (Nutrição Esportiva e Estética, ~6 anos), CEO, clínica, conteúdo, cabeça criativa. CRN: **[a confirmar]**.
 - **Gabriel** — **Inside Sales operacional e estratégico** (fechou com o Henrique em jun/2026). Responsável por: atender novos leads, converter/reativar leads parados na base e propor melhorias no processo comercial. Foco atual: **1º Consultoria online, 2º Clínica presencial**. Também segue cuidando de análise de funil, CAC e estratégias de escala.
 - **João Luz** — usuário do CRM Kommo (vendedor/comercial). joaoluz642@gmail.com.
+- **Kami** — atendimento e suporte ao cliente pela WhatsApp (pós-venda). Hoje faz TUDO (do primeiro contato ao suporte); na reorganização (jul/2026) fica só com o **cliente ativo**.
 - **Alice** — marketing; ângulo de cultura do Projeto Mais Saúde.
 - **Maria** — gestora de tráfego.
 - **Equipe de 7 pessoas** — operação do sistema da consultoria online.
@@ -67,9 +68,20 @@
 - CTA principal do site: "QUERO TRANSFORMAR MEU CORPO"
 
 ## Ferramentas
+- **Transcrição de áudio local:** `faster-whisper` instalado (Python user), roda offline sem custo. Script: `python3 scripts/transcrever-audios.py [modelo] [pasta]`. Usado pra transcrever áudios do WhatsApp (ex: os 8 áudios da degustação).
 - **CRM: Kommo** (`comercialhenriquechedid.kommo.com`, account_id 35408136). Conectado via API (token de longa duração em `.env`, fora do Git). O Claude consegue ler funis, etapas e leads ao vivo.
-  - **Funis:** "Funil de vendas" (principal, consultoria online), "DEGUSTAÇÃO" (onde a venda real acontece hoje), "Funil de Indicação", "Clínica Chedid".
-  - **Raio-x jun/2026 (871 leads):** "Funil de vendas" com ~600 leads parados há meses (431 na entrada nunca triados) — mina de reativação. "DEGUSTAÇÃO" é o funil ativo. Clínica quase sem uso no CRM (1 lead). Motivo de perda **desligado** (não medem o porquê das perdas).
+  - **Funis ATIVOS:**
+    - **Arquitetura aprovada (reunião 02/07/2026): 3 funis SEQUENCIAIS** → **Degustação** (comercial, aquisição) → **Suporte** (áudios dos ~26 dias) → **Anual** (comercial, conversão).
+    - **DEGUSTAÇÃO** (id `13257796`) — acoplado ao WhatsApp da consultoria online, com **bot rodando**. É o motor de venda do online. Pós-reunião fica só com a **aquisição** (lead → compra R$197); a esteira de áudios migra pro Funil de Suporte.
+    - **Funil de Suporte** (**criado jul/2026, id `14050808`**; etapas Onboarding D0 · Em acompanhamento · Reta final D26 · Cliente anual) — a "casa do cliente", **operado pela Kami**. Guarda dois perfis por tag: **CLIENTE DEGUSTAÇÃO** (entra ao comprar a degustação, recebe os 8 áudios D0→D26 + suporte até o dia 26) e **CLIENTE ANUAL** (volta pra cá após fechar o anual). Fluxo: Degustação → (compra) → Suporte[CLIENTE DEGUSTAÇÃO] → dia 27 → Anual → (compra) → Suporte[CLIENTE ANUAL]. Roda no **mesmo número da degustação (48 99212-2712)**; a Kami atende direto pelo **WhatsApp Web** (usa o Kommo só pra info), e o Kommo dispara os áudios e observa as mensagens (pausa o bot quando o cliente responde). Já recebeu os 51 CLIENTE DEGUSTAÇÃO (tag LEGADO-MANUAL) + 9 CLIENTE ANUAL migrados.
+    - **Funil Anual** (id `14045616`) — **criado pelo Gabriel jul/2026** via API. Máquina dedicada de converter degustação → anual (a métrica-chave, ~30%). Entrada automática no fim dos 30 dias. Etapas: Saiu da degustação → Aquecendo (áudios NOVOS + vídeos) → Oferta anual feita → Negociação/objeção → Follow-up → Ganho/Perda. Em estruturação. Blueprint em `saidas/blueprint-crm-degustacao-funil-anual.md`.
+    - **Clínica Chedid** (id `13970652`) — acoplado ao WhatsApp do consultório, mas **NÃO estruturado** ("só tá plugado no número", segundo Henrique). Oportunidade de montar do zero (prioridade #2 do Gabriel).
+  - **Funis INATIVOS:**
+    - **Funil de vendas** — **legado** de um vendedor antigo, ligado a outro WhatsApp (o antigo com API). ~600 leads parados, muitos nunca responderam; conversão era "na unha". Tratar como **garimpo único** da base, não como processo.
+    - **Funil de Indicação** — inativo.
+  - **WhatsApp (DEFINIDO jul/2026): 2 números; a automação roda toda no da Kami.** Pré-compra (aquisição / Funil Degustação) = **número comercial separado do Gabriel** (WhatsApp Web; a configurar depois). Pós-compra (Funil Suporte + esteira de áudios + aquecimento do Anual) = **número da Kami, 48 99212-2712, WhatsApp Lite** (verificado: manda áudio e roda bot). O cliente passa do comercial (Gabriel) pra Kami ao comprar a degustação. Sem API/templates/chip a aquecer. Plano B: API oficial instalada no número do Henrique (48 9159-2181, qualidade Alta). Clínica no Lite = 48 99524-629.
+  - **Reorganização de números por função (jul/2026):** hoje a **Kami** faz tudo (primeiro contato → venda → suporte) num número só, plugado no Kommo. Vai separar: **número COMERCIAL (API oficial) = Gabriel** roda toda a esteira comercial (lead novo → degustação com áudios → fechamento do anual); **número CLIENTE = Kami** cuida do suporte ao cliente ativo (pós-venda). Handoff pra Kami quando vira anual. A automação da esteira roda no número comercial.
+  - **Motivo de perda: ATIVADO (jun/2026)** — obrigatório marcar motivo ao perder lead, com 7 motivos sob medida (Preço/sem orçamento · Não é o público · Momento ruim · Já tem nutri · Sumiu/sem resposta · Comprou degustação não virou anual · Foi pro outro produto).
 
 ## Preços (confirmados via scripts comerciais, jun/2026)
 **Consultoria online (Team Chedid):**
