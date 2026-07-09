@@ -30,27 +30,30 @@
 
 ### As 4 variáveis de ambiente
 
-| Variável | O que é | Onde pegar |
+| Variável | O que é | Valor |
 |---|---|---|
-| `KOMMO_BASE_URL` | URL base da sua conta Kommo | está no seu `.env` local |
-| `KOMMO_LONG_LIVED_TOKEN` | token de longa duração do Kommo | está no seu `.env` local |
-| `GURU_API_TOKEN` | token que a Guru manda no webhook (valida o remetente) | painel da Guru → Configurações → Webhook / API (é o `api_token`) |
-| `GURU_PRODUCT_IDS` | id(s) do produto **degustação** na Guru | painel da Guru → produto da degustação → id. Vários? separa por vírgula |
+| `KOMMO_BASE_URL` | URL base da conta Kommo | importar do seu `.env` local |
+| `KOMMO_LONG_LIVED_TOKEN` | token de longa duração do Kommo | importar do seu `.env` local |
+| `WEBHOOK_SECRET` | segredo que autentica o webhook (vai na URL) | um segredo forte gerado pra você (guardar) |
+| `GURU_PRODUCT_NAME_CONTAINS` | filtra só o produto da degustação pelo nome | `degustação` |
 
-> Alternativa ao `GURU_PRODUCT_IDS`: `GURU_PRODUCT_NAME_CONTAINS` (ex: `degustação`)
-> — casa pelo nome do produto em vez do id. Dá pra usar os dois juntos.
-> **Um dos dois filtros de produto é obrigatório** — sem ele, o webhook ignora tudo
-> (proteção pra não disparar em venda de outro produto).
+> **Autenticação (WEBHOOK_SECRET):** a URL do webhook na Guru leva o segredo no final
+> (`.../api/handoff?key=SEU_SEGREDO`). Só quem tem a URL completa consegue acionar —
+> bloqueia acesso indevido sem precisar caçar o token da Guru.
+>
+> **Filtro de produto (obrigatório):** `GURU_PRODUCT_NAME_CONTAINS=degustação` faz o
+> webhook processar só vendas cujo nome do produto contém "degustação" e ignorar o
+> resto. (Alternativa: `GURU_PRODUCT_IDS` com o id exato, separado por vírgula.)
 
 ---
 
 ## Parte 2 — Configurar o webhook na Guru
 
-1. Painel da Guru → **Configurações → Webhook** → **Adicionar webhook**.
-2. **URL:** cola a URL da Vercel (`https://SEU-PROJETO.vercel.app/api/handoff`).
-3. **Evento/tipo:** Transação (venda).
-4. **Status:** marca **Aprovada** (`approved`). *(Só esse — o resto o endpoint ignora sozinho, mas melhor nem mandar.)*
-5. **Ativo:** sim. Salva.
+1. Painel da Guru → **Configurações → Webhooks** → aba **Vendas** → **Adicionar Webhook**.
+2. **URL:** cola a URL da Vercel **com o segredo no final**:
+   `https://SEU-PROJETO.vercel.app/api/handoff?key=SEU_WEBHOOK_SECRET`
+3. **Status:** marca **Aprovada** (`approved`). *(Só esse — o resto o endpoint ignora sozinho, mas melhor nem mandar.)*
+4. **Ativo:** sim. Salva.
 
 ---
 

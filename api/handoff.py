@@ -13,7 +13,7 @@ Deploy: função serverless Python na Vercel (arquivo em /api vira rota
 /api/handoff). Config toda por variável de ambiente (ver guia de deploy).
 Roda com stdlib pura — sem dependências.
 """
-import json, os, re, time, urllib.request, urllib.error
+import json, os, re, time, urllib.request, urllib.error, urllib.parse
 from http.server import BaseHTTPRequestHandler
 
 # ---------------------------------------------------------------- config (env)
@@ -37,7 +37,11 @@ def _env(key, default=None):
 
 BASE  = _env('KOMMO_BASE_URL')
 TOKEN = _env('KOMMO_LONG_LIVED_TOKEN')
-GURU_API_TOKEN = _env('GURU_API_TOKEN')                      # valida o remetente
+# Autenticação do webhook — dois métodos aceitos (basta um):
+#  1) segredo na URL: a Guru chama .../api/handoff?key=<WEBHOOK_SECRET>  (mais simples)
+#  2) api_token da Guru no corpo == GURU_API_TOKEN                        (se você tiver o token)
+WEBHOOK_SECRET = _env('WEBHOOK_SECRET')
+GURU_API_TOKEN = _env('GURU_API_TOKEN')
 PRODUCT_IDS = {x.strip() for x in (_env('GURU_PRODUCT_IDS', '') or '').split(',') if x.strip()}
 PRODUCT_NAME_CONTAINS = (_env('GURU_PRODUCT_NAME_CONTAINS', '') or '').strip().lower()
 
@@ -139,13 +143,24 @@ def criar_lead(nome, telefone, executar=True):
     return {"acao": "criar", "executado": True, "http": st, "lead_id": new_id}
 
 # ---------------------------------------------------------------- webhook core
-def processar_webhook(payload, executar=True):
+def _autorizado(payload, query):
+    """Aceita o webhook se o segredo da URL OU o api_token baterem."""
+    if not WEBHOOK_SECRET and not GURU_API_TOKEN:
+        return False, "servidor sem segredo configurado (WEBHOOK_SECRET)"
+    if WEBHOOK_SECRET and query.get('key') == WEBHOOK_SECRET:
+        return True, None
+    if GURU_API_TOKEN and payload.get('api_token') == GURU_API_TOKEN:
+        return True, None
+    return False, "não autorizado (segredo/token inválido)"
+
+def processar_webhook(payload, query=None, executar=True):
     """Retorna (status_http_pra_responder, dict_resultado)."""
+    query = query or {}
     # 1) segurança: o webhook veio mesmo da Guru?
-    if not GURU_API_TOKEN:
-        return 500, {"erro": "GURU_API_TOKEN não configurado no servidor"}
-    if payload.get('api_token') != GURU_API_TOKEN:
-        return 401, {"erro": "api_token inválido"}
+    ok, motivo = _autorizado(payload, query)
+    if not ok:
+        code = 500 if 'servidor' in motivo else 401
+        return code, {"erro": motivo}
 
     # 2) só venda aprovada
     if payload.get('status') != 'approved':
@@ -205,8 +220,11 @@ class handler(BaseHTTPRequestHandler):
             payload = json.loads(raw or b'{}')
         except Exception as e:
             return self._send(400, {"erro": f"json inválido: {e}"})
+        # segredo vem na query string da URL (?key=...)
+        q = urllib.parse.urlparse(self.path).query
+        query = {k: v[0] for k, v in urllib.parse.parse_qs(q).items()}
         try:
-            code, result = processar_webhook(payload, executar=True)
+            code, result = processar_webhook(payload, query, executar=True)
         except Exception as e:
             # 500 => a Guru reenvia (não perde a venda)
             return self._send(500, {"erro": str(e)})
@@ -217,10 +235,8 @@ class handler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
     # Monta um payload FAKE de venda aprovada usando um lead real da Degustação
     # e roda em DRY-RUN (não altera nada). Prova que o webhook resolve o lead certo.
-    os.environ.setdefault('GURU_API_TOKEN', 'TESTE-LOCAL')
-    os.environ.setdefault('GURU_PRODUCT_IDS', 'PROD-DEGUSTACAO')
-    GURU_API_TOKEN = 'TESTE-LOCAL'
-    PRODUCT_IDS = {'PROD-DEGUSTACAO'}
+    WEBHOOK_SECRET = 'TESTE-LOCAL'
+    PRODUCT_NAME_CONTAINS = 'degustação'
 
     _, d = api(f'/api/v4/leads?filter[pipeline_id]={PID_DEG}&with=contacts&limit=5')
     tel = ''
@@ -235,13 +251,13 @@ if __name__ == '__main__':
         if tel:
             break
     fake = {
-        "api_token": "TESTE-LOCAL", "status": "approved", "webhook_type": "transaction",
+        "status": "approved", "webhook_type": "transaction",
         "product": {"id": "PROD-DEGUSTACAO", "name": "Degustação Team Chedid"},
         "contact": {"name": "Comprador Teste", "phone_local_code": "55",
                     "phone_number": norm(tel)[-11:] if tel else ""},
     }
     print("=== AUTO-TESTE (dry-run) webhook Guru->Kommo ===")
     print("payload.contact.phone_number:", fake['contact']['phone_number'])
-    code, res = processar_webhook(fake, executar=False)
+    code, res = processar_webhook(fake, {"key": "TESTE-LOCAL"}, executar=False)
     print("resposta HTTP:", code)
     print("resultado    :", json.dumps(res, ensure_ascii=False, indent=2))
