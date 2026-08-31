@@ -1,0 +1,614 @@
+<title>Bot Filtro Team Chedid</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=Newsreader:opsz,wght@6..72,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root{
+  --bg:#F1F4F2; --surface:#FFFFFF; --surface2:#E9EEEB;
+  --ink:#101815; --muted:#57655F; --line:#D6DED9;
+  --accent:#0E7C66; --accent-soft:#0E7C6618;
+  --anual:#9A5F0B; --anual-soft:#9A5F0B14;
+  --degust:#0E7C66; --degust-soft:#0E7C6614;
+  --alert:#A33322;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0B100E; --surface:#141B18; --surface2:#1B2420;
+    --ink:#E7EDEA; --muted:#8FA099; --line:#26322C;
+    --accent:#43C3A2; --accent-soft:#43C3A21F;
+    --anual:#E2A648; --anual-soft:#E2A64818;
+    --degust:#43C3A2; --degust-soft:#43C3A218;
+    --alert:#E4735C;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0B100E; --surface:#141B18; --surface2:#1B2420;
+  --ink:#E7EDEA; --muted:#8FA099; --line:#26322C;
+  --accent:#43C3A2; --accent-soft:#43C3A21F;
+  --anual:#E2A648; --anual-soft:#E2A64818;
+  --degust:#43C3A2; --degust-soft:#43C3A218;
+  --alert:#E4735C;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif;
+  font-size:16px; line-height:1.6; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:860px; margin:0 auto; padding:0 24px 96px}
+
+h1,h2,h3{
+  font-family:"Archivo",Arial,sans-serif; font-variation-settings:"wdth" 88;
+  font-weight:800; text-wrap:balance; margin:0;
+  letter-spacing:-.015em; line-height:1.08;
+}
+h1{font-size:clamp(2.6rem,7vw,4.2rem); text-transform:uppercase}
+h2{font-size:clamp(1.6rem,3.6vw,2.2rem); text-transform:uppercase}
+h3{font-size:1.22rem; font-variation-settings:"wdth" 95; letter-spacing:-.005em}
+.prosa{font-family:"Newsreader",Georgia,serif; font-size:1.08rem; line-height:1.65; max-width:62ch}
+.prosa strong{font-weight:600; color:var(--ink)}
+.eyebrow{
+  font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.72rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent); margin:0 0 .9rem;
+}
+
+header.top{padding:80px 0 56px; border-bottom:2px solid var(--ink)}
+.lede{
+  font-family:"Newsreader",Georgia,serif; font-size:1.3rem; line-height:1.5;
+  color:var(--muted); max-width:56ch; margin:24px 0 0;
+}
+.meta{
+  display:flex; flex-wrap:wrap; gap:10px 28px; margin-top:32px;
+  font-family:"IBM Plex Mono",monospace; font-size:.76rem;
+  letter-spacing:.05em; color:var(--muted); text-transform:uppercase;
+}
+.live{color:var(--accent); font-weight:500}
+
+section{padding-top:72px}
+.section-head{margin-bottom:28px}
+
+figure{margin:0; padding:28px 0 0}
+.fig-box{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:4px; padding:28px 24px; overflow-x:auto;
+}
+figure svg{display:block; width:100%; max-width:100%; height:auto; color:var(--ink)}
+figcaption{
+  font-family:"Newsreader",Georgia,serif; font-size:.98rem;
+  color:var(--muted); margin-top:14px; max-width:62ch;
+}
+
+.etapa{border-top:1px solid var(--line); padding:34px 0 6px; display:grid; gap:18px}
+.etapa-head{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+.num{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:500;
+  color:var(--bg); background:var(--accent); padding:3px 8px; border-radius:3px;
+  letter-spacing:.04em;
+}
+.campo{
+  font-family:"IBM Plex Mono",monospace; font-size:.72rem; color:var(--muted);
+  border:1px solid var(--line); padding:3px 8px; border-radius:3px;
+  margin-left:auto; letter-spacing:.06em;
+}
+.bolha{
+  background:var(--surface); border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:4px 14px 14px 4px; padding:18px 20px;
+  font-size:.97rem; line-height:1.62;
+}
+.bolha p{margin:0 0 .8em}
+.bolha p:last-child{margin-bottom:0}
+.bolha .foto{
+  display:flex; align-items:center; gap:10px; margin:12px 0 0;
+  padding:12px 14px; border:1px dashed var(--line); border-radius:4px;
+  font-family:"IBM Plex Mono",monospace; font-size:.76rem;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+}
+.ops{list-style:none; margin:14px 0 0; padding:0; display:grid; gap:7px}
+.ops li{display:flex; gap:11px; align-items:flex-start; font-size:.94rem}
+.op{
+  flex:none; font-family:"IBM Plex Mono",monospace; font-size:.78rem; font-weight:500;
+  min-width:22px; height:22px; display:grid; place-items:center;
+  border:1px solid var(--accent); color:var(--accent); border-radius:3px;
+  background:var(--accent-soft); margin-top:1px;
+}
+.devs{display:grid; border:1px solid var(--line); border-radius:4px; overflow:hidden}
+.dev{
+  display:grid; grid-template-columns:34px 1fr; gap:14px;
+  padding:14px 18px; background:var(--surface);
+  border-top:1px solid var(--line); font-size:.93rem; line-height:1.58;
+}
+.dev:first-child{border-top:0}
+.dev .op{margin-top:2px}
+.dev p{margin:0; color:var(--muted)}
+.dev em{font-style:normal; color:var(--ink); font-weight:600}
+.devs-label{
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.13em;
+  text-transform:uppercase; color:var(--muted); margin:0 0 -6px;
+}
+.nota{
+  font-family:"Newsreader",Georgia,serif; font-size:1rem; color:var(--muted);
+  margin:0; padding-left:16px; border-left:2px solid var(--line); max-width:62ch;
+}
+
+.oferta{display:grid; gap:0; margin-top:28px; border:1px solid var(--line); border-radius:4px; overflow:hidden}
+.of{padding:22px; background:var(--surface); border-top:1px solid var(--line)}
+.of:first-child{border-top:0}
+.of.a{border-left:3px solid var(--anual); background:var(--anual-soft)}
+.of.b{border-left:3px solid var(--degust); background:var(--degust-soft)}
+.of .rot{
+  font-family:"IBM Plex Mono",monospace; font-size:.7rem; letter-spacing:.1em;
+  text-transform:uppercase; margin:0 0 10px;
+}
+.of.a .rot{color:var(--anual)}
+.of.b .rot{color:var(--degust)}
+.of p{margin:0 0 .7em; font-size:.95rem}
+.of p:last-child{margin-bottom:0}
+.preco{
+  font-family:"Archivo",sans-serif; font-variation-settings:"wdth" 88;
+  font-weight:800; font-size:1.7rem; letter-spacing:-.02em; margin:10px 0 4px;
+}
+.of.a .preco{color:var(--anual)}
+.of.b .preco{color:var(--degust)}
+.risco{text-decoration:line-through; opacity:.55}
+
+.tabela-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:4px; margin-top:24px}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.93rem}
+th,td{text-align:left; padding:13px 18px; border-top:1px solid var(--line); vertical-align:top}
+thead th{
+  border-top:0; background:var(--surface2); font-weight:600; font-size:.72rem;
+  font-family:"IBM Plex Mono",monospace; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted);
+}
+td:first-child{font-weight:600; width:34%}
+tbody tr{background:var(--surface)}
+
+.chips{display:flex; flex-wrap:wrap; gap:9px; margin-top:22px}
+.chip{
+  font-family:"IBM Plex Mono",monospace; font-size:.78rem; letter-spacing:.05em;
+  border:1px solid var(--accent); color:var(--accent); background:var(--accent-soft);
+  padding:6px 11px; border-radius:3px;
+}
+.chip.off{border-color:var(--line); color:var(--muted); background:transparent}
+
+.pend{display:grid; gap:14px; margin-top:24px; counter-reset:p; padding:0}
+.pend li{
+  list-style:none; display:grid; grid-template-columns:30px 1fr; gap:14px;
+  padding:16px 18px; background:var(--surface);
+  border:1px solid var(--line); border-left:3px solid var(--alert); border-radius:4px;
+  font-size:.95rem;
+}
+.pend li::before{
+  counter-increment:p; content:counter(p);
+  font-family:"IBM Plex Mono",monospace; font-size:.8rem; color:var(--alert); font-weight:500;
+}
+.pend.ok li{border-left-color:var(--accent)}
+.pend.ok li::before{content:"✓"; color:var(--accent)}
+.pend strong{display:block; margin-bottom:2px}
+.pend span{color:var(--muted)}
+
+.links{display:grid; gap:12px; margin-top:26px}
+.link-row{
+  display:grid; gap:4px; padding:15px 18px; background:var(--surface);
+  border:1px solid var(--line); border-radius:4px;
+}
+.link-row b{
+  font-family:"IBM Plex Mono",monospace; font-size:.74rem; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--accent); font-weight:500;
+}
+.link-row a{
+  font-family:"IBM Plex Mono",monospace; font-size:.82rem; color:var(--ink);
+  word-break:break-all; text-decoration:none; border-bottom:1px solid var(--line);
+}
+.link-row a:hover, .link-row a:focus-visible{border-bottom-color:var(--accent); color:var(--accent)}
+.link-row span{font-size:.86rem; color:var(--muted)}
+:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+footer{
+  margin-top:80px; padding-top:26px; border-top:1px solid var(--line);
+  font-family:"IBM Plex Mono",monospace; font-size:.74rem;
+  letter-spacing:.06em; color:var(--muted); text-transform:uppercase;
+}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <p class="eyebrow">Consultoria Online · Funil Degustação</p>
+  <h1>Bot filtro<br>Team Chedid</h1>
+  <div class="meta">
+    <span class="live">● no ar desde 31 ago 2026</span><span>Kommo Salesbot</span><span>5 perguntas</span><span>Gabriel</span>
+  </div>
+</header>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">O diagnóstico</p>
+    <h2>Onde o v1 perdia gente</h2>
+  </div>
+  <figure>
+    <div class="fig-box">
+      <svg viewBox="0 0 740 300" role="img" aria-label="Comparação entre v1 e v2: no v1 o lead age uma única vez antes do preço aparecer; no v2 ele age sete vezes.">
+        <defs>
+          <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+        <g font-family="IBM Plex Mono, monospace" font-size="11.5" fill="currentColor">
+          <circle cx="8" cy="17" r="5.5" fill="currentColor"/>
+          <text x="21" y="21" opacity=".75">bot fala</text>
+          <circle cx="112" cy="17" r="5.5" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <text x="125" y="21" opacity=".75">lead responde</text>
+          <polygon points="262,12 268,22 256,22" fill="#C4472F"/>
+          <text x="276" y="21" opacity=".75">preço aparece</text>
+        </g>
+
+        <text x="0" y="82" font-family="Archivo, sans-serif" font-size="20" font-weight="800" fill="currentColor">V1</text>
+        <text x="0" y="100" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity=".6">8 mensagens</text>
+        <line x1="56" y1="84" x2="700" y2="84" stroke="currentColor" stroke-width="1.4" opacity=".28"/>
+        <circle cx="90"  cy="84" r="7" fill="currentColor"/>
+        <circle cx="176" cy="84" r="7" fill="currentColor"/>
+        <circle cx="262" cy="84" r="7" fill="currentColor"/>
+        <circle cx="348" cy="84" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="434" cy="84" r="7" fill="currentColor"/>
+        <circle cx="520" cy="84" r="7" fill="currentColor"/>
+        <circle cx="606" cy="84" r="7" fill="currentColor"/>
+        <circle cx="692" cy="84" r="7" fill="currentColor"/>
+        <polygon points="520,60 526,70 514,70" fill="#C4472F"/>
+        <text x="520" y="54" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#C4472F">R$</text>
+        <text x="348" y="109" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity=".6">sim/não</text>
+
+        <text x="0" y="200" font-family="Archivo, sans-serif" font-size="20" font-weight="800" fill="currentColor">V2</text>
+        <text x="0" y="218" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity=".6">7 trocas</text>
+        <line x1="56" y1="202" x2="700" y2="202" stroke="currentColor" stroke-width="1.4" opacity=".28"/>
+        <g>
+          <circle cx="76"  cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="118" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="160" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="202" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="244" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="286" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="328" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="370" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="412" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="454" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="496" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="538" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="580" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="622" cy="202" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/>
+          <circle cx="664" cy="202" r="6.5" fill="currentColor"/>
+          <circle cx="700" cy="202" r="6.5" fill="currentColor"/>
+        </g>
+        <polygon points="700,178 706,188 694,188" fill="#C4472F"/>
+        <text x="700" y="172" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#C4472F">R$</text>
+        <text x="622" y="226" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="currentColor" opacity=".55">prova social</text>
+
+        <line x1="118" y1="248" x2="622" y2="248" stroke="currentColor" stroke-width="1.2" opacity=".45" marker-start="url(#seta)" marker-end="url(#seta)"/>
+        <text x="370" y="269" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" opacity=".75">7 respostas do lead antes do preço</text>
+        <text x="370" y="288" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" opacity=".55">cada uma devolve leitura do caso dele</text>
+      </svg>
+    </div>
+    <figcaption>A diferença não está na quantidade de mensagens, está em quantas vezes o lead age antes de ver um número. No v1 ele age uma vez. No v2, sete.</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">A mecânica</p>
+    <h2>Troca a cada toque</h2>
+  </div>
+  <p class="prosa">O contrato é declarado na abertura: <strong>são 5 perguntas, e no final eu te devolvo uma leitura do teu caso</strong>. O lead não está preenchendo um formulário, está construindo o diagnóstico dele. Os 3 pilares do método saíram do monólogo e viraram resposta ao que trava cada um.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">O fluxo</p>
+    <h2>As cinco perguntas</h2>
+  </div>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">Abertura</span><h3>O contrato</h3><span class="campo">tag: BOT-INICIADO</span></div>
+    <div class="bolha">
+      <p>Oi! Aqui é o Gabriel, do time do Nutri Chedid 🔱</p>
+      <p>Antes de te passar valores, deixa eu entender teu caso. A conduta muda bastante de pessoa pra pessoa, e se eu já jogar um preço aqui vai ser igual a qualquer dieta de gaveta.</p>
+      <p>São 5 perguntas rápidas, leva uns 2 minutos. No final eu te devolvo uma leitura do teu caso e te falo qual é a melhor rota pra você.</p>
+      <p>Bora?</p>
+      <p>Se preferir falar comigo direto, é só mandar 0 👇</p>
+    </div>
+    <p class="nota">Aqui a regra é frouxa de propósito: só quem digita 0 sai do fluxo, qualquer outra resposta continua. Muita gente responde "bora" ou "sim" em vez de número, e mandar essas pessoas pro atendimento humano mataria metade dos leads na primeira mensagem.</p>
+  </article>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">1</span><h3>Objetivo</h3><span class="campo">campo: OBJETIVO</span></div>
+    <div class="bolha">
+      <p>Boa. Então primeira pergunta: qual é teu objetivo hoje?</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Emagrecer e reduzir medidas</span></li>
+        <li><span class="op">2</span><span>Recomposição: secar gordura e ganhar músculo</span></li>
+        <li><span class="op">3</span><span>Definir e afinar a cintura, o peso já está ok</span></li>
+        <li><span class="op">4</span><span>Ganhar massa e volume em glúteo e perna</span></li>
+      </ul>
+    </div>
+    <p class="devs-label">Devolutiva por opção</p>
+    <div class="devs">
+      <div class="dev"><span class="op">1</span><p>Entendi. Quem chega com esse objetivo quase sempre já tentou cortar comida, foi bem por um tempo e depois travou. Isso tem explicação e a gente chega nela em 2 perguntas 👇</p></div>
+      <div class="dev"><span class="op">2</span><p>Esse é o objetivo mais comum aqui dentro e o que eu mais vejo gente errando por aí. Recomposição não se resolve comendo menos, se resolve ensinando o corpo a usar energia. Já te explico 👇</p></div>
+      <div class="dev"><span class="op">3</span><p>Aí você tá falando do <em>Shape Slim</em>: cintura fina, barriga seca e volume nos pontos certos 🔱</p></div>
+      <div class="dev"><span class="op">4</span><p>Show. Volume não vem só do treino, vem do corpo conseguir usar o que você come pra construir músculo. Segue comigo 👇</p></div>
+    </div>
+  </article>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">2</span><h3>Treino</h3><span class="campo">campo: TREINO</span></div>
+    <div class="bolha">
+      <p>E hoje, como está teu treino?</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Musculação 3x por semana ou mais</span></li>
+        <li><span class="op">2</span><span>Treino 1 ou 2x, bem irregular</span></li>
+        <li><span class="op">3</span><span>Estou parada e quero recomeçar</span></li>
+      </ul>
+    </div>
+    <p class="devs-label">Devolutiva por opção</p>
+    <div class="devs">
+      <div class="dev"><span class="op">1</span><p>Ótimo, então o estímulo já existe. E olha, quando a pessoa treina firme e mesmo assim não vê resultado, <em>dificilmente o problema é o treino</em>. Quase sempre é a alimentação que não está acompanhando.</p></div>
+      <div class="dev"><span class="op">2</span><p>Dá pra trabalhar bem assim. E tem uma coisa que quase ninguém liga: treino irregular costuma ser falta de energia, e falta de energia vem da comida. Ajusta um, o outro anda junto.</p></div>
+      <div class="dev"><span class="op">3</span><p>Tranquilo, muita gente aqui começou parada. A dieta certa é o que devolve disposição pra você conseguir treinar sem se arrastar.</p></div>
+    </div>
+  </article>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">3</span><h3>O que trava</h3><span class="campo">campo: TRAVA</span></div>
+    <div class="bolha">
+      <p>Agora vem a que mais me ajuda a entender teu caso.</p>
+      <p>O que costuma acontecer quando você tenta?</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Já fiz dieta, funcionou um tempo e voltou tudo</span></li>
+        <li><span class="op">2</span><span>Treino certinho mas o corpo não muda</span></li>
+        <li><span class="op">3</span><span>Usei caneta e travei ou voltei a engordar</span></li>
+        <li><span class="op">4</span><span>Nunca fiz nada estruturado, sempre no achismo</span></li>
+        <li><span class="op">5</span><span>Já passei por vários nutris e não engatei</span></li>
+      </ul>
+    </div>
+    <p class="devs-label">Devolutiva por opção · aqui entram os pilares</p>
+    <div class="devs">
+      <div class="dev"><span class="op">1</span><p>Clássico. E não é falta de força de vontade, viu. Chama adaptação metabólica: o corpo se ajusta à restrição e para de responder. Por isso aqui a gente não corta comida, a gente reorganiza. Esse é o pilar da <em>Sincronia Metabólica</em>.</p></div>
+      <div class="dev"><span class="op">2</span><p>Isso tem nome: falta de <em>responsividade fisiológica</em>. Quando intestino, inflamação e eixos hormonais estão desregulados, o corpo simplesmente não responde ao estímulo, por melhor que seja o treino.</p></div>
+      <div class="dev"><span class="op">3</span><p>A caneta tira a fome, só que não ensina nada pro teu corpo. Quando ela sai, o corpo volta pro que era, muitas vezes com menos músculo do que antes. Tem um <em>Protocolo Canetas Emagrecedoras</em> justamente pra essa transição.</p></div>
+      <div class="dev"><span class="op">4</span><p>Então tenho uma boa notícia: você nunca teve um plano de verdade. Quem chega assim costuma ter o resultado mais rápido, porque tem muita coisa simples pra organizar.</p></div>
+      <div class="dev"><span class="op">5</span><p>Olha, na maioria das vezes o problema não foi o nutri. Foi a dieta não caber na vida da pessoa. <em>Dieta boa é a que você consegue sustentar.</em></p></div>
+    </div>
+  </article>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">4</span><h3>Sintomas</h3><span class="campo">campo: SINTOMA</span></div>
+    <div class="bolha">
+      <p>E além do shape, o que mais te incomoda hoje?</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Inchaço e retenção</span></li>
+        <li><span class="op">2</span><span>Ansiedade e compulsão à noite</span></li>
+        <li><span class="op">3</span><span>Cansaço, acordo sem disposição</span></li>
+        <li><span class="op">4</span><span>Intestino irregular, gases</span></li>
+        <li><span class="op">5</span><span>TPM forte, oscilação hormonal</span></li>
+        <li><span class="op">6</span><span>Nenhum desses, é o shape mesmo</span></li>
+      </ul>
+    </div>
+    <p class="devs-label">Devolutiva por opção</p>
+    <div class="devs">
+      <div class="dev"><span class="op">1</span><p>Inchaço costuma ser dos primeiros a melhorar, e é o que mais muda a foto. Podemos montar um planejamento contra inchaço e retenção específico pro seu caso.</p></div>
+      <div class="dev"><span class="op">2</span><p>Esse é o que mais derruba dieta, e não tem nada a ver com força de vontade. Podemos montar um planejamento focado em zerar esses sintomas, que mexe em comida, horário e no que sustenta teu humor.</p></div>
+      <div class="dev"><span class="op">3</span><p>Cansaço quase sempre é o corpo recebendo energia na hora errada. Podemos montar um planejamento focado na sua disposição e energia.</p></div>
+      <div class="dev"><span class="op">4</span><p>Intestino é base de tudo, porque se ele não vai bem você não absorve direito o que come. Podemos montar um planejamento focado em regular seu intestino.</p></div>
+      <div class="dev"><span class="op">5</span><p>TPM forte mexe direto com fome, retenção e humor, e isso atrapalha o shape o mês inteiro. Esse é um cenário que resolvemos todos os dias por aqui.</p></div>
+      <div class="dev"><span class="op">6</span><p>Beleza, então a gente foca 100% no shape e no que sustenta ele.</p></div>
+    </div>
+    <p class="nota">Escolha única, porque o Salesbot não tem múltipla escolha de verdade. Pelo Playbook, 75% do público come por ansiedade e 83% tem inchaço, então essa pergunta acerta quase todo mundo.</p>
+  </article>
+
+  <article class="etapa">
+    <div class="etapa-head"><span class="num">5</span><h3>Condição de saúde</h3><span class="campo">campo: CONDICAO</span></div>
+    <div class="bolha">
+      <p>Tem alguma dessas condições?</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Hipotireoidismo ou Hashimoto</span></li>
+        <li><span class="op">2</span><span>Resistência à insulina ou pré-diabetes</span></li>
+        <li><span class="op">3</span><span>Uso anticoncepcional</span></li>
+        <li><span class="op">4</span><span>Lipedema</span></li>
+        <li><span class="op">5</span><span>Nenhuma delas</span></li>
+        <li><span class="op">6</span><span>Outra (me conta qual)</span></li>
+      </ul>
+    </div>
+    <p class="devs-label">Devolutiva</p>
+    <div class="devs">
+      <div class="dev"><span class="op">1-4</span><p>Esse é o tipo de coisa que derruba dieta genérica. Aqui o seu planejamento é montado considerando isso, e se você tiver exames recentes eles entram na leitura do teu caso.</p></div>
+      <div class="dev"><span class="op">5</span><p>Beleza, isso simplifica bastante o planejamento.</p></div>
+      <div class="dev"><span class="op">6</span><p>"Me conta rapidinho qual é?" O bot <em>espera a resposta</em> e grava o texto no campo CONDICAO_OUTRA.</p></div>
+    </div>
+    <p class="nota">O ramo da opção 6 tem um bloco de espera antes de gravar. Sem ele, o campo guardaria o "6" em vez do que a pessoa escreveu, porque a macro resolve sempre a última mensagem recebida.</p>
+  </article>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">A entrega prometida</p>
+    <h2>Diagnóstico</h2>
+  </div>
+  <p class="prosa">O bot paga aqui o que prometeu na abertura. A frase se monta sozinha com os campos gravados, e é por isso que os valores foram cadastrados em minúscula e em forma de pedaço de frase.</p>
+
+  <div class="bolha" style="margin-top:24px">
+    <p>Fechado, já consigo te dar uma leitura 👇</p>
+    <p>Você quer <strong>recomposição corporal</strong>, <strong>treina 3x ou mais por semana</strong>, e o que te trava é <strong>o efeito sanfona</strong>.</p>
+    <p>Pelo que você me contou, o que falta não é esforço, é direção. A parte difícil você já faz. Falta o corpo receber o estímulo certo, na ordem certa.</p>
+    <p>Com um planejamento montado pro teu caso, o que costuma acontecer nas primeiras 4 a 8 semanas:</p>
+    <p>✅ 2 a 5 cm a menos de cintura<br>✅ desinchaço forte já nas primeiras semanas<br>✅ mais disposição e menos compulsão à noite<br>✅ corpo mais leve e mais seco no espelho</p>
+    <p>São mais de 3.000 pacientes em mais de 20 países e <strong>86% de renovação</strong>. As pessoas ficam porque funciona 🔱</p>
+  </div>
+  <p class="nota" style="margin-top:18px">As três palavras em negrito são variáveis. Usa só objetivo, treino e trava: o sintoma e a condição ficaram de fora porque quem responde "nenhum" faria a frase sair quebrada.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">Antes do preço</p>
+    <h2>Prova social e interação</h2>
+  </div>
+  <p class="prosa">Acrescentado depois do primeiro teste em produção. Sem isso o lead recebia quatro mensagens seguidas do diagnóstico até o cupom, sem falar nada no meio. A pausa quebra a sequência e <strong>cobra um micro compromisso antes do preço</strong>, o que aumenta a chance de ele ler a oferta em vez de só bater o olho no número.</p>
+
+  <div class="bolha" style="margin-top:24px">
+    <p>E antes de falar de valores, quero te mostrar uma coisa.</p>
+    <p>Essa é uma paciente que chegou com um quadro bem parecido com o teu 👇</p>
+    <div class="foto">📷 foto de antes e depois</div>
+  </div>
+  <div class="bolha" style="margin-top:16px">
+    <p>Resultado assim não é sorte, é método aplicado no caso certo.</p>
+    <p>Faz sentido pra você chegar nisso?</p>
+    <ul class="ops">
+      <li><span class="op">1</span><span>Faz sentido, quero saber como</span></li>
+      <li><span class="op">2</span><span>Faz, mas tenho receio de não funcionar pra mim</span></li>
+    </ul>
+  </div>
+  <p class="nota" style="margin-top:18px">Quem responde 2 recebe antes da oferta: <em>"Esse receio é o mais comum que eu escuto aqui, e é exatamente por isso que existe uma opção de entrada. Já te explico 👇"</em>. A objeção vira ponte pro plano mensal, que é o produto que a gente quer vender.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">A virada de 25 de agosto</p>
+    <h2>A oferta é uma âncora</h2>
+  </div>
+  <p class="prosa">Todo lead recebe a mesma sequência, e <strong>a ordem é a estratégia</strong>. O anual entra primeiro para fixar o valor de referência. O mensal chega depois parecendo leve por comparação. O objetivo declarado não é vender o anual: é vender o mensal, que tem a menor barreira de entrada.</p>
+
+  <figure>
+    <div class="fig-box">
+      <svg viewBox="0 0 720 300" role="img" aria-label="A âncora de preço: o anual de R$1.764 é apresentado primeiro, o mensal de R$347 com cupom cai para R$197, e depois da compra do mensal o objetivo passa a ser o upsell para o anual.">
+        <defs>
+          <marker id="p2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" fill="currentColor"/>
+          </marker>
+        </defs>
+
+        <text x="0" y="20" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" opacity=".6">1 · a âncora</text>
+        <rect x="0" y="32" width="250" height="74" rx="4" fill="none" stroke="#B0740F" stroke-width="2"/>
+        <text x="18" y="58" font-family="Archivo, sans-serif" font-size="13" font-weight="800" fill="#B0740F">ANUAL</text>
+        <text x="18" y="84" font-family="Archivo, sans-serif" font-size="24" font-weight="800" fill="currentColor">R$1.764</text>
+        <text x="140" y="84" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity=".6">12x R$147</text>
+
+        <path d="M250 69 L318 69" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8" marker-end="url(#p2)"/>
+
+        <text x="330" y="20" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" opacity=".6">2 · o produto de entrada</text>
+        <rect x="330" y="32" width="250" height="74" rx="4" fill="none" stroke="#0E8C72" stroke-width="2"/>
+        <text x="348" y="58" font-family="Archivo, sans-serif" font-size="13" font-weight="800" fill="#0E8C72">MENSAL</text>
+        <text x="348" y="84" font-family="Archivo, sans-serif" font-size="17" font-weight="800" fill="currentColor" opacity=".45" text-decoration="line-through">R$347</text>
+        <text x="424" y="84" font-family="Archivo, sans-serif" font-size="24" font-weight="800" fill="#0E8C72">R$197</text>
+        <text x="348" y="100" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="currentColor" opacity=".55">cupom BEMVINDO150 · 24h · 1ª compra</text>
+
+        <path d="M455 106 L455 150" fill="none" stroke="currentColor" stroke-width="1.6" opacity=".8" marker-end="url(#p2)"/>
+        <text x="466" y="132" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" opacity=".7">é aqui que a venda acontece</text>
+
+        <rect x="330" y="152" width="250" height="54" rx="4" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+        <text x="455" y="176" text-anchor="middle" font-family="Archivo, sans-serif" font-size="13" font-weight="700" fill="currentColor">Cliente do mensal</text>
+        <text x="455" y="194" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="currentColor" opacity=".6">30 dias de acompanhamento</text>
+
+        <path d="M330 179 L125 179 L125 106" fill="none" stroke="#B0740F" stroke-width="1.8" stroke-dasharray="6 4" marker-end="url(#p2)"/>
+        <text x="132" y="150" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B0740F">upsell pro anual</text>
+        <text x="132" y="164" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#B0740F" opacity=".7">vira o objetivo depois</text>
+
+        <text x="360" y="252" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" opacity=".6">o anual é mostrado pra ser recusado, e depois conquistado</text>
+      </svg>
+    </div>
+    <figcaption>O anual aparece duas vezes na vida do lead: primeiro como âncora que ele recusa, depois como upsell que ele aceita. O mensal é a porta, não o destino.</figcaption>
+  </figure>
+
+  <div class="oferta">
+    <div class="of a">
+      <p class="rot">mensagem 1 · a âncora</p>
+      <p>Pro teu caso o caminho certo é o <strong>Acompanhamento Anual</strong>. São 12 protocolos, um pra cada fase do teu processo, com atualização completa a cada 8 semanas e acompanhamento diário com o Nutri e com o time no WhatsApp.</p>
+      <p class="preco">12x R$147</p>
+      <p style="color:var(--muted)">ou à vista com 5% de desconto</p>
+      <p>Um ano inteiro com nutricionista só seu, levando em conta o teu objetivo de <strong>recomposição corporal</strong>, por menos de uma coxinha por dia 😄</p>
+    </div>
+    <div class="of b">
+      <p class="rot">mensagem 2 · o produto de entrada</p>
+      <p>Como você nunca testou a metodologia, é normal aquele medinho de dar o primeiro passo e se comprometer com um planejamento anual sem ter certeza de que vai funcionar.</p>
+      <p>Por isso temos uma opção de entrada que só vale na primeira compra: o <strong>Acompanhamento Mensal</strong>, por 30 dias, de <span class="risco">R$347</span>.</p>
+      <p>Mesmo Diagnóstico, mesmo protocolo feito pelo Chedid, mesma profundidade. Muda só o tempo.</p>
+      <p>É pra você testar por 30 dias, sentir os resultados na pele, e depois decidir como quer seguir!</p>
+    </div>
+    <div class="of b">
+      <p class="rot">mensagem 3 · o cupom e a escolha</p>
+      <p>E além disso, eu tenho direito a liberar um cupom de desconto por 24h para novos contatos! Seu cupom de primeira compra derruba o preço de R$347 pra <strong>R$197</strong> 😁</p>
+      <p class="preco">R$197</p>
+      <ul class="ops">
+        <li><span class="op">1</span><span>Quero o Anual, 12x R$147</span></li>
+        <li><span class="op">2</span><span>Quero começar pelo Mensal, R$197</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="nota" style="margin-top:24px">"Plano Degustação" deixou de existir como nome. Virou um plano mensal normal com cupom de boas-vindas, o que soa como produto em vez de amostra grátis.</p>
+
+  <div class="links">
+    <div class="link-row">
+      <b>Anual</b>
+      <a href="https://clkdmg.site/pay/consultoria-team-chedid-d-shape-slim-anual">clkdmg.site/pay/consultoria-team-chedid-d-shape-slim-anual</a>
+      <span>12x R$147 ou à vista com 5% de desconto</span>
+    </div>
+    <div class="link-row">
+      <b>Mensal</b>
+      <a href="https://clkdmg.site/pay/acompanhamento-online-chedid-mensal">clkdmg.site/pay/acompanhamento-online-chedid-mensal</a>
+      <span>R$347 com cupom BEMVINDO150 = R$197, só na primeira compra</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">Segurança do fluxo</p>
+    <h2>Ninguém termina no vácuo</h2>
+  </div>
+  <p class="prosa">O bot antigo morria quando o lead escrevia texto livre, que é exatamente o que quem vem de anúncio faz. Nenhuma situação abaixo pode terminar em silêncio.</p>
+  <div class="tabela-wrap">
+    <table>
+      <thead><tr><th>Situação</th><th>Ação</th></tr></thead>
+      <tbody>
+        <tr><td>Fechou pelo anual ou pelo mensal</td><td>Recebe o link, vai pra "Muito quente", gera tarefa e o Gabriel assume</td></tr>
+        <tr><td>Digitou 0 ou escreveu texto livre</td><td>Marca FALAR-COM-HUMANO, gera tarefa e responde "pode deixar comigo, eu te respondo aqui direto"</td></tr>
+        <tr><td>Parou no meio do fluxo</td><td>Um segundo bot cutuca em 3h, D+1 e D+4, e move pra etapa "Follow-up"</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="nota" style="margin-top:24px">O follow-up não retoma o questionário: ele traz a pessoa de volta e entrega pro Gabriel. O campo ETAPA_BOT no cartão diz em qual pergunta ela parou.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">O que fica no CRM</p>
+    <h2>Seis campos por lead</h2>
+  </div>
+  <p class="prosa">É aqui que o filtro paga sozinho, independente da venda: o cartão já traz objetivo, treino, histórico, sintoma e condição de saúde <strong>antes do bom dia</strong>.</p>
+  <div class="chips">
+    <span class="chip">OBJETIVO</span><span class="chip">TREINO</span><span class="chip">TRAVA</span>
+    <span class="chip">SINTOMA</span><span class="chip">CONDICAO</span><span class="chip">CONDICAO_OUTRA</span><span class="chip">ETAPA_BOT</span>
+    <span class="chip off">URGENCIA · sem uso</span>
+  </div>
+  <p class="prosa" style="margin-top:28px">Pra medir: <strong>quantos chegam na oferta</strong>. Se uma etapa concentrar o abandono, é aquela pergunta que muda, não o fluxo inteiro. Depois, conversão por plano, e como o objetivo é vender o mensal, <strong>o mensal é o placar</strong>.</p>
+</section>
+
+<section>
+  <div class="section-head">
+    <p class="eyebrow">Estado</p>
+    <h2>No ar, com ressalvas</h2>
+  </div>
+  <ul class="pend ok">
+    <li><span><strong>Bot montado, testado e ativo</strong><span>Sete etapas, escape, diagnóstico com variáveis, prova social, oferta e handoff. Gatilho na entrada de Leads Entrantes do funil Degustação.</span></span></li>
+    <li><span><strong>Follow-up de abandono no ar</strong><span>Bot separado, dispara 3h após a última mensagem recebida, três toques e para na primeira resposta.</span></span></li>
+  </ul>
+  <ul class="pend">
+    <li><span><strong>O número de aquisição ainda não existe</strong><span>O bot está rodando no número da Kami, o mesmo dos clientes ativos. Enquanto isso não se separar, aquisição e pós-venda dividem o mesmo WhatsApp.</span></span></li>
+    <li><span><strong>O Gabriel não tem usuário no Kommo</strong><span>Toda tarefa gerada pelo bot cai no Henrique. Os blocos usam "usuário responsável atual", então isso se corrige sozinho no dia em que o usuário existir.</span></span></li>
+    <li><span><strong>O diagnóstico não é empurrado</strong><span>Como o atendimento acontece no WhatsApp Web, o resumo fica preso num cartão que ninguém abre. Falta usar o bloco de mensagem interna pra levar o resumo até quem vai atender.</span></span></li>
+  </ul>
+</section>
+
+<footer>Nutri Chedid · Team Chedid · Bot de aquisição v2 · uso interno · atualizado em 31/08/2026</footer>
+
+</div>

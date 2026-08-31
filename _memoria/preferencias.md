@@ -19,11 +19,15 @@ A abordagem muda conforme o público:
   Público principal: **mulheres** querendo transformação estética ("shape slim", barriga seca, cintura fina, glúteos/pernas definidos) com **dieta de vida real**, sem abrir mão da rotina e da vida social. Compra **emocional e por impulso**. Copy direta, com desejo de resultado, **empoderamento** e senso de **comunidade**. Exemplos do tom real da marca: *"Sozinha, você para. No lugar certo e com as pessoas certas, você evolui"* · *"A diferença entre quem consegue e quem desiste não é sorte. É ter o método certo para você."*
 
 ## O que evitar
+- **Jargão e cara de texto de IA (regra do Henrique/Gabriel, ago/2026).** O texto tem que parecer falado. Vícios a caçar: (a) o padrão de antítese **"não é X, é Y"** repetido mensagem após mensagem — pode aparecer 1 ou 2 vezes num fluxo inteiro, nunca em toda frase; (b) abrir toda mensagem com "Perfeito / Ótimo / Boa"; (c) construções empoladas tipo "É exatamente isso que X nunca vai fazer". Usar marcas de fala real: "E olha", "viu", "Tranquilo", "Show", "tá comparando", "Vou ser sincero contigo".
 - **Travessões (—) e traços longos (–): NUNCA usar** (regra do Henrique, jul/2026). Ele acha que faz o texto parecer escrito por IA. Trocar por vírgula, dois-pontos ou ponto. Vale pra tudo: copy, textos de áudio, apresentações, mensagens.
 - Spin-selling e fórmulas genéricas de venda (principalmente no B2B)
 - Corporativês, jargão de guru, frases de autoajuda vazias
 - Promessa sem prova (sempre ancorar em resultado/prova social real)
 - Tratar "Mais Saúde" como nome final da marca (é provisório)
+
+## Quem fala no WhatsApp
+No bot de aquisição e no atendimento comercial da consultoria online, **quem fala é o Gabriel, em primeira pessoa**: "Oi! Aqui é o Gabriel, do time do Nutri Chedid 🔱". Nada de "nosso time" impessoal nem promessa de "vou te passar pro vendedor" — ele é o vendedor. Emojis da marca: 🔱 💪 🔥, 1 a 3 por texto.
 
 ## Estilo geral
 Fala *com* a pessoa, não *para* ela. Autoridade real + proximidade. Storytelling no B2B, emoção e direção no B2C.

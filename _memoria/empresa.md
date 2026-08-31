@@ -9,6 +9,8 @@
 
 ---
 
+> ⚠️ São **quatro** linhas de receita hoje: as três frentes abaixo + **Mentoria para nutricionistas** (método pra nutris faturarem alto com consultório; "reativação da Mentoria B2B" está no cenário 2026 do Playbook). Há também o **Time de Embaixadoras** (influencers que produzem conteúdo mensal e divulgam a consultoria) como canal de captação.
+
 ## As três frentes
 
 ### 1. Clínica / Consultório presencial
@@ -83,10 +85,28 @@
   - **Reorganização de números por função (jul/2026):** hoje a **Kami** faz tudo (primeiro contato → venda → suporte) num número só, plugado no Kommo. Vai separar: **número COMERCIAL (API oficial) = Gabriel** roda toda a esteira comercial (lead novo → degustação com áudios → fechamento do anual); **número CLIENTE = Kami** cuida do suporte ao cliente ativo (pós-venda). Handoff pra Kami quando vira anual. A automação da esteira roda no número comercial.
   - **Motivo de perda: ATIVADO (jun/2026)** — obrigatório marcar motivo ao perder lead, com 7 motivos sob medida (Preço/sem orçamento · Não é o público · Momento ruim · Já tem nutri · Sumiu/sem resposta · Comprou degustação não virou anual · Foi pro outro produto).
 
-## Preços (confirmados via scripts comerciais, jun/2026)
-**Consultoria online (Team Chedid):**
-- Plano degustação (30 dias de acompanhamento): **R$197**
-- Plano anual: **12x R$147**
+## Preços (atualizados pelo Playbook oficial + fluxos do bot, ago/2026)
+**Consultoria online (Team Chedid) — 4 ofertas:**
+- **Acompanhamento Mensal** (30 dias): **R$347**, com cupom de primeira compra **`BEMVINDO150`** (R$150 off) = **R$197**. Válido **só na primeira compra**.
+  `https://clkdmg.site/pay/acompanhamento-online-chedid-mensal`
+  🔄 **REPOSICIONADO em 25/08/2026:** era "Plano Degustação". O nome sumiu; agora é um plano mensal normal com cupom de boas-vindas, que é uma roupagem mais atrativa e menos "amostra grátis".
+  ✅ **Preço cheio R$347 CONFIRMADO pelo Gabriel (25/08/2026).** O R$397 que circulou (no bot v1 e num rascunho da oferta nova) está errado: R$397 menos o cupom de R$150 daria R$247, não R$197. **Não usar R$397 em lugar nenhum.**
+  🔗 Link antigo da degustação (`.../consultoria-online-team-chedid-plano-degustacao`) está aposentado.
+- **Anual** (12 meses): **R$1.764**, ou **12x R$147**, ou à vista com 5% off.
+  `https://clkdmg.site/pay/consultoria-team-chedid-d-shape-slim-anual`
+- **PIX** (pagamento manual, fora do checkout): chave **10366978942**.
+- **Semestral** (6 meses): **R$990**, ou **6x R$165**, ou à vista com 5% off. **NÃO entra no bot** (decisão 24/08/2026); é carta do Gabriel no atendimento humano, boa pra lead com meta de prazo definido.
+- **Recorrência**: **R$197/mês** (vale 1 protocolo completo), cancela quando quiser, **só cartão**. Fora do bot.
+  `https://clkdmg.site/subscribe/a255d676-d8fc-4868-9f09-d87ba12574e9`
+- **Upsell de treino:** dieta+treino **R$97/mês** (ajustes a cada 2 meses) · planilha avulsa só treino **R$200** (validade 2 meses). ⚠️ O Playbook diz "+R$100/mês ou +R$200 na recorrência" — **conflito a confirmar**.
+- Página de vendas: `teamchedid.com/consultoria-teamchedid/`
+- **Protocolo completo atualizado a cada 8 SEMANAS** (bot v1 e base de conhecimento batem; o script do Playbook diz 4 semanas e **está errado**).
+
+**Prova social oficial:** +3.000 pacientes · 20+ países · **86% de renovação** (o Playbook diz 18 países; usar 20+).
+
+**Fonte-mãe:** `Playbook | Nutri Chedid` (PDF, 47 págs) — história, posicionamento, persona detalhada, mecanismo único, manual de marca e voz, produtos, oferta com os **12 protocolos nomeados** (Cintura Fina, Barriga Sem Pochete, Ansiedade Zero, Sono Profundo, anti-Celulite, Anti-Flacidez, Intestino Regulado, Disposição, Anti-inflamatório, Canetas Emagrecedoras, Zero Inchaço, Máxima Massa Muscular), script de vendas v1.0 e playbook de diagnóstico de conteúdo.
+
+**Persona (Playbook):** mulheres **25 a 38**, recomposição (barriga, flanco, glúteo, perna). 75% come por ansiedade · 85% tem ansiedade · inchaço 83% · distensão 74% · comer por estresse 83% · intestino 65% · queda de cabelo 65% · cansaço 61%. Condições recorrentes: **hipotireoidismo**, resistência à insulina, anticoncepcional, lipedema, GLP-1. Padrões: caneta com rebote, já passou por vários nutris, lipo com reganho, crença no jejum.
 
 **Clínica presencial (Clínica Chedid & Cruz):**
 - Consulta avulsa: **R$650** (2x cartão) ou **R$600** à vista (pix/dinheiro). Inclui avaliação física, dieta individualizada na hora, suplementos e guias.
